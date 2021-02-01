@@ -13,18 +13,7 @@ The steps and commands which follow are intended only for use with, and tested a
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl create -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/namespace.yaml
-```
-{% endtab %}
-
-{% tab title="YAML" %}
-```
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: mayastor
-  labels:
-    name: mayastor
+kubectl create namespace mayastor
 ```
 {% endtab %}
 {% endtabs %}
