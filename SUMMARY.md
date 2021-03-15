@@ -13,6 +13,7 @@
 * [Known Issues](quickstart/known-issues.md)
 * [Tips and Tricks](quickstart/tips-and-tricks.md)
 * [Performance Tips](quickstart/performance-tips.md)
+* [Basic Troubleshooting](quickstart/troubleshooting.md)
 * [Next Steps](quickstart/next-steps.md)
 
 ## Reference
