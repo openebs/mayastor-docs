@@ -142,7 +142,7 @@ the `gdb` debugger.
 {% tabs %}
 {% tab title="Install systemd-coredump and gdb" %}
 ```sh
-sudo apt-get install -y systemd-coredump gdb
+sudo apt-get install -y systemd-coredump gdb lz4
 ```
 {% endtab %}
 {% endtabs %}
@@ -197,9 +197,11 @@ d72afea5bcc2        mayadata/mayastor-csi                      "/bin/mayastor-cs
 {% endtabs %}
 
 {% tabs %}
-{% tab title="Copy container's filesystem" %}
+{% tab title="Copy relevant parts of the container's fs" %}
 ```sh
-docker cp b3db4615d5e1:/ /tmp/rootdir
+mkdir -p /tmp/rootdir
+docker cp b3db4615d5e1:/bin /tmp/rootdir
+docker cp b3db4615d5e1:/nix /tmp/rootdir
 ```
 {% endtab %}
 {% endtabs %}
