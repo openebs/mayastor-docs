@@ -7,7 +7,7 @@ Mayastor's storage engine, or "nexus" as we term it, provides synchronous mirror
 This Mayastor documentation contains sections which are focused on initial, 'quickstart' deployment scenarios, including the correct configuration of underlying hardware and software, and of Mayastor features such as "Storage Nodes" \(MSNs\) and "Disk Pools" \(MSPs\).  Information describing tuning for the optimisation of performance is also provided.
 
 ["Quickstart" Guide](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor)
-[Performance Tips]({{\field{\*\fldinst{HYPERLINK https://mayastor.gitbook.io/introduction/quickstart/performance-tips)
+[Performance Tips](https://mayastor.gitbook.io/introduction/quickstart/performance-tips)
 
 MayaData provides resources which can automatate both these types of configuration tasks.  These include the ["automation playground" project](https://github.com/mayadata-io/deployment-automation-playground/tree/main/demo-playground), which uses Terraform and Ansible, is pluggable and extensible, and is able to deploy both FIO based benchmarking and other workloads for initial "first sighting" deployments.
 
@@ -19,7 +19,7 @@ MayaData has performed its own benchmarking tests in collaboration with Intel, u
 Further information regarding the testing performed may be found [here](https://blog.mayadata.io/mayastor-nvme-of-tcp-performance)
 
 ##  What is the on-disk format used by Disk Pools?  Is it also open source?
-Mayastor makes use of parts of the open source [Storage Performance Development Kit (SPDK)](https://spdk.io/) project, contributed by Intel.  Currently, and for the anticipated General Availability \(GA)\ release, Mayastor's Storage Pools use the SPDK's Blobstore structure as their on-disk persistence layer.  Blobstore structures and layout are [documented](https://github.com/spdk/spdk/blob/master/doc/blob.md).
+Mayastor makes use of parts of the open source [Storage Performance Development Kit (SPDK)](https://spdk.io/) project, contributed by Intel.  Currently, and for the anticipated General Availability \(GA\) release, Mayastor's Storage Pools use the SPDK's Blobstore structure as their on-disk persistence layer.  Blobstore structures and layout are [documented](https://github.com/spdk/spdk/blob/master/doc/blob.md).
 
 Since the replicas \(data copies\) of Mayastor volumes are held entirely within Blobstores, it is not possible to directly access the data held on Disk Pool block devices from outside of Mayastor.  Equally, Mayastor cannot directly 'import' and use existing volumes which aren't of Mayastor origin.  MayaData is considering alternative options for the persistence layer which may support such data migration goals but any such contribution will not be part of the currently planned GA release.
 
