@@ -6,8 +6,8 @@ Mayastor's storage engine, or "nexus" as we term it, provides synchronous mirror
 ## How is it configured?
 This Mayastor documentation contains sections which are focused on initial, 'quickstart' deployment scenarios, including the correct configuration of underlying hardware and software, and of Mayastor features such as "Storage Nodes" \(MSNs\) and "Disk Pools" \(MSPs\).  Information describing tuning for the optimisation of performance is also provided.
 
-["Quickstart" Guide](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor)
-[Performance Tips](https://mayastor.gitbook.io/introduction/quickstart/performance-tips)
+* [Quickstart Guide](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor)
+* [Performance Tips](https://mayastor.gitbook.io/introduction/quickstart/performance-tips)
 
 MayaData provides resources which can automatate both these types of configuration tasks.  These include the ["automation playground" project](https://github.com/mayadata-io/deployment-automation-playground/tree/main/demo-playground), which uses Terraform and Ansible, is pluggable and extensible, and is able to deploy both FIO based benchmarking and other workloads for initial "first sighting" deployments.
 
