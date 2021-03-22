@@ -5,7 +5,7 @@ This quickstart guide describes the actions necessary to perform a basic install
 Deploying and operating Mayastor within production contexts requires a foundational knowledge of Mayastor internals and best practices, found elsewhere within this documentation resource.  Some application use cases may require specific configuration and where this is so, it is called out in the Use Cases section.
 
 {% hint style="warning" %}
-**Mayastor is beta software**.  It is considered largely, if not entirely, feature complete and substantially without major known defects.  Minor and unknown defects can be expected; exercise caution in production contexts.
+**Mayastor is beta software**.  It is considered largely, if not entirely, feature complete.  Beta software "will generally have many more bugs in it than completed software and speed or performance issues, and may still cause crashes or data loss"
 {% endhint %}
 
 

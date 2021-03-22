@@ -5,12 +5,13 @@
 ## Quickstart
 
 * [Scope](quickstart/scope.md)
+* [Known Limitations](quickstart/known-limitations.md)
+* [Known Issues](quickstart/known-issues.md)
 * [Prerequisites](quickstart/prerequisites.md)
 * [Preparing the Cluster](quickstart/preparing-the-cluster.md)
 * [Deploy Mayastor](quickstart/deploy-mayastor.md)
 * [Configure Mayastor](quickstart/configure-mayastor.md)
 * [Deploy a Test Application](quickstart/deploy-a-test-application.md)
-* [Known Issues](quickstart/known-issues.md)
 * [Tips and Tricks](quickstart/tips-and-tricks.md)
 * [Performance Tips](quickstart/performance-tips.md)
 * [Basic Troubleshooting](quickstart/troubleshooting.md)
