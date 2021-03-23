@@ -16,7 +16,7 @@ Mayastor's maintainers perform integration and end-to-end testing on nightly bui
 
 ### A Mayastor pod restarts unexpectedly with exit code 132 whilst mounting a PVC
 
-The Mayastor process has been sent the SIGKILL signal as the result of attempting to execute an illegal instruction.  This indicates that the host node's CPU does not satisfy the prerequisite instruction set level for Mayastor \(SSE4.2 on x86-64\).
+The Mayastor process has been sent the SIGILL signal as the result of attempting to execute an illegal instruction.  This indicates that the host node's CPU does not satisfy the prerequisite instruction set level for Mayastor \(SSE4.2 on x86-64\).
 
 
 ### Deploying Mayastor on RKE & Fedora CoreOS
