@@ -29,3 +29,8 @@ In addition to ensuring that the general prerequisites for installation are met,
 
 If this is not done, CSI socket paths won't match expected values and the Mayastor CSI driver registration process will fail, resulting in the inability to provision Mayastor volumes on the cluster.
 
+## Other Issues
+
+### Lengthy worker node reboot times
+
+When rebooting a node that runs applications mounting Mayastor volumes, this can take tens of minutes. The reason is the long default NVMe controller timeout (`ctrl_loss_tmo`). The solution is to follow the best k8s practices and cordon the node ensuring there aren't any application pods running on it before the reboot.
