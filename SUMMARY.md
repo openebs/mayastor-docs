@@ -23,19 +23,6 @@
 * [I/O Path Description](reference/i-o-path-description.md)
 * [Operations](reference/operations.md)
 
-## User Guide
-
-* [Day Zero](user-guide/day-zero.md)
-* [Day One](user-guide/day-one.md)
-* [Day Two](user-guide/day-two.md)
-* [Beyond](user-guide/beyond.md)
-
-## Use Cases
-
-* [Kafka](use-cases/kafka.md)
-* [Cassandra](use-cases/cassandra.md)
-* [MongoDB](use-cases/mongodb.md)
-
 ## Mayastor A-Z
 
 * [Glossary A-E](mayastor-a-z/glossary-a-e.md)
