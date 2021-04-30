@@ -13,7 +13,7 @@ A pool is defined declaratively, through the creation of a corresponding `Mayast
 | Type | Format | Example |
 | :--- | :--- | :--- |
 | Attached Disk Device | Device File | /dev/sdx |
-| NVMe | NQN | nvme://nqn.2014-08.com.vendor:nvme:nvm-subsystem-sn-d78432 |
+| NVMe-oF | NQN | nvmf://nqn.2014-08.com.vendor:nvme:nvm-subsystem-sn-d78432 |
 | iSCSI | IQN | iscsi://iqn.2000-08.com.datacore.com:cloudvm41-2 |
 | Async. Disk I/O \(AIO\) | Device File  | aio:///dev/sdx |
 | io\_uring | Device File  | io\_uring:///dev/sdx |
