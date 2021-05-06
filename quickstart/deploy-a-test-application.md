@@ -4,11 +4,9 @@
 
 If all verification steps in the preceding stages were satisfied, then Mayastor has been successfully deployed within the cluster.  In order to verify basic functionality, we will now dynamically provision a Persistent Volume based on a Mayastor StorageClass, mount that volume within a small test pod which we'll create, and use the [**Flexible I/O Tester**](https://github.com/axboe/fio) utility within that pod to check that I/O to the volume is processed correctly.
 
-## Create a Persistent Volume Claim \(PVC\)
+## Define the PVC
 
-### Define the PVC
-
-Use `kubectl` to create a PVC based on a StorageClass which you created in the [previous stage](configure-mayastor.md#create-mayastor-storageclass-s).  In the example shown below, we'll consider that StorageClass to have been named "mayastor-nvmf".  Replace the value of the field "storageClassName" with the name of your own Mayastor-based StorageClass.
+Use `kubectl` to create a PVC based on a StorageClass which you created in the [previous stage](configure-mayastor.md#create-mayastor-storageclass-s).  In the example shown below, we'll consider that StorageClass to have been named "mayastor-1".  Replace the value of the field "storageClassName" with the name of your own Mayastor-based StorageClass.
 
 For the purposes of this quickstart guide, it is suggested to name the PVC "ms-volume-claim", as this is what will be illustrated in the example steps which follow.
 
@@ -26,7 +24,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: mayastor-nvmf
+  storageClassName: mayastor-1
 EOF
 ```
 {% endtab %}
@@ -48,6 +46,47 @@ spec:
 {% endtab %}
 {% endtabs %}
 
+If you used the storage class example from previous stage, then volume binding mode is set to `WaitForFirstConsumer`. That means, that the volume won't be created until there is an application using the volume. We will go ahead and create the application pod and then check all resources that should have been created as part of that in kubernetes.
+
+## Deploy the FIO Test Pod
+
+We schedule the application to one of the storage nodes in order to make the volume available to the application in spite of the node failures. That's why nodeSelector is used in the Pod specification. See ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters) for more in-depth explanation of how the scheduling works.
+
+{% tabs %}
+{% tab title="Command \(GitHub Latest\)" %}
+```text
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/fio.yaml
+```
+{% endtab %}
+
+{% tab title="YAML" %}
+```
+kind: Pod
+apiVersion: v1
+metadata:
+  name: fio
+spec:
+  nodeSelector:
+    openebs.io/engine: mayastor
+  volumes:
+    - name: ms-volume
+      persistentVolumeClaim:
+        claimName: ms-volume-claim
+  containers:
+    - name: fio
+      image: nixery.dev/shell/fio
+      args:
+        - sleep
+        - "1000000"
+      volumeMounts:
+        - mountPath: "/volume"
+          name: ms-volume
+```
+{% endtab %}
+{% endtabs %}
+
+## Verify the Volume and the Deployment
+
 We will now verify the Volume Claim and that the corresponding Volume and Mayastor Volume \(MSV\) resources have been created and are healthy.
 
 ### Verify the Volume Claim
@@ -64,7 +103,7 @@ kubectl get pvc ms-volume-claim
 {% tab title="Example Output" %}
 ```
 NAME                STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS     AGE
-ms-volume-claim   Bound    pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            mayastor-iscsi   15s
+ms-volume-claim     Bound    pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            mayastor-1       15s
 ```
 {% endtab %}
 {% endtabs %}
@@ -85,7 +124,7 @@ Substitute the example volume name with that shown under the "VOLUME" heading of
 {% tab title="Example Output" %}
 ```
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                       STORAGECLASS     REASON   AGE
-pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            Delete           Bound    default/ms-volume-claim   mayastor-nvmf            16m
+pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            Delete           Bound    default/ms-volume-claim     mayastor-1       16m
 ```
 {% endtab %}
 {% endtabs %}
@@ -109,40 +148,9 @@ fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   aks-agentpool-12194210-0   1073741824   h
 {% endtab %}
 {% endtabs %}
 
-## Deploy the FIO Test Pod
+### Verify the application
 
-{% tabs %}
-{% tab title="Command \(GitHub Latest\)" %}
-```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/fio.yaml
-```
-{% endtab %}
-
-{% tab title="YAML" %}
-```
-kind: Pod
-apiVersion: v1
-metadata:
-  name: fio
-spec:
-  volumes:
-    - name: ms-volume
-      persistentVolumeClaim:
-       claimName: ms-volume-claim
-  containers:
-    - name: fio
-      image: nixery.dev/shell/fio
-      args:
-        - sleep
-        - "1000000"
-      volumeMounts:
-        - mountPath: "/volume"
-          name: ms-volume
-```
-{% endtab %}
-{% endtabs %}
-
-Verify that the pod has been deployed successfully, having the status "Running".  It make take a few seconds after creating the pod before it reaches that status, proceeding via the "ContainerCreating" state.
+Verify that the pod has been deployed successfully, having the status "Running". It may take a few seconds after creating the pod before it reaches that status, proceeding via the "ContainerCreating" state.
 
 {% hint style="info" %}
 Note: The FIO pod resource declaration from the Mayastor master branch references a PVC named `ms-volume-claim`, consistent with the example PVC created in this section of the quickstart.  If you have elected to name your PVC differently, deploy the Pod using the example YAML, modifying the `claimName`field appropriately.

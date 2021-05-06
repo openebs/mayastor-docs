@@ -72,7 +72,3 @@ NATS is a high performance open source messaging system.  It is used within Maya
 
 In future releases of Mayastor, the control plane will transition towards a more microservice-like architecture following the saga pattern, whereupon a highly available NATS deployment within the Mayastor namespace will be employed as an event bus. 
 
-## 
-
-
-

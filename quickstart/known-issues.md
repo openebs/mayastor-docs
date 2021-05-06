@@ -35,4 +35,4 @@ If this is not done, CSI socket paths won't match expected values and the Mayast
 
 ### Lengthy worker node reboot times
 
-When rebooting a node that runs applications mounting Mayastor volumes, this can take tens of minutes. The reason is the long default NVMe controller timeout (`ctrl_loss_tmo`). The solution is to follow the best k8s practices and cordon the node ensuring there aren't any application pods running on it before the reboot.
+When rebooting a node that runs applications mounting Mayastor volumes, this can take tens of minutes. The reason is the long default NVMe controller timeout (`ctrl_loss_tmo`). The solution is to follow the best k8s practices and cordon the node ensuring there aren't any application pods running on it before the reboot. Setting `ioTimeout` storage class parameter can be used to fine-tune the timeout.
