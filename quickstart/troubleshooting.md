@@ -235,7 +235,7 @@ sudo lz4cat /var/lib/systemd/coredump/core.mayastor.0.6a5e550e77ee4e77a19bd67436
 {% tabs %}
 {% tab title="Open coredump in GDB" %}
 ```sh
-gdb -c core /tmp/rootdir/bin/mayastor
+gdb -c core /tmp/rootdir$(readlink /tmp/rootdir/bin/mayastor)
 ```
 {% endtab %}
 {% tab title="Output example" %}
