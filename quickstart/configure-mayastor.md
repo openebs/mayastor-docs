@@ -13,13 +13,15 @@ A pool is defined declaratively, through the creation of a corresponding `Mayast
 | Type | Format | Example |
 | :--- | :--- | :--- |
 | Attached Disk Device | Device File | /dev/sdx |
-| NVMe-oF | NQN | nvmf://nqn.2014-08.com.vendor:nvme:nvm-subsystem-sn-d78432 |
-| iSCSI | IQN | iscsi://iqn.2000-08.com.datacore.com:cloudvm41-2 |
 | Async. Disk I/O \(AIO\) | Device File  | aio:///dev/sdx |
-| io\_uring | Device File  | io\_uring:///dev/sdx |
+| io\_uring | Device File  | uring:///dev/sdx |
 | RAM drive | Custom | malloc:///malloc0?size\_mb=1024 |
 
 Once a Mayastor node has created a pool it is assumed that it henceforth has exclusive use of the associated block device; it should not be partitioned, formatted, or shared with another application or process.  Any existing data on the device will be destroyed.
+
+{% hint style="warning" %}
+RAM drive isn't suitable for production as it uses volatile memory for backing the data. The memory for the disk is allocated from hugepages. Make sure to allocate sufficient amount of extra hugepages on storage node if you want to experiment with it.
+{% endhint %}
 
 ### Configure Pool\(s\) for Use with this Quickstart
 
@@ -115,49 +117,47 @@ pool-on-node-2   aks-agentpool-12194210-2   online   4s
 
 ## Create Mayastor StorageClass\(s\)
 
-Mayastor dynamically provisions Persistent Volumes \(PV\) based on custom StorageClass definitions defined by the user.  Parameters of the StorageClass resource definition are used to set the characteristics and behaviour of its associated PVs.  In the current version of Mayastor, StorageClass definitions are used to control both which transport protocol is used to mount the PV to the worker node hosting the consuming application pod \(iSCSI, or NVMe-oF TCP\) and the level of data protection afforded to it \(that is, the number of synchronous data replicas which are maintained, for purposes of redundancy\).  It is possible to create any number of custom StorageClass definitions to span this range of permutations.
+Mayastor dynamically provisions Persistent Volumes \(PV\) based on custom StorageClass definitions defined by the user.  Parameters of the StorageClass resource definition are used to set the characteristics and behaviour of its associated PVs. For detailed description of the parameters see ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters). Most importantly StorageClass definition is used to control the level of data protection afforded to it \(that is, the number of synchronous data replicas which are maintained, for purposes of redundancy\).  It is possible to create any number of custom StorageClass definitions to span range of storage class parameters permutations.
 
-We illustrate this quickstart guide with two examples of possible use cases; one which uses iSCSI and offers no data protection \(i.e. a single data replica\), and another using NVMe-oF TCP transport and having three data replicas.  You may modify these as required to match your own desired test cases, within the limitations of the cluster under test.
+We illustrate this quickstart guide with two examples of possible use cases; one which offers no data protection \(i.e. a single data replica\), and another having three data replicas. You may modify these as required to match your own desired test cases, within the limitations of the cluster under test.
 
 {% tabs %}
-{% tab title="Command \(iSCSI Example\)" %}
+{% tab title="Command \(1 replica example\)" %}
 ```text
 cat <<EOF | kubectl create -f -
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: mayastor-iscsi
+  name: mayastor-1
 parameters:
-  # Set the number of data replicas ("replication factor")
   repl: '1'
-  # Set the export transport protocol
-  protocol: 'iscsi'
+  protocol: 'nvmf'
+  ioTimeout: 60
+  local: true
 provisioner: io.openebs.csi-mayastor
+volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
 {% endtab %}
 
-{% tab title="Command \(NVME-oF Example\)" %}
+{% tab title="Command \(3 replicas example\)" %}
 ```
 cat <<EOF | kubectl create -f -
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: mayastor-nvmf
+  name: mayastor-3
 parameters:
-  # Set the number of data replicas ("replication factor")
   repl: '3'
-  # Set the export transport protocol
   protocol: 'nvmf'
+  ioTimeout: 60
+  local: true
 provisioner: io.openebs.csi-mayastor
+volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
 {% endtab %}
 {% endtabs %}
-
-{% hint style="info" %}
-Note:  Permissible values for the field "protocol" are either "iscsi", or "nvmf"
-{% endhint %}
 
 **Action: Create the StorageClass\(es\) appropriate to your intended testing scenario\(s\).**
 
