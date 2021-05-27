@@ -77,6 +77,43 @@ nats-b4cbb6c96-nbp75   1/1     Running   0          28s
 {% endtab %}
 {% endtabs %}
 
+### etcd 
+
+Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.
+
+The steps described below provide an example of how etcd cluster can be deployed for use by Mayastor. 
+
+**&#9888; Warning: This etcd cluster should not be used in production. The user is requested to deploy their own etcd cluster for production use.** 
+
+{% tabs %}
+{% tab title="Command \(GitHub Latest\)" %}
+```
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/secrets.yaml 
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/statefulset.yaml 
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/svc.yaml
+```
+{% endtab %}
+{% endtabs %}
+
+Verify that the deployment of etcd to the cluster was successful. Within the mayastor namespace there should be 3 pods having a name starting with "mayastor-etcd-", and with a reported status of "Running".
+
+{% tabs %}
+{% tab title="Command" %}
+```text
+kubectl -n mayastor get pods --selector=app.kubernetes.io/name=etcd
+```
+{% endtab %}
+
+{% tab title="Example Output" %}
+```
+NAME             READY  STATUS   RESTARTS  AGE
+mayastor-etcd-0  1/1    Running  0         24m
+mayastor-etcd-1  1/1    Running  0         24m
+mayastor-etcd-2  1/1    Running  0         24m
+```
+{% endtab %}
+{% endtabs %}
+
 ## Deploy Mayastor Components
 
 ### CSI Node Plugin
