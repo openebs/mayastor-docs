@@ -79,6 +79,9 @@ nats-b4cbb6c96-nbp75   1/1     Running   0          28s
 
 ### etcd 
 
+**Note: Execute this step ONLY if deploying a version of Mayastor after v0.8.0**
+If you have used the definition files from the links given in the previous sections, this step should be omitted.
+
 Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.
 
 The steps described below provide an example of how etcd cluster can be deployed for use by Mayastor. 
@@ -88,9 +91,10 @@ The steps described below provide an example of how etcd cluster can be deployed
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/secrets.yaml 
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/statefulset.yaml 
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/svc.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/secrets.yaml 
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/statefulset.yaml 
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/svc.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/svc-headless.yaml
 ```
 {% endtab %}
 {% endtabs %}
