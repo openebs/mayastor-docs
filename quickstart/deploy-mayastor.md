@@ -91,7 +91,6 @@ The steps described below provide an example of how etcd cluster can be deployed
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/secrets.yaml 
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/statefulset.yaml 
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/svc.yaml
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/svc-headless.yaml
