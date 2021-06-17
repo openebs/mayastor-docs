@@ -8,7 +8,7 @@ Kubernetes worker nodes are not required to be MSNs in order to be able to mount
 
 ### Verify / Enable Huge Page Support
 
-_2MiB-sized_  Huge Pages must be supported and enabled on a MSN.  A minimum number of 512 such pages \(i.e. 1GiB total\) must be available on each node, which should be verified thus:
+_2MiB-sized_  Huge Pages must be supported and enabled on a MSN.  A minimum number of 1024 such pages \(i.e. 2GiB total\) must be available on each node, which should be verified thus:
 
 ```text
 grep HugePages /proc/meminfo
@@ -22,16 +22,16 @@ HugePages_Surp:        0
 
 ```
 
-If fewer than 512 pages are available then the page count should be reconfigured as required, accounting for any other workloads which may be co-resident on the worker node and which also require them.  For example:
+If fewer than 1024 pages are available then the page count should be reconfigured as required, accounting for any other workloads which may be co-resident on the worker node and which also require them.  For example:
 
 ```text
-echo 512 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+echo 1024 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 ```
 
 This change should also be made persistent across reboots by adding the required value to the file`/etc/sysctl.conf` like so:
 
 ```text
-echo vm.nr_hugepages = 512 | sudo tee -a /etc/sysctl.conf
+echo vm.nr_hugepages = 1024 | sudo tee -a /etc/sysctl.conf
 ```
 
 {% hint style="warning" %}

@@ -10,7 +10,7 @@ Each Mayastor Node \(MSN\), that is each cluster worker node which will host an 
 * **4GiB of RAM**
 * HugePage support
   * A minimum of **2GiB of** **2MiB-sized** **huge pages**
-* Linux kernel 5.4 or higher with the following modules loaded:
+* Linux kernel **5.4 or higher** with the following modules loaded:
   * nvme-tcp
   * ext4 and optionally xfs
 
