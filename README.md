@@ -34,7 +34,5 @@ The Mayastor GitHub repository can be found [here](https://github.com/openebs/Ma
 
 Mayastor is a component of OpenEBS and is primarily developed and maintained by [MayaData](https://mayadata.io/), which also provides enterprise support and management software for the use of OpenEBS Mayastor and Kubernetes for data. The OpenEBS family of storage engines are fully Open Source and "free forever" - feedback and contributions are welcomed. Other companies also provide support for OpenEBS and these offerings may include support for OpenEBS Mayadata. More information about these companies can be found on the web site for the OpenEBS project at: www.openEBS.io/support
 
-![](.gitbook/assets/openebs-stacked-color.png)
-
 ![](.gitbook/assets/mayadata-logo-1d5e6edb8a36beb68572ffc65dfe7a4e.svg)
 
