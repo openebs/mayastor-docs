@@ -79,11 +79,9 @@ nats-b4cbb6c96-nbp75   1/1     Running   0          28s
 
 ### etcd
 
-**Note: Execute this step ONLY if deploying a version of Mayastor after v0.8.0** If you have used the definition files from the links given in the previous sections, this step should be omitted.
+**Note: Execute this step ONLY if deploying a version of Mayastor after v0.8.0** If you have used the definition files from the links given in the previous sections, this step should be omitted.  Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.  The steps described below provide an _**example**_ of how the etcd cluster can be deployed for use by Mayastor.  
 
-Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.
-
-The steps described below provide an example of how etcd cluster can be deployed for use by Mayastor.
+It will depend on the exact environment what the optimal configuration for etcd is. By default, the example given does not perisist the etcd data on stable storage. Please refer to the etcd documentation to get a better understnading. If you already have an existing etcd cluster deployed in your environment, that etcd cluster can be used as well. 
 
 **⚠ Warning: This etcd cluster should not be used in production. The user is requested to deploy their own etcd cluster for production use.**
 
