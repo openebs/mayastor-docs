@@ -12,7 +12,7 @@ A pool is defined declaratively, through the creation of a corresponding `Mayast
 
 | Type | Format | Example |
 | :--- | :--- | :--- |
-| Attached Disk Device | Device File | /dev/sdx |
+| Attached Disk Device \(AIO\) | Device File | /dev/sdx |
 | Async. Disk I/O \(AIO\) | Device File | aio:///dev/sdx |
 | io\_uring | Device File | uring:///dev/sdx |
 | RAM drive | Custom | malloc:///malloc0?size\_mb=1024 |
@@ -41,36 +41,6 @@ metadata:
 spec:
   node: workernode-1-hostname
   disks: ["/dev/sdx"]
-EOF
-```
-{% endtab %}
-
-{% tab title="Example \(NVMe-oF Fabric device\)" %}
-```text
-cat <<EOF | kubectl create -f -
-apiVersion: "openebs.io/v1alpha1"
-kind: MayastorPool
-metadata:
-  name: nvme-pool-on-node-2
-  namespace: mayastor
-spec:
-  node: workernode-2-hostname
-  disks: ["nvme://nqn.2014-08.com.vendor:nvme:nvm-subsystem-sn-d78432"]
-EOF
-```
-{% endtab %}
-
-{% tab title="Example \(iSCSI device\)" %}
-```text
-cat <<EOF | kubectl create -f -
-apiVersion: "openebs.io/v1alpha1"
-kind: MayastorPool
-metadata:
-  name: iscsi-pool-on-node-3
-  namespace: mayastor
-spec:
-  node: workernode-3-hostname
-  disks: ["iscsi://iqn.yyyy-mm.naming-authority:unique_name"]
 EOF
 ```
 {% endtab %}
