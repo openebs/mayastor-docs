@@ -22,7 +22,9 @@ While Mayastor utilizes NVMe-oF it does not require NVMe devices or cloud volume
 
 ## Where can I find Mayastor?
 
-The Mayastor GitHub repository can be found [here](https://github.com/openebs/Mayastor).
+The branch with the latest release can be found here.  Our active development is done on the develop branch. 
+
+We also produce nightly mayastor images using the `:develop` tag.  Please validate any changes to the YAML files between the lastest release branch and the develop branch when deploying mayastor. 
 
 ## Project Status
 
