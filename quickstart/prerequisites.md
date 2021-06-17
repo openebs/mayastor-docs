@@ -9,8 +9,10 @@ Each Mayastor Node \(MSN\), that is each cluster worker node which will host an 
   * AMD Bulldozer processor and newer
 * **4GiB of RAM**
 * HugePage support
-
-  * A minimum of **1GiB of** **2MiB-sized** **huge pages**
+  * A minimum of **2GiB of** **2MiB-sized** **huge pages**
+* Linux kernel 5.4 or higher with the following modules loaded:
+  * nvme-tcp
+  * ext4 and optionally xfs
 
 {% hint style="info" %}
 Instances of the Mayastor pod _must_ be run in privileged mode
@@ -24,13 +26,9 @@ As long as the resource prerequisites are met, Mayastor can deployed to a cluste
 
 Mayastor supports the export and mounting of a Persistent Volume over either NVMe-oF TCP or iSCSI \(configured as a parameter of the PV's underlying StorageClass\).  Worker node\(s\) on which a PV is to be mounted must have the requisite initiator support installed and configured for the protocol in use.
 
-#### iSCSI
-
-The iSCSI client should be installed and correctly configured as per [this guide](https://docs.openebs.io/docs/next/prerequisites.html).
-
 #### NVMe-oF
 
-In order to reliably mount application PVs  over NVMe-oF TCP, a worker node's kernel version must be 5.3 or later.  Verify that the `nvme-tcp` module is loaded and if necessary, load it.
+In order to reliably mount application PVs  over NVMe-oF TCP, a worker node's kernel version must be 5.3 or later.  Verify that the `nvme-tcp`  kernel module is loaded and if necessary, load it.
 
 
 

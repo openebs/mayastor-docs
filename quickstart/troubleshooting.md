@@ -1,18 +1,18 @@
-# Troubleshooting
+# Basic Troubleshooting
 
 ## Logs
 
-The right log file to collect depends on the nature of the problem. If unsure,
-then the best thing is to collect log files for all Mayastor containers.
+The right log file to collect depends on the nature of the problem. If unsure, then the best thing is to collect log files for all Mayastor containers.
 
 {% tabs %}
 {% tab title="List all Mayastor pods" %}
-```sh
+```bash
 kubectl -n mayastor get pods -o wide
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 NAME                    READY   STATUS    RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES
 mayastor-csi-7pg82      2/2     Running   0          15m   10.0.84.131    worker-2   <none>           <none>
 mayastor-csi-gmpq6      2/2     Running   0          15m   10.0.239.174   worker-1   <none>           <none>
@@ -28,19 +28,17 @@ nats-6fdd6dfb4f-swlm8   1/1     Running   0          16m   10.244.3.2     worker
 
 ### moac's log file
 
-`moac` is the control plane of Mayastor. There is only one `moac` container running
-in the cluster. It is generally useful as it captures all high-level operations
-related to mayastor volumes in the cluster. So it is a good idea to always
-inspect this log file.
+`moac` is the control plane of Mayastor. There is only one `moac` container running in the cluster. It is generally useful as it captures all high-level operations related to mayastor volumes in the cluster. So it is a good idea to always inspect this log file.
 
 {% tabs %}
-{% tab title="Obtaining moac's log" %}
-```sh
+{% tab title="Obtaining moac\'s log" %}
+```bash
 kubectl -n mayastor logs $(kubectl -n mayastor get pod -l app=moac -o jsonpath="{.items[0].metadata.name}") moac
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 Mar 09 10:44:47.560 info [csi]: CSI server listens at /var/lib/csi/sockets/pluginproxy/csi.sock
 Mar 09 10:44:47.565 debug [nats]: Connecting to NATS at "nats" ...
 Mar 09 10:44:47.574 info [node-operator]: Initializing node operator
@@ -70,14 +68,11 @@ Mar 09 10:44:58.206 debug [csi]: probe request (ready=true)
 
 ### mayastor's log file
 
-mayastor containers form the data plane of Mayastor.  A cluster should schedule as many container instances as 
-storage nodes that have been configured. This log file is most useful when troubleshooting
-IO errors. Management operations could also fail because of
-a problem on the storage node.
+mayastor containers form the data plane of Mayastor. A cluster should schedule as many container instances as storage nodes that have been configured. This log file is most useful when troubleshooting IO errors. Management operations could also fail because of a problem on the storage node.
 
 {% tabs %}
-{% tab title="Example obtaining mayastor's log" %}
-```sh
+{% tab title="Example obtaining mayastor\'s log" %}
+```bash
 kubectl -n mayastor logs mayastor-qgpw6 mayastor
 ```
 {% endtab %}
@@ -85,14 +80,11 @@ kubectl -n mayastor logs mayastor-qgpw6 mayastor
 
 ### mayastor CSI agent's log file
 
-When having a problem with (un)mounting volume on an application node, this log
-file can be useful. Generally all nodes in the cluster run mayastor CSI agent,
-so it's good to know which node is having the problem and inspect the log file
-only on that node.
+When having a problem with \(un\)mounting volume on an application node, this log file can be useful. Generally all nodes in the cluster run mayastor CSI agent, so it's good to know which node is having the problem and inspect the log file only on that node.
 
 {% tabs %}
-{% tab title="Example obtaining mayastor CSI driver's log" %}
-```sh
+{% tab title="Example obtaining mayastor CSI driver\'s log" %}
+```bash
 kubectl -n mayastor logs mayastor-csi-7pg82 mayastor-csi
 ```
 {% endtab %}
@@ -100,14 +92,11 @@ kubectl -n mayastor logs mayastor-csi-7pg82 mayastor-csi
 
 ### CSI sidecars
 
-These containers implement the CSI spec for Kubernetes and run in the same pods
-with moac and mayastor-csi containers. Although they are not part of
-Mayastor, they can contain useful information when Mayastor CSI
-control/node plugin fails to register with k8s cluster.
+These containers implement the CSI spec for Kubernetes and run in the same pods with moac and mayastor-csi containers. Although they are not part of Mayastor, they can contain useful information when Mayastor CSI control/node plugin fails to register with k8s cluster.
 
 {% tabs %}
 {% tab title="Obtaining CSI control containers logs" %}
-```sh
+```bash
 kubectl -n mayastor logs $(kubectl -n mayastor get pod -l app=moac -o jsonpath="{.items[0].metadata.name}") csi-attacher
 kubectl -n mayastor logs $(kubectl -n mayastor get pod -l app=moac -o jsonpath="{.items[0].metadata.name}") csi-provisioner
 ```
@@ -116,7 +105,7 @@ kubectl -n mayastor logs $(kubectl -n mayastor get pod -l app=moac -o jsonpath="
 
 {% tabs %}
 {% tab title="Example obtaining CSI node container log" %}
-```sh
+```bash
 kubectl -n mayastor logs mayastor-csi-7pg82 csi-driver-registrar
 ```
 {% endtab %}
@@ -124,40 +113,29 @@ kubectl -n mayastor logs mayastor-csi-7pg82 csi-driver-registrar
 
 ## Coredumps
 
-A coredump is a snapshot of process' memory with auxiliary information
-(PID, state of registers, etc.) saved to a file. It is used for post-mortem
-analysis and it is generated by the operating system in case of a severe error
-(i.e. memory corruption). Using a coredump for a problem analysis requires
-deep knowledge of program internals and is usually done only by developers.
-However, there is a very useful piece of information that even users can
-retrieve and this information alone can often identify the root cause of
-the problem. It is the stack (backtrace). Put differently, the thing that the
-program was doing at the time when it crashed. Here we describe how to get it.
-The steps as shown apply specifically to Ubuntu, other linux distros might employ variations.
+A coredump is a snapshot of process' memory with auxiliary information \(PID, state of registers, etc.\) saved to a file. It is used for post-mortem analysis and it is generated by the operating system in case of a severe error \(i.e. memory corruption\). Using a coredump for a problem analysis requires deep knowledge of program internals and is usually done only by developers. However, there is a very useful piece of information that even users can retrieve and this information alone can often identify the root cause of the problem. It is the stack \(backtrace\). Put differently, the thing that the program was doing at the time when it crashed. Here we describe how to get it. The steps as shown apply specifically to Ubuntu, other linux distros might employ variations.
 
-We rely on systemd-coredump that saves and manages coredumps on the system,
-`coredumpctl` utility that is part of the same package and finally
-the `gdb` debugger.
+We rely on systemd-coredump that saves and manages coredumps on the system, `coredumpctl` utility that is part of the same package and finally the `gdb` debugger.
 
 {% tabs %}
 {% tab title="Install systemd-coredump and gdb" %}
-```sh
+```bash
 sudo apt-get install -y systemd-coredump gdb lz4
 ```
 {% endtab %}
 {% endtabs %}
 
-If installed correctly then the global core pattern will be set so that all
-generated coredumps will be piped to the `systemd-coredump` binary.
+If installed correctly then the global core pattern will be set so that all generated coredumps will be piped to the `systemd-coredump` binary.
 
 {% tabs %}
 {% tab title="Verify coredump configuration" %}
-```sh
+```bash
 cat /proc/sys/kernel/core_pattern
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 |/lib/systemd/systemd-coredump %P %u %g %s %t 9223372036854775808 %h
 ```
 {% endtab %}
@@ -165,31 +143,30 @@ cat /proc/sys/kernel/core_pattern
 
 {% tabs %}
 {% tab title="List coredumps" %}
-```sh
+```bash
 coredumpctl list
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 TIME                            PID   UID   GID SIG COREFILE  EXE
 Tue 2021-03-09 17:43:46 UTC  206366     0     0   6 present   /bin/mayastor
 ```
 {% endtab %}
 {% endtabs %}
 
-If there is a new coredump from mayastor container, the coredump alone won't
-be that useful. GDB needs to access the binary of crashed process in order
-to be able to print at least some information in the backtrace. For that, we
-need to copy the contents of the container's filesystem to the host.
+If there is a new coredump from mayastor container, the coredump alone won't be that useful. GDB needs to access the binary of crashed process in order to be able to print at least some information in the backtrace. For that, we need to copy the contents of the container's filesystem to the host.
 
 {% tabs %}
 {% tab title="Get ID of the mayastor container" %}
-```sh
+```bash
 docker ps | grep mayadata/mayastor
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 b3db4615d5e1        mayadata/mayastor                          "sleep 100000"           27 minutes ago      Up 27 minutes                           k8s_mayastor_mayastor-n682s_mayastor_51d26ee0-1a96-44c7-85ba-6e50767cd5ce_0
 d72afea5bcc2        mayadata/mayastor-csi                      "/bin/mayastor-csi -…"   7 hours ago         Up 7 hours                              k8s_mayastor-csi_mayastor-csi-xrmxx_mayastor_d24017f2-5268-44a0-9fcd-84a593d7acb2_0
 ```
@@ -197,8 +174,8 @@ d72afea5bcc2        mayadata/mayastor-csi                      "/bin/mayastor-cs
 {% endtabs %}
 
 {% tabs %}
-{% tab title="Copy relevant parts of the container's fs" %}
-```sh
+{% tab title="Copy relevant parts of the container\'s fs" %}
+```bash
 mkdir -p /tmp/rootdir
 docker cp b3db4615d5e1:/bin /tmp/rootdir
 docker cp b3db4615d5e1:/nix /tmp/rootdir
@@ -206,19 +183,17 @@ docker cp b3db4615d5e1:/nix /tmp/rootdir
 {% endtab %}
 {% endtabs %}
 
-Now we can start GDB. *Don't use* `coredumpctl` command for starting the
-debugger. It invokes GDB with invalid path to the debugged binary hence
-stack unwinding fails for Rust functions then. At first we extract the
-compressed coredump.
+Now we can start GDB. _Don't use_ `coredumpctl` command for starting the debugger. It invokes GDB with invalid path to the debugged binary hence stack unwinding fails for Rust functions then. At first we extract the compressed coredump.
 
 {% tabs %}
 {% tab title="Find location of the compressed coredump" %}
-```sh
+```bash
 coredumpctl info | grep Storage | awk '{ print $2 }'
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 /var/lib/systemd/coredump/core.mayastor.0.6a5e550e77ee4e77a19bd67436ce7a98.64074.1615374302000000000000.lz4
 ```
 {% endtab %}
@@ -226,7 +201,7 @@ coredumpctl info | grep Storage | awk '{ print $2 }'
 
 {% tabs %}
 {% tab title="Extract the coredump" %}
-```sh
+```bash
 sudo lz4cat /var/lib/systemd/coredump/core.mayastor.0.6a5e550e77ee4e77a19bd67436ce7a98.64074.1615374302000000000000.lz4 >core
 ```
 {% endtab %}
@@ -234,12 +209,13 @@ sudo lz4cat /var/lib/systemd/coredump/core.mayastor.0.6a5e550e77ee4e77a19bd67436
 
 {% tabs %}
 {% tab title="Open coredump in GDB" %}
-```sh
+```bash
 gdb -c core /tmp/rootdir$(readlink /tmp/rootdir/bin/mayastor)
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 GNU gdb (Ubuntu 9.2-0ubuntu1~20.04) 9.2
 Copyright (C) 2020 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -268,18 +244,18 @@ Program terminated with signal SIGABRT, Aborted.
 {% endtab %}
 {% endtabs %}
 
-Once in GDB we need to set a sysroot so that GDB knows where to find the
-binary for the debugged program.
+Once in GDB we need to set a sysroot so that GDB knows where to find the binary for the debugged program.
 
 {% tabs %}
 {% tab title="Set sysroot in GDB" %}
-```sh
+```bash
 set auto-load safe-path /tmp/rootdir
 set sysroot /tmp/rootdir
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 Reading symbols from /tmp/rootdir/nix/store/f1gzfqq10dlha1qw10sqvgil34qh30af-systemd-246.6/lib/libudev.so.1...
 (No debugging symbols found in /tmp/rootdir/nix/store/f1gzfqq10dlha1qw10sqvgil34qh30af-systemd-246.6/lib/libudev.so.1)
 Reading symbols from /tmp/rootdir/nix/store/0kdiav729rrcdwbxws653zxz5kngx8aa-libspdk-dev-21.01/lib/libspdk.so...
@@ -293,16 +269,17 @@ Reading symbols from /tmp/rootdir/nix/store/a6rnjp15qgp8a699dlffqj94hzy1nldg-gli
 {% endtab %}
 {% endtabs %}
 
-After that we can print backtrace(s).
+After that we can print backtrace\(s\).
 
 {% tabs %}
 {% tab title="Obtain backtraces for all threads in GDB" %}
-```sh
+```bash
 thread apply all bt
 ```
 {% endtab %}
+
 {% tab title="Output example" %}
-```
+```text
 Thread 5 (Thread 0x7f78248bb640 (LWP 59)):
 #0  0x00007f7825ac0582 in __lll_lock_wait () from /tmp/rootdir/nix/store/a6rnjp15qgp8a699dlffqj94hzy1nldg-glibc-2.32/lib/libpthread.so.0
 #1  0x00007f7825ab90c1 in pthread_mutex_lock () from /tmp/rootdir/nix/store/a6rnjp15qgp8a699dlffqj94hzy1nldg-glibc-2.32/lib/libpthread.so.0
@@ -352,3 +329,4 @@ Thread 1 (Thread 0x7f782559f040 (LWP 56)):
 ```
 {% endtab %}
 {% endtabs %}
+

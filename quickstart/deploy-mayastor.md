@@ -2,9 +2,9 @@
 
 ## Overview
 
-In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the `deploy`folder of the [Mayastor project's GitHub repository](https://github.com/openebs/Mayastor).  The repository is configured for the GitFlow release pattern, wherein the master branch contains official releases.  By extension, the head of the master branch represents the latest official release.
+In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the `deploy`folder of the [Mayastor project's GitHub repository](https://github.com/openebs/Mayastor). The repository is configured for the GitFlow release pattern, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.
 
-The steps and commands which follow are intended only for use with, and tested against, the latest release.  Earlier releases or development versions may require a modified or different installation process.
+The steps and commands which follow are intended only for use with, and tested against, the latest release. Earlier releases or development versions may require a modified or different installation process.
 
 ## Create Mayastor Application Resources
 
@@ -12,7 +12,7 @@ The steps and commands which follow are intended only for use with, and tested a
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl create namespace mayastor
 ```
 {% endtab %}
@@ -22,13 +22,13 @@ kubectl create namespace mayastor
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl create -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/moac-rbac.yaml
 ```
 {% endtab %}
 
 {% tab title="Expected Output" %}
-```
+```text
 serviceaccount/moac created
 clusterrole.rbac.authorization.k8s.io/moac created
 clusterrolebinding.rbac.authorization.k8s.io/moac created
@@ -40,7 +40,7 @@ clusterrolebinding.rbac.authorization.k8s.io/moac created
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/csi/moac/crds/mayastorpool.yaml
 ```
 {% endtab %}
@@ -54,7 +54,7 @@ Mayastor uses [NATS](https://nats.io/), an Open Source messaging system, as an e
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/nats-deployment.yaml
 ```
 {% endtab %}
@@ -70,27 +70,26 @@ kubectl -n mayastor get pods --selector=app=nats
 {% endtab %}
 
 {% tab title="Example Output" %}
-```
+```text
 NAME                   READY   STATUS    RESTARTS   AGE
 nats-b4cbb6c96-nbp75   1/1     Running   0          28s
 ```
 {% endtab %}
 {% endtabs %}
 
-### etcd 
+### etcd
 
-**Note: Execute this step ONLY if deploying a version of Mayastor after v0.8.0**
-If you have used the definition files from the links given in the previous sections, this step should be omitted.
+**Note: Execute this step ONLY if deploying a version of Mayastor after v0.8.0** If you have used the definition files from the links given in the previous sections, this step should be omitted.
 
 Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.
 
-The steps described below provide an example of how etcd cluster can be deployed for use by Mayastor. 
+The steps described below provide an example of how etcd cluster can be deployed for use by Mayastor.
 
-**&#9888; Warning: This etcd cluster should not be used in production. The user is requested to deploy their own etcd cluster for production use.** 
+**⚠ Warning: This etcd cluster should not be used in production. The user is requested to deploy their own etcd cluster for production use.**
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/secrets.yaml 
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/statefulset.yaml 
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/develop/deploy/etcd/svc.yaml
@@ -109,7 +108,7 @@ kubectl -n mayastor get pods --selector=app.kubernetes.io/name=etcd
 {% endtab %}
 
 {% tab title="Example Output" %}
-```
+```text
 NAME             READY  STATUS   RESTARTS  AGE
 mayastor-etcd-0  1/1    Running  0         24m
 mayastor-etcd-1  1/1    Running  0         24m
@@ -124,7 +123,7 @@ mayastor-etcd-2  1/1    Running  0         24m
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/csi-daemonset.yaml
 ```
 {% endtab %}
@@ -135,12 +134,12 @@ Verify that the CSI Node Plugin DaemonSet has been correctly deployed to all wor
 {% tabs %}
 {% tab title="Command" %}
 ```text
-kubectl -n mayastor get daemonset mayastor-csi 
+kubectl -n mayastor get daemonset mayastor-csi
 ```
 {% endtab %}
 
 {% tab title="Example Output" %}
-```
+```text
 NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR              AGE
 mayastor-csi   3         3         3       3            3           kubernetes.io/arch=amd64   26m
 ```
@@ -151,7 +150,7 @@ mayastor-csi   3         3         3       3            3           kubernetes.i
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/moac-deployment.yaml
 ```
 {% endtab %}
@@ -167,24 +166,24 @@ kubectl get pods -n mayastor --selector=app=moac
 {% endtab %}
 
 {% tab title="Example Output" %}
-```
+```text
 NAME                    READY   STATUS    RESTARTS   AGE
 moac-7d487fd5b5-9hj62   3/3     Running   0          8m4s
 ```
 {% endtab %}
 {% endtabs %}
 
-### Data Plane 
+### Data Plane
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
-```
+```text
 kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/mayastor-daemonset.yaml
 ```
 {% endtab %}
 {% endtabs %}
 
-Verify that the Mayastor DaemonSet has been correctly deployed.  The reported Desired, Ready and Available instance counts should be equal, and should match the count of worker nodes which carry the label `openebs.io/engine=mayastor` \(as performed earlier in the "[Preparing the Cluster](preparing-the-cluster.md#label-the-storage-nodes)" stage\).
+Verify that the Mayastor DaemonSet has been correctly deployed. The reported Desired, Ready and Available instance counts should be equal, and should match the count of worker nodes which carry the label `openebs.io/engine=mayastor` \(as performed earlier in the "[Preparing the Cluster](preparing-the-cluster.md#label-the-storage-nodes)" stage\).
 
 {% tabs %}
 {% tab title="Command" %}
@@ -194,14 +193,14 @@ kubectl -n mayastor get daemonset mayastor
 {% endtab %}
 
 {% tab title="Example Output" %}
-```
+```text
 NAME       DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                                         AGE
 mayastor   3         3         3       3            3           kubernetes.io/arch=amd64,openebs.io/engine=mayastor   108s
 ```
 {% endtab %}
 {% endtabs %}
 
-For each resulting Mayastor pod instance, a Mayastor Node \(MSN\) custom resource definition should be created.  List these definitions and verify that the count meets the expected number and that all nodes are reporting their State as `online`
+For each resulting Mayastor pod instance, a Mayastor Node \(MSN\) custom resource definition should be created. List these definitions and verify that the count meets the expected number and that all nodes are reporting their State as `online`
 
 {% tabs %}
 {% tab title="Command" %}
@@ -211,7 +210,7 @@ kubectl -n mayastor get msn
 {% endtab %}
 
 {% tab title="Example Output" %}
-```
+```text
 NAME                       STATE    AGE
 aks-agentpool-12194210-0   online   8m18s
 aks-agentpool-12194210-1   online   8m19s
