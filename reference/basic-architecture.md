@@ -49,14 +49,11 @@ The instance of the `mayastor` binary running inside the container performs four
 * Present a gRPC interface to the MOAC control plane component, to allow the latter to orchestrate creation, configuration and deletion of Mayastor managed objects hosted by that instance
 * Create and manage storage pools hosted on that node
 * Create, export and manage nexus objects \(and by extension, volumes\) hosted on that node
-* Create and share "replicas" from storage pools hosted on that node
-  * Local replica -&gt; loopback -&gt; Local Nexus
-  * Local replica - &gt; NVMe-F TCP -&gt;  Remote Nexus \(hosted by a Mayastor container on another node\)
-  * Remote replicas are employed by a Nexus as synchronous data copies, where replication is in use
+* Create and shares "replicas" from storage pools hosted on that node over NVMe-TCP
 
 When a Mayastor pod starts running, an init container attempts to verify connectivity to the NATS message bus in the Mayastor namespace. If a connection can be established the Mayastor container is started, and the Mayastor instance performs registration with MOAC over the message bus. In this way, MOAC maintains a registry of nodes \(specifically, running Mayastor instances\) and their current state. For each registered Mayastor container/instance, MOAC creates a MayastorNode custom resource within the Kubernetes API of the cluster.
 
-The scheduling of Mayastor pods is determined declaratively by using a DaemonSet specification. By default, a `nodeSelector` field is used within the pod spec to select all worker nodes to which the user has attached the label `openebs.io/engine=mayastor` as recipients of a Mayastor pod. It is in this way that the MayastorNode count and location is set appropriate to the hardware configuration of the worker nodes \(i.e. which nodes host the block storage devices to be used\), and capacity and performance demands of the cluster.
+The scheduling of Mayastor pods is determined declaratively by using a DaemonSet specification. By default, a `nodeSelector` field is used within the pod spec to select all worker nodes to which the user has attached the label `openebs.io/engine=mayastor` as recipients of a Mayastor pod. It is in this way that the MayastorNode count and location is set appropriate to the hardware configuration of the worker nodes \(i.e. which nodes host the block storage devices to be used\), and the capacity and performance demands of the cluster.
 
 ### Mayastor-CSI
 
