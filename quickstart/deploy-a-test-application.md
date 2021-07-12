@@ -114,7 +114,7 @@ fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   aks-agentpool-12194210-0   1073741824   h
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/fio.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v0.8.0/deploy/fio.yaml
 ```
 {% endtab %}
 
