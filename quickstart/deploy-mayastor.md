@@ -13,7 +13,7 @@ The steps and commands which follow are intended only for use with, and tested a
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl create -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/namespace.yaml
+kubectl create -f https://raw.githubusercontent.com/openebs/Mayastor/v0.7.0/deploy/namespace.yaml
 ```
 {% endtab %}
 
@@ -34,7 +34,7 @@ metadata:
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl create -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/moac-rbac.yaml
+kubectl create -f https://raw.githubusercontent.com/openebs/Mayastor/v0.7.0/deploy/moac-rbac.yaml
 ```
 {% endtab %}
 
@@ -52,7 +52,7 @@ clusterrolebinding.rbac.authorization.k8s.io/moac created
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/csi/moac/crds/mayastorpool.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v0.7.0/csi/moac/crds/mayastorpool.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -66,7 +66,7 @@ Mayastor uses [NATS](https://nats.io/), an Open Source messaging system, as an e
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/nats-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v0.7.0/deploy/nats-deployment.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -95,7 +95,7 @@ nats-b4cbb6c96-nbp75   1/1     Running   0          28s
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/csi-daemonset.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v0.7.0/deploy/csi-daemonset.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -122,7 +122,7 @@ mayastor-csi   3         3         3       3            3           kubernetes.i
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/moac-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v0.7.0/deploy/moac-deployment.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -149,7 +149,7 @@ moac-7d487fd5b5-9hj62   3/3     Running   0          8m4s
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/mayastor-daemonset.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v0.7.0/deploy/mayastor-daemonset.yaml
 ```
 {% endtab %}
 {% endtabs %}
