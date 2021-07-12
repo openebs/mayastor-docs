@@ -81,11 +81,10 @@ nats-b4cbb6c96-nbp75   1/1     Running   0          28s
 
 Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.  The steps described below deploy a limited etcd cluster instance which can be used in conjunction with Mayastor for the purposes of this quickstart guide's testing scenarios.  
 
-It will depend on the exact environment what the optimal configuration for etcd is. By default, the example given does not perisist the etcd data on stable storage. Please refer to the etcd documentation to get a better understnading. If you already have an existing etcd cluster deployed in your environment, that etcd cluster can be used as well. 
+By default, the example given does not perisist the etcd data on stable storage.
 
 {% hint style="warning" %}
-The etcd cluster deployed here is intended for demonstration purposes only. For production use, the user is responsible for the deployment of a suitable etcd instance which
-they have verifed satisfies their use case, and recommended best practices for etcd.
+The etcd cluster deployed here is intended for demonstration purposes only. By default, this instance does not perisist the etcd data on stable storage.  For production use, the user is responsible for the deployment of a suitable etcd instance which they have verifed satisfies their use case, and recommended best practices for etcd.
 {% endhint %}
 
 {% tabs %}
