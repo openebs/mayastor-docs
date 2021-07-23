@@ -21,6 +21,7 @@
 
 * [Basic Architecture](reference/basic-architecture.md)
 * [I/O Path Description](reference/i-o-path-description.md)
+* [Replica Operations](reference/replica-operations.md)
 * [Operations](reference/operations.md)
 
 ## Mayastor A-Z
