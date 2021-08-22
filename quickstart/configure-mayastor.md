@@ -101,8 +101,8 @@ metadata:
 parameters:
   repl: '1'
   protocol: 'nvmf'
-  ioTimeout: 60
-  local: true
+  ioTimeout: '60'
+  local: 'true'
 provisioner: io.openebs.csi-mayastor
 volumeBindingMode: WaitForFirstConsumer
 EOF
@@ -119,8 +119,8 @@ metadata:
 parameters:
   repl: '3'
   protocol: 'nvmf'
-  ioTimeout: 60
-  local: true
+  ioTimeout: '60'
+  local: 'true'
 provisioner: io.openebs.csi-mayastor
 volumeBindingMode: WaitForFirstConsumer
 EOF
