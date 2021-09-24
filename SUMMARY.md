@@ -23,6 +23,7 @@
 * [I/O Path Description](reference/i-o-path-description.md)
 * [Replica Operations](reference/replica-operations.md)
 * [Operations](reference/operations.md)
+* [Storage Class Parameters](reference/storage-class-parameters.md)
 
 ## Mayastor A-Z
 
