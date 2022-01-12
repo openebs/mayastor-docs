@@ -2,7 +2,7 @@
 
 ### **General**
 
-Each Mayastor Node \(MSN\), that is each cluster worker node which will host an instance of a Mayastor pod, must have these resources _free and available_ for use by Mayastor:
+Each worker node that will host an instance of a Mayastor pod, must have the following resources _free and available_ for use by Mayastor:
 
 * **Two  x86-64 CPU cores with SSE4.2 instruction support**:
   * Intel Nehalem processor \(march=nehalem\) and newer
@@ -24,7 +24,7 @@ As long as the resource prerequisites are met, Mayastor can deployed to a cluste
 
 ### Transport Protocols
 
-Mayastor supports the export and mounting of a Persistent Volume over either NVMe-oF TCP or iSCSI \(configured as a parameter of the PV's underlying StorageClass\).  Worker node\(s\) on which a PV is to be mounted must have the requisite initiator support installed and configured for the protocol in use.
+Mayastor supports the export and mounting of a Persistent Volume over NVMe-oF TCP. Worker node\(s\) on which a PV is to be mounted must have the requisite initiator support installed and configured for the protocol in use.
 
 #### NVMe-oF
 
