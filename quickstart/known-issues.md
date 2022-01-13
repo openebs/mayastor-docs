@@ -36,3 +36,9 @@ If this is not done, CSI socket paths won't match expected values and the Mayast
 
 When rebooting a node that runs applications mounting Mayastor volumes, this can take tens of minutes. The reason is the long default NVMe controller timeout \(`ctrl_loss_tmo`\). The solution is to follow the best k8s practices and cordon the node ensuring there aren't any application pods running on it before the reboot. Setting `ioTimeout` storage class parameter can be used to fine-tune the timeout.
 
+### Node restarts on scheduling an application 
+
+Deploying an application on a K8s environment which hosts Mayastor along with Prometheus exporter causes the application node to restart.
+The issue originated because of a kernel bug. Once the nexus disconnects, the entries under `/host/sys/class/hwmon/` should get removed, which does not happen in this case(The issue was fixed via this [kernel patch](https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2413147.html)).
+
+**Fix:** Since the issue got fixed in the next kernel version, i.e, `linux-modules-extra-5.13.0-22-generic`, upgrading ubuntu-based OS kernel to >= extra-5.13.0 should fix node restarts issue.
