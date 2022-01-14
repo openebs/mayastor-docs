@@ -40,7 +40,7 @@ If you modify the Huge Page configuration of a node, you _must_ either restart k
 
 ### Label Mayastor Node Candidates
 
-All the worker nodes that will have Mayastor pods running on it must be labelled with the OpenEBS engine type "mayastor".  This label will be used as a selector by the Mayastor Daemonset, which will be deployed as a part of Mayastor Data plane component installation. To add label to a node, execute:
+All the worker nodes that will have Mayastor pods running on them must be labelled with the OpenEBS engine type "mayastor".  This label will be used as a selector by the Mayastor Daemonset, which will be deployed as a part of Mayastor data plane component installation. To add label to a node, execute:
 
 ```text
 kubectl label node <node_name> openebs.io/engine=mayastor

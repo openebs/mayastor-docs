@@ -22,14 +22,11 @@ While Mayastor utilizes NVMe-oF it does not require NVMe devices or cloud volume
 
 ## Where can I find Mayastor?
 
-The branch with the latest release can be found [here](https://github.com/openebs/mayastor/tree/master).  Our active development is done on the [develop branch](https://github.com/openebs/mayastor/tree/develop). 
+The Mayastor product is associated with multiple repositories under the OpenEBS project. The list of repositories are as follows:
+- `[openebs/mayastor](https://github.com/openebs/mayastor)` : This repository contains specifications for Mayastor Data Plane components.
+- `[openebs/mayastor-control-plane](https://github.com/openebs/mayastor-control-plane)` : This repository contains specifications for Mayastor Control Plane components.
+- `[openebs/mayastor-api](https://github.com/openebs/mayastor-api)` : This repository contains protocol buffer definitions and OpenAPI specifications for Mayastor
 
-We also produce nightly mayastor images using the `:develop` tag.  Please validate any changes to the YAML files between the lastest release branch and the develop branch when deploying mayastor. 
 
-## Project Status
-
-{% hint style="warning" %}
-**Mayastor is beta software**. It is considered largely, if not entirely, feature complete and substantially without major known defects. Minor and unknown defects can be expected; **please deploy accordingly**.
-{% endhint %}
 
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the `deploy`folder of the [Mayastor project's GitHub repository](https://github.com/openebs/Mayastor/tree/master). The repository is configured for the GitFlow release pattern, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.
+In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided under multiple repositories(for [Control Plane](https://github.com/openebs/mayastor-control-plane), [Data Plane](https://github.com/openebs/mayastor) and [API](https://github.com/openebs/mayastor-api) components) under the OpenEBS project. The repository is configured for the GitFlow release pattern, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.
 
 The steps and commands which follow are intended only for use with, and tested against, the latest release. Earlier releases or development versions may require a modified or different installation process.
 
@@ -60,7 +60,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deplo
 {% endtab %}
 {% endtabs %}
 
-Verify that the deployment of the NATS application to the cluster was successful. Within the mayastor namespace there should be a pod with the name "nats-x", and with a reported status of Running.
+Verify that the deployment of the NATS application to the cluster was successful. Within the mayastor namespace ensure that there are 3 replicas with the name "nats-x", and with a reported status of Running.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -72,7 +72,7 @@ kubectl -n mayastor get pods --selector=app=nats
 {% tab title="Example Output" %}
 ```text
 NAME          READY   STATUS    RESTARTS   AGE
-nats-0        2/2     Running   0          61s
+nats-0        3/3     Running   0          61s
 ```
 {% endtab %}
 {% endtabs %}
@@ -81,10 +81,8 @@ nats-0        2/2     Running   0          61s
 
 Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.  The steps described below deploy a limited etcd cluster instance which can be used in conjunction with Mayastor for the purposes of this quickstart guide's testing scenarios.  
 
-By default, the example given does not perisist the etcd data on stable storage.
-
 {% hint style="warning" %}
-The etcd cluster deployed here is intended for demonstration purposes only. By default, this instance does not perisist the etcd data on stable storage.  For production use, the user is responsible for the deployment of a suitable etcd instance which satisfies their use case and follows the recommended best practices for etcd.
+The etcd cluster deployed here is intended for demonstration purposes only. For production use, the user is responsible for the deployment of a suitable etcd instance which satisfies their use case and follows the recommended best practices for etcd.
 {% endhint %}
 
 {% tabs %}
@@ -97,7 +95,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deplo
 {% endtab %}
 {% endtabs %}
 
-Verify that the deployment of etcd to the cluster was successful. Within the mayastor namespace there should be a pod with the name "mayastor-etcd-", and with a reported status of "Running".
+Verify that the deployment of etcd to the cluster was successful. Within the mayastor namespace there should be 3 replicas with the name "mayastor-etcd-", and with a reported status of "Running".
 
 {% tabs %}
 {% tab title="Command" %}
@@ -109,7 +107,7 @@ kubectl -n mayastor get pods --selector=app.kubernetes.io/name=etcd
 {% tab title="Example Output" %}
 ```text
 NAME              READY   STATUS    RESTARTS   AGE
-mayastor-etcd-0   1/1     Running   0          4m32s
+mayastor-etcd-0   3/3     Running   0          4m32s
 ```
 {% endtab %}
 {% endtabs %}
@@ -155,7 +153,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plan
 {% endtab %}
 {% endtabs %}
 
-Verify that the Core agent pods are running.
+Verify that the Core agent pod is running.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -184,7 +182,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plan
 {% endtab %}
 {% endtabs %}
 
-Verify that the CSI-controller pods are running.
+Verify that the CSI-controller pod is running.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -211,7 +209,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plan
 {% endtab %}
 {% endtabs %}
 
-Verify that the MSP operator pods are running.
+Verify that the pool operator pod is running.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -281,7 +279,7 @@ For each resulting Mayastor pod instance, a Mayastor Node \(MSN\) custom resourc
 {% tabs %}
 {% tab title="Command" %}
 ```text
-kubectl-mayastor get nodes -n mayastor 
+kubectl mayastor get nodes -n mayastor 
 ```
 {% endtab %}
 
