@@ -38,7 +38,7 @@ When rebooting a node that runs applications mounting Mayastor volumes, this can
 
 ### Node restarts on scheduling an application 
 
-Deploying an application on a K8s environment which hosts Mayastor along with Prometheus exporter causes the application node to restart.
+Deploying an application pod on a worker node which hosts Mayastor and Prometheus exporter causes that node to restart.
 The issue originated because of a kernel bug. Once the nexus disconnects, the entries under `/host/sys/class/hwmon/` should get removed, which does not happen in this case(The issue was fixed via this [kernel patch](https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2413147.html)).
 
-**Fix:** Since the issue got fixed in the next kernel version, i.e, `linux-modules-extra-5.13.0-22-generic`, upgrading ubuntu-based OS kernel to >= extra-5.13.0 should fix node restarts issue.
+**Fix:** Use kernel version extra-5.31.0 or later if deploying Mayastor in conjunction with the Prometheus metrics exporter.
