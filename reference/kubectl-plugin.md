@@ -5,7 +5,7 @@ This section provides an overview of Mayastor kubectl plugin. It includes instal
 
 # Mayastor kubectl plugin
 
-The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor components such as nodes, pools and volumes. Apart from this, the plugin can also be used for operations such as scaling up/down volumes. 
+The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor resources such as nodes, pools and volumes. It is also used for operations such as scaling the replica count of volumes. 
 
 
 ### Installation
@@ -53,14 +53,6 @@ kubectl-plugin 0.1.0
 {% endtab %}
 {% endtabs %}
 
-
-{% hint style="warning" %}
-The current kubectl-mayastor plugin version is 0.1.0, which is compatible with the following component versions:
-
-- Mayastor core-agent version=0.1.0
-- Rest version = 0.1.0
-- Kubernnetes version >=1.18
-{% endhint %}
 
 ### Using Mayastor kubectl plugin
 
@@ -151,9 +143,9 @@ The plugin can be used to get the following resource information:
  kubectl mayastor get &lt;resource_name&gt; &lt;resource_id&gt;
  {% endhint %}
 
-Mayastor kubectl plugin can also be used for implementing operations such as:
+The Mayastor kubectl plugin can also be used for performing the following operations:
 
-1. Scaling up volume using Volume ID
+1. Scaling the replica count of a volume
    {% tabs %}
     {% tab title="Command" %}
     ```text
@@ -205,7 +197,7 @@ Mayastor kubectl plugin can also be used for implementing operations such as:
 
 
 {% hint style="warning" %}
-The plugin needs access to `mayastor rest server` for execution. It gets the master node IP from the kube-config file. In case of any failure, the rest endpoint can be specified using the ‘–rest’ flag.
+The plugin requires access to the `Mayastor REST server` for execution. It gets the master node IP from the kube-config file. In case of any failure, the REST endpoint can be specified using the ‘–rest’ flag.
 {% endhint %}
 
 
@@ -213,7 +205,7 @@ The plugin needs access to `mayastor rest server` for execution. It gets the mas
 
 - The plugin currently does not have authentication support.
 - The plugin can operate only over HTTP.
-- In the case of a multi-cluster setup, the plugin by default picks up the first master node IP for REST access. In case  REST is not accessible using the selected master node IP, the plugin would not be able to pick up an alternate worker node IP by default.
+- In the case of a cluster with multiple master nodes, the plugin by default picks up the first master node IP for accessing the REST service. In case  the REST service is not accessible using the selected master node IP, the plugin would not be able to pick up an alternate master node IP by default.
 
 
 
