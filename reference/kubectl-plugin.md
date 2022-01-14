@@ -10,32 +10,8 @@ The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor resour
 
 ### Installation
 
-- The Mayastor kubectl plugin is available for the Linux platform. To download the binary click [here]  (https://github.com/mayadata-io/mayastor-control-plane/releases). Once downloaded, ensure that it is added to PATH.
+- The Mayastor kubectl plugin is available for the Linux platform. The binary for the plugin can be found [here](https://github.com/mayadata-io/mayastor-control-plane/releases). 
 
-- Next, clone the [openebs/mayastor-control-plane](https://github.com/mayadata-io/mayastor-control-plane) GitHub repository. This repository will be used to perform builds of the downloaded binary plugin. To clone,
-
-{% tabs %}
-{% tab title="Command" %}
-```text
-git clone https://github.com/openebs/mayastor-control-plane
-cd mayastor-control-plane
-```
-{% endtab %}
-{% endtabs %}
-
-- To execute the build:
-
-{% tabs %}
-{% tab title="Command" %}
-```text
-nix-build -A utils.release.kubectl-plugin
-```
-{% endtab %}
-{% endtabs %}
-
-{% hint style="warning" %}
-To execute the build ensure that your setup has [rust](https://www.rust-lang.org/tools/install) and [nix](https://nixos.org/download.html) configured. Rust is needed to compile the binary and the nix environment provide us with the required dependencies. 
-{% endhint %}
 
 To verify the installation, execute:
 
@@ -48,7 +24,7 @@ kubectl mayastor -v
 
 {% tab title="Expected Output" %}
 ```text
-kubectl-plugin 0.1.0
+kubectl-plugin 1.0.0
 ```
 {% endtab %}
 {% endtabs %}
