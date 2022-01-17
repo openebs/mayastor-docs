@@ -1,8 +1,3 @@
----
-description: >-
-This section provides an overview of Mayastor kubectl plugin. It includes installation, usage and current scope of the plugin.
----
-
 # Mayastor kubectl plugin
 
 The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor resources such as nodes, pools and volumes. It is also used for operations such as scaling the replica count of volumes. 
