@@ -26,45 +26,6 @@ nats-6fdd6dfb4f-swlm8   1/1     Running   0          16m   10.244.3.2     worker
 {% endtab %}
 {% endtabs %}
 
-### moac's log file
-
-`moac` is the control plane of Mayastor. There is only one `moac` container running in the cluster. It is generally useful as it captures all high-level operations related to mayastor volumes in the cluster. So it is a good idea to always inspect this log file.
-
-{% tabs %}
-{% tab title="Obtaining moac\'s log" %}
-```bash
-kubectl -n mayastor logs $(kubectl -n mayastor get pod -l app=moac -o jsonpath="{.items[0].metadata.name}") moac
-```
-{% endtab %}
-
-{% tab title="Output example" %}
-```text
-Mar 09 10:44:47.560 info [csi]: CSI server listens at /var/lib/csi/sockets/pluginproxy/csi.sock
-Mar 09 10:44:47.565 debug [nats]: Connecting to NATS at "nats" ...
-Mar 09 10:44:47.574 info [node-operator]: Initializing node operator
-Mar 09 10:44:47.602 info [nats]: Connected to NATS message bus at "nats"
-Mar 09 10:44:47.631 info [node-operator]: Created CRD mayastornode
-Mar 09 10:44:47.709 debug [watcher]: mayastornode watcher with 0 objects was started
-Mar 09 10:44:47.710 trace: Initial content of the "mayastornode" cache:
-Mar 09 10:44:47.711 info [pool-operator]: Initializing pool operator
-Mar 09 10:44:47.729 info [pool-operator]: Created CRD mayastorpool
-Mar 09 10:44:47.787 debug [watcher]: mayastorpool watcher with 0 objects was started
-Mar 09 10:44:47.788 trace: Initial content of the "mayastorpool" cache:
-Mar 09 10:44:47.788 info: Warming up will take 7 seconds ...
-Mar 09 10:44:53.335 debug [csi]: probe request (ready=false)
-Mar 09 10:44:54.201 debug [csi]: probe request (ready=false)
-Mar 09 10:44:54.788 info [volume-operator]: Initializing volume operator
-Mar 09 10:44:54.803 info [volume-operator]: Created CRD mayastorvolume
-Mar 09 10:44:56.339 debug [csi]: probe request (ready=false)
-Mar 09 10:44:57.340 debug [csi]: probe request (ready=false)
-Mar 09 10:44:57.861 debug [watcher]: mayastorvolume watcher with 0 objects was started
-Mar 09 10:44:57.861 trace: Initial content of the "mayastorvolume" cache:
-Mar 09 10:44:57.866 info [api]: API server listening on port 4000
-Mar 09 10:44:57.866 info: MOAC is warmed up and ready to 🚀
-Mar 09 10:44:58.206 debug [csi]: probe request (ready=true)
-```
-{% endtab %}
-{% endtabs %}
 
 ### mayastor's log file
 
