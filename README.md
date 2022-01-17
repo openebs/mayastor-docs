@@ -18,23 +18,15 @@ OpenEBS Mayastor incorporates Intel's [Storage Performance Development Kit](http
 
 By comparison most pre-CAS shared everything storage systems are widely thought to impart an overhead of at least 40% and sometimes as much as 80% or more as compared to the capabilities of the underlying devices or cloud volumes; additionally pre-CAS shared storage scales in an unpredictale manner as I/O from many workloads interact and complete for the capabilities of the shared storage system.
 
-While Mayastor utilizes NVMe-oF it does not require NVMe devices or cloud volumes to operate as is explained below.
+While Mayastor utilizes NVMe-oF it does not require NVMe devices or cloud volumes to operate.
 
 ## Where can I find Mayastor?
 
-The branch with the latest release can be found here.  Our active development is done on the develop branch. 
+The Mayastor product is associated with multiple repositories under the OpenEBS project. The list of repositories are as follows:
+- `[openebs/mayastor](https://github.com/openebs/mayastor)` : This repository contains specifications for Mayastor Data Plane components.
+- `[openebs/mayastor-control-plane](https://github.com/openebs/mayastor-control-plane)` : This repository contains specifications for Mayastor Control Plane components.
+- `[openebs/mayastor-api](https://github.com/openebs/mayastor-api)` : This repository contains protocol buffer definitions and OpenAPI specifications for Mayastor
 
-We also produce nightly mayastor images using the `:develop` tag.  Please validate any changes to the YAML files between the lastest release branch and the develop branch when deploying mayastor. 
 
-## Project Status
 
-{% hint style="warning" %}
-**Mayastor is beta software**. It is considered largely, if not entirely, feature complete and substantially without major known defects. Minor and unknown defects can be expected; **please deploy accordingly**.
-{% endhint %}
-
-## "Who" are Mayastor?
-
-Mayastor is a component of OpenEBS and is primarily developed and maintained by [MayaData](https://mayadata.io/), which also provides enterprise support and management software for the use of OpenEBS Mayastor and Kubernetes for data. The OpenEBS family of storage engines are fully Open Source and "free forever" - feedback and contributions are welcomed. Other companies also provide support for OpenEBS and these offerings may include support for OpenEBS Mayadata. More information about these companies can be found on the web site for the OpenEBS project at: www.openEBS.io/support
-
-![](.gitbook/assets/mayadata-logo-1d5e6edb8a36beb68572ffc65dfe7a4e.svg)
 

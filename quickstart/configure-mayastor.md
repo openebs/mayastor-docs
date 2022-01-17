@@ -2,11 +2,12 @@
 
 ## Create Mayastor Pool\(s\)
 
+
 ### What is a Mayastor Pool \(MSP\)?
 
-When a Mayastor Node \(MSN\) allocates storage capacity for a Persistent Volume \(PV\) it does so from a construct named a Mayastor Pool \(MSP\). Each MSN may create and manage zero, one, or more such pools. The ownership of a pool by a MSN is exclusive. In the current version of Mayastor, a pool may have only a single block device member, which constitutes the entire data persistence layer for that pool and thus determines its maximum capacity.
+When a Mayastor Node allocates storage capacity for a Persistent Volume \(PV\) it does so from a construct named a Mayastor Pool \(MSP\). Each Mayastor node may create and manage zero, one, or more such pools. The ownership of a pool by a Mayastor node is exclusive. In the current version of Mayastor, a pool may have only a single block device member, which constitutes the entire data persistence layer for that pool and thus determines its maximum capacity.
 
-A pool is defined declaratively, through the creation of a corresponding `MayastorPool`custom resource \(CR\) on the cluster. User configurable parameters of this CR type include a unique name for the pool, the host name of the MSN on which it is hosted and a reference to a disk device which is accessible from that node \(for inclusion within the pool\). The pool definition allows the reference to its member block device to adhere to one of a number of possible schemes, each associated with a specific access mechanism/transport/device type and differentiated by corresponding performance and/or attachment locality.
+A pool is defined declaratively, through the creation of a corresponding `MayastorPool`custom resource \(CR\) on the cluster. User configurable parameters of this CR type include a unique name for the pool, the node name on which it will be hosted and a reference to a disk device which is accessible from that node \(for inclusion within the pool\). The pool definition allows the reference to its member block device to adhere to one of a number of possible schemes, each associated with a specific access mechanism/transport/device type and differentiated by corresponding performance and/or attachment locality.
 
 #### Permissible Schemes for the MSP CRD field `disks`
 
@@ -25,7 +26,7 @@ RAM drive isn't suitable for production as it uses volatile memory for backing t
 
 ### Configure Pool\(s\) for Use with this Quickstart
 
-To continue with this quick start exercise, a minimum of one pool is necessary, created and hosted by one of the MSNs in the cluster. However the number of pools available limits the extent to which the synchronous n-way mirroring feature \("replication"\) of Persistent Volumes can configured for testing and evaluation; the number of pools configured should be no lower than the desired maximum replication factor of the PVs to be created. Note also that when placing data replicas, to provide appropriate redundancy, Mayastor's control plane will avoid locating more than one replica of a PV on the same MSN. Therefore, for example, the minimum viable configuration for a Mayastor deployment which is intended to test 3-way mirrored PVs must have three Mayastor Nodes, each having one Mayastor Pool, with each of those pools having one unique block device allocated to it.
+To continue with this quick start exercise, a minimum of one pool is necessary, created and hosted on one of the Mayastor nodes in the cluster. However, the number of pools available limits the extent to which the synchronous n-way mirroring feature \("replication"\) of Persistent Volumes can be configured for testing and evaluation; the number of pools configured should be no lower than the desired maximum replication factor of the PVs to be created. Also, while placing data replicas ensure that appropriate redundancy is provided. Mayastor's control plane will avoid locating more than one replica of a PV on the same Mayastor node. Therefore, for example, the minimum viable configuration for a Mayastor deployment which is intended to test 3-way mirrored PVs must have three Mayastor Nodes, each having one Mayastor Pool, with each of those pools having one unique block device allocated to it.
 
 Using one or more the following examples as templates, create the required type and number of pools.
 
@@ -60,7 +61,7 @@ spec:
 {% endtabs %}
 
 {% hint style="info" %}
-When following the examples in order to create your own Mayastor Pool\(s\), remember to replace the values for the fields "name", "node" and "disks" as appropriate to your cluster's intended configuration. Note that whilst the "disks" parameter accepts an array of scheme values, the current version of Mayastor supports only one disk device per pool.
+When following the examples in order to create your own Mayastor Pool\(s\), remember to replace the values for the fields "metadata.name", "spec.node" and "spec.disks" as appropriate to your cluster's intended configuration. Note that whilst the "disks" parameter accepts an array of scheme values, the current version of Mayastor supports only one disk device per pool.
 {% endhint %}
 
 ### Verify Pool Creation and Status
