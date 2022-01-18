@@ -49,7 +49,8 @@ SUBCOMMANDS:
 
 The plugin can be used to get the following resource information:
 
- 1. Volumes
+1. **Volumes**
+
 {% tabs %}
 {% tab title="Command" %}
 ```text
@@ -68,7 +69,7 @@ ID                                    REPLICAS  TARGET-NODE  ACCESSIBILITY STATU
 {% endtabs %}
  
 
- 2. Pools
+2. **Pools**
 
 {% tabs %}
 {% tab title="Command" %}
@@ -89,7 +90,7 @@ mayastor-pool-3  5360320512      3258974208     aio:///dev/vdb?uuid=f324edb7-1ac
 {% endtab %}
 {% endtabs %}
 
- 3. Nodes
+3. **Nodes**
 
 {% tabs %}
 {% tab title="Command" %}
@@ -116,7 +117,7 @@ mayastor-3  10.1.0.8:10124  Online
 
 The Mayastor kubectl plugin can also be used for performing the following operations:
 
-1. Scaling the replica count of a volume
+- Scaling the replica count of a volume
 {% tabs %}
 {% tab title="Command" %}
 ```text
@@ -132,7 +133,7 @@ Volume 0c08667c-8b59-4d11-9192-b54e27e0ce0f Scaled Successfully 🚀
 {% endtabs %}
 
 
-2. Retrieving resource specs in any desired format
+- Retrieving resource specs in any desired format
 
 {% tabs %}
 {% tab title="Command" %}
@@ -148,7 +149,7 @@ kubectl mayastor -ojson get <resource_type>
 {% endtab %}
 {% endtabs %}
 
-3. Retrieving replica topology for specific volumes.
+- Retrieving replica topology for specific volumes.
 
 {% tabs %}
 {% tab title="Command" %}
