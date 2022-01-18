@@ -1,6 +1,6 @@
 # Preparing the Cluster
 
-## Configure Mayastor Nodes \(MSNs\)
+## Configure Mayastor Nodes
 
 Within the context of the Mayastor application, a "Mayastor Node" is a Kubernetes worker node on which is scheduled an instance of a Mayastor data plane pod, so is thus capable of hosting a Storage Pool and exporting Persistent Volumes\(PV\).  A MSN makes use of block storage device\(s\) attached to it to contribute storage capacity to its pool\(s\), which supply backing storage for the Persistent Volumes provisioned on the parent cluster by Mayastor.
 
