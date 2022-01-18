@@ -235,10 +235,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plan
 kubectl apply -f https://raw.githubusercontent.com/openbes/mayastor-control-plane/master/deploy/rest-service.yaml
 ```
 {% endtab %}
-{% endtabs %}
 
-
-{% tabs %}
 {% tab title="Example Output" %}
 ```text
 deployment.apps/rest created
