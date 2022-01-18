@@ -6,7 +6,7 @@ If all verification steps in the preceding stages were satisfied, then Mayastor 
 
 ## Define the PVC
 
-Use `kubectl` to create a PVC based on a StorageClass which you created in the [previous stage](configure-mayastor.md#create-mayastor-storageclass-s). In the example shown below, we'll consider that StorageClass to have been named "mayastor-1". Replace the value of the field "storageClassName" with the name of your own Mayastor-based StorageClass.
+Use `kubectl` to create a PVC based on a StorageClass that you created in the [previous stage](configure-mayastor.md#create-mayastor-storageclass-s). In the example shown below, we'll consider that StorageClass to have been named "mayastor-1". Replace the value of the field "storageClassName" with the name of your own Mayastor-based StorageClass.
 
 For the purposes of this quickstart guide, it is suggested to name the PVC "ms-volume-claim", as this is what will be illustrated in the example steps which follow.
 
@@ -87,7 +87,7 @@ spec:
 
 ## Verify the Volume and the Deployment
 
-We will now verify the Volume Claim and that the corresponding Volume and Mayastor Volume \(MSV\) resources have been created and are healthy.
+We will now verify the Volume Claim and that the corresponding Volume and Mayastor Volume resources have been created and are healthy.
 
 ### Verify the Volume Claim
 
@@ -129,21 +129,26 @@ pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            Delete     
 {% endtab %}
 {% endtabs %}
 
-### Verify the Mayastor Volume \(MSV\)
+### Verify the Mayastor Volume 
 
-The state of the MSV resource should be "healthy".
+The status of the volume should be "online".
+
+{% hint style="warning" %}
+To verify the status of volume [Mayastor Kubectl plugin](https://mayastor.gitbook.io/introduction/reference/kubectl-plugin) is used.
+{% endhint %}
 
 {% tabs %}
 {% tab title="Command" %}
 ```text
-kubectl get -n mayastor msv
+kubectl mayastor get volumes
 ```
 {% endtab %}
 
 {% tab title="Example Output" %}
 ```text
-NAME                                   NODE                       SIZE         STATE     AGE
-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   aks-agentpool-12194210-0   1073741824   healthy   21m
+ID                                    REPLICAS  TARGET-NODE                ACCESSIBILITY STATUS  SIZE
+
+18e30e83-b106-4e0d-9fb6-2b04e761e18a  3         aks-agentpool-12194210-0   nvmf           Online  1073741824 
 ```
 {% endtab %}
 {% endtabs %}
