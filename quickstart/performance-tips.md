@@ -13,11 +13,11 @@ However, it prevents system services including kubelet from interfering with May
 
 ### Set Linux kernel boot parameter
 
-Note that the best way to do the following step may differ based on Linux distro that you are using.
+Note that the best way to accomplish this step may differ, based on the Linux distro that you are using.
 
-Add `isolcpus` kernel boot parameter to `GRUB_CMDLINE_LINUX_DEFAULT` in the grub configuration file with the specification of isolated CPUs \(indexing starts from zero here\). The location of the configuration file to change is `/etc/default/grub`, though it depends. For example when running Ubuntu 20.04 in AWS EC2 Cloud boot parameters are in `/etc/default/grub.d/50-cloudimg-settings.cfg`.
+Add the `isolcpus` kernel boot parameter to `GRUB_CMDLINE_LINUX_DEFAULT` in the grub configuration file, with a value which identifies the CPUs to be isolated \(indexing starts from zero here\). The location of the configuration file to change is typically `/etc/default/grub` but may vary. For example when running Ubuntu 20.04 in AWS EC2 Cloud boot parameters are in `/etc/default/grub.d/50-cloudimg-settings.cfg`.
 
-In the following example, we assume a system with 4 CPU cores and the third and the fourth CPU core will be dedicated for Mayastor.
+In the following example we assume a system with 4 CPU cores in total, and that the third and the fourth CPU cores are to be dedicated to Mayastor.
 
 ```text
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2,3"
@@ -61,7 +61,7 @@ sudo reboot
 
 ### Verify isolcpus
 
-Basic verification is to print the boot parameters of the currently running kernel.
+Basic verification is by outputting the boot parameters of the currently running kernel:
 
 {% tabs %}
 {% tab title="Command" %}
@@ -77,7 +77,7 @@ BOOT_IMAGE=/boot/vmlinuz-5.8.0-29-generic root=PARTUUID=7213a253-01 ro console=t
 {% endtab %}
 {% endtabs %}
 
-You could also print a list of isolated CPUs.
+You can also print a list of isolated CPUs:
 
 {% tabs %}
 {% tab title="Command" %}
