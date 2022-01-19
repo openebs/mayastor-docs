@@ -1,20 +1,6 @@
 # Known Issues
 
-## Live Issue Tracker
-
-Mayastor is currently considered to be beta software.
-
-> "\(it\) will generally have many more bugs in it than completed software and speed or performance issues, and may still cause crashes or data loss."
-
-The project's maintainers operate a live issue tracking dashboard for defects which they have under active triage and investigation. It can be accessed [here](https://mayadata.atlassian.net/secure/Dashboard.jspa?selectPageId=10015). You are strongly encouraged to familiarise yourself with the issues identified there before using Mayastor and when raising issue reports in order to limit to the extent possible redundant issue reporting.
-
-## How is Mayastor Tested?
-
-Mayastor's maintainers perform integration and end-to-end testing on nightly builds and named releases. Clusters used to perform this testing are composed of worker nodes running Ubuntu 20.04.2 LTS, using the docker runtime 20.10.5 under Kubernetes version 1.19.8. Other testing efforts are underway including soak testing and failure injection testing.
-
-We periodically access the labs of partners and community members for scale and performance testing and would welcome offers of any similar or other testing assistance.
-
-## Common Installation Issues
+## Installation Issues
 
 ### A Mayastor pod restarts unexpectedly with exit code 132 whilst mounting a PVC
 
@@ -31,6 +17,10 @@ In addition to ensuring that the general prerequisites for installation are met,
 If this is not done, CSI socket paths won't match expected values and the Mayastor CSI driver registration process will fail, resulting in the inability to provision Mayastor volumes on the cluster.
 
 ## Other Issues
+
+### Mayastor pod may restart if a pool disk is inaccessible
+
+If the disk device used by a Mayastor pool becomes inaccessible or enters the offline state, the hosting Mayastor pod may panic.  A fix for this behaviour is under investigation.
 
 ### Lengthy worker node reboot times
 

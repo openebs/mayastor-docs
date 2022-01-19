@@ -2,7 +2,7 @@
 
 ## How does it help to keep my data safe?
 
-Mayastor's storage engine, or "nexus" as we term it, provides synchronous mirroring functionality to enhance the durability of data at rest within whatever physical persistence layer is in use. When volumes are provisioned which are configured for replication \(a user can control the count of active replicas which should be maintained, on a per StorageClass basis\), write I/O operations issued by an application to that volume are 'amplified' by the nexus and sent to all active replicas. Only if every replica completes the write successfully on its own underlying block device will the I/O completion be acknowledged. Otherwise, the I/O is failed and must be tried by the caller. If a replica is determined to have faulted \(I/O cannot be serviced within the configured timeout period, or not without error\), the control plane will automatically take corrective action and remove it from the volume. If spare capacity is available within another Mayastor pool, a new replica will be created as a replacement and automatically brought into syncrhonisation with the existing replicas. The data path for a replicated volume is described in more detail [here](https://github.com/openebs/mayastor-docs/blob/master/reference/i-o-path-description.md#replicated-volume-io-path)
+Mayastor's storage engine supports synchronous mirroring to enhance the durability of data at rest within whatever physical persistence layer is in use. When volumes are provisioned which are configured for replication \(a user can control the count of active replicas which should be maintained, on a per StorageClass basis\), write I/O operations issued by an application to that volume are amplified by its controller ("nexus") and dispatched to all its active replicas. Only if every replica completes the write successfully on its own underlying block device will the I/O completion be acknowledged to the controller. Otherwise, the I/O is failed and the caller must make its own decision as to whether it should be retried. If a replica is determined to have faulted \(I/O cannot be serviced within the configured timeout period, or not without error\), the control plane will automatically take corrective action and remove it from the volume. If spare capacity is available within a Mayastor pool, a new replica will be created as a replacement and automatically brought into synchronisation with the existing replicas. The data path for a replicated volume is described in more detail [here](https://github.com/openebs/mayastor-docs/blob/master/reference/i-o-path-description.md#replicated-volume-io-path)
 
 ## How is it configured?
 
@@ -11,7 +11,6 @@ This Mayastor documentation contains sections which are focused on initial, 'qui
 * [Quickstart Guide](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor)
 * [Performance Tips](https://mayastor.gitbook.io/introduction/quickstart/performance-tips)
 
-MayaData provides resources which can automatate both these types of configuration tasks. These include the ["automation playground" project](https://github.com/mayadata-io/deployment-automation-playground/tree/main/demo-playground), which uses Terraform and Ansible, is pluggable and extensible, and is able to deploy both FIO based benchmarking and other workloads for initial "first sighting" deployments.
 
 ## What is the basis for its performance claims?  Has it been benchmarked?
 
@@ -23,25 +22,25 @@ Further information regarding the testing performed may be found [here](https://
 
 ## What is the on-disk format used by Disk Pools?  Is it also open source?
 
-Mayastor makes use of parts of the open source [Storage Performance Development Kit \(SPDK\)](https://spdk.io/) project, contributed by Intel. Currently, and for the anticipated General Availability \(GA\) release, Mayastor's Storage Pools use the SPDK's Blobstore structure as their on-disk persistence layer. Blobstore structures and layout are [documented](https://github.com/spdk/spdk/blob/master/doc/blob.md).
+Mayastor makes use of parts of the open source [Storage Performance Development Kit \(SPDK\)](https://spdk.io/) project, contributed by Intel.  Mayastor's Storage Pools use the SPDK's Blobstore structure as their on-disk persistence layer. Blobstore structures and layout are [documented](https://github.com/spdk/spdk/blob/master/doc/blob.md).
 
-Since the replicas \(data copies\) of Mayastor volumes are held entirely within Blobstores, it is not possible to directly access the data held on Disk Pool block devices from outside of Mayastor. Equally, Mayastor cannot directly 'import' and use existing volumes which aren't of Mayastor origin. MayaData is considering alternative options for the persistence layer which may support such data migration goals but any such contribution will not be part of the currently planned GA release.
+Since the replicas \(data copies\) of Mayastor volumes are held entirely within Blobstores, it is not possible to directly access the data held on pool's block devices from outside of Mayastor. Equally, Mayastor cannot directly 'import' and use existing volumes which aren't of Mayastor origin. The project's maintainers are considering alternative options for the persistence layer which may support such data migration goals.
 
 ## Can the size / capacity of a Disk Pool be changed?
 
-For the planned GA release, the size of a Disk Pool is fixed at the time of creation and is immutable. A single Disk Pool may have only one block device as a member. These constraints may be removed in later versions.
+The size of a Mayastor Pool is fixed at the time of creation and is immutable. A single pool may have only one block device as a member. These constraints may be removed in later versions.
 
 ## How can I ensure that replicas aren't scheduled onto the same node?  How about onto nodes in the same rack / availability zone?
 
-The replica placement logic of Mayastor's control plane doesn't permit replicas of the same volume to be placed onto the same node, even if it were to be within different Disk Pools. For example, if a volume with replication factor 3 is to be provisioned, then there must be three healthy Disk Pools available, each with sufficient free capacity and each located on its own Mayastor node. It is not planned to further supplement this level of topology awareness for the planned GA version. Enhancements are under consideration for inclusion in MayaData Propel-based operators for Mayastor, which may be available for later versions of the latter.
+The replica placement logic of Mayastor's control plane doesn't permit replicas of the same volume to be placed onto the same node, even if it were to be within different Disk Pools. For example, if a volume with replication factor 3 is to be provisioned, then there must be three healthy Disk Pools available, each with sufficient free capacity and each located on its own Mayastor node. Further enhancements to topology awareness are under consideration by the maintainers.
 
 ## How can I see the node on which the active nexus for a particular volume resides?
 
-The `MayastorVolume` Kubernetes custom resource representing the state and configuration of the volume includes this information within its `Status.Nexus.Node` field.
+The Mayastor kubectl plugin is used to obtain this information.
 
 ## Is there a way to automatically rebalance data across available nodes?  Can data be manually re-distributed?
 
-There are currently no plans to include this functionality within the GA release of Mayastor. It may be a feature of future releases, or of Propel operators for Mayastor.
+No.  This may be a feature of future releases.
 
 ## Can mayastor do async replication to a node in the same cluster?  How about a different cluster?
 
@@ -49,11 +48,8 @@ Mayastor does not peform asynchronous replication.
 
 ## Does Mayastor support RAID?
 
-Mayastor's Disk Pools do not implement any form of RAID, erasure coding or striping \(in the GA release they will support only the membership of a single disk device\). If higher levels of data redundancy are required, Mayastor volumes can be provisioned with a replication factor of greater than 1, which will result in synchronously mirrored copies of their data being stored in multiple Disk Pools across multiple Storage Nodes. If the block device on which a Disk Pool is created is actually a logical unit backed by its own RAID implementation \(e.g. a Fibre Channel attached LUN from an external SAN\) it can still be used within a Mayastor Disk Pool whilst providing protection against physical disk device failures.
+Mayastor pools do not implement any form of RAID, erasure coding or striping. If higher levels of data redundancy are required, Mayastor volumes can be provisioned with a replication factor of greater than 1, which will result in synchronously mirrored copies of their data being stored in multiple Disk Pools across multiple Storage Nodes. If the block device on which a Disk Pool is created is actually a logical unit backed by its own RAID implementation \(e.g. a Fibre Channel attached LUN from an external SAN\) it can still be used within a Mayastor Disk Pool whilst providing protection against physical disk device failures.
 
-## Which environments is Mayastor tested in?
-
-Mayastor's maintainers perform end-to-end testing on Mayastor running on Kubernetes version 1.19. Worker nodes run Ubuntu 20.04.2 LTS, using the docker runtime 20.10.5
 
 ## Does Mayastor perform compression and/or deduplication?
 
@@ -61,11 +57,11 @@ No.
 
 ## Does Mayastor support snapshots?  Clones?
 
-These features will not be available in the GA release.
+No but these may be features of future releases.
 
 ## Which CPU architectures are supported?  What are the minimum hardware requirements?
 
-Mayastor nightly builds and releases are compiled and tested on x86. Some effort has been made to allow compilation on ARM platforms but this is currently considered experimental and is not subject to integration or end-to-end testing by Mayastor's maintainers. There are no plans to support ARM for the GA release.
+Mayastor nightly builds and releases are compiled and tested on x86. Some effort has been made to allow compilation on ARM platforms but this is currently considered experimental and is not subject to integration or end-to-end testing by Mayastor's maintainers.
 
 Minimum hardware requirements are discussed in the [quickstart section](https://mayastor.gitbook.io/introduction/quickstart/prerequisites) of this documentation.
 
