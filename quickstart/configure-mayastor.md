@@ -3,13 +3,17 @@
 ## Create Mayastor Pool\(s\)
 
 
-### What is a Mayastor Pool \(MSP\)?
+### What is a Mayastor Pool?
 
-When a Mayastor Node allocates storage capacity for a Persistent Volume \(PV\) it does so from a construct named a Mayastor Pool \(MSP\). Each Mayastor node may create and manage zero, one, or more such pools. The ownership of a pool by a Mayastor node is exclusive. In the current version of Mayastor, a pool may have only a single block device member, which constitutes the entire data persistence layer for that pool and thus determines its maximum capacity.
+When a Mayastor node allocates storage capacity for a replica of a Persistent Volume it does so from a Mayastor Pool. Each Mayastor node may create and manage zero, one, or more such pools. The ownership of a pool by a node is exclusive. A pool can manage only one block device, which constitutes the entire data persistence layer for that pool and thus defines its maximum storage capacity.
 
-A pool is defined declaratively, through the creation of a corresponding `MayastorPool`custom resource \(CR\) on the cluster. User configurable parameters of this CR type include a unique name for the pool, the node name on which it will be hosted and a reference to a disk device which is accessible from that node \(for inclusion within the pool\). The pool definition allows the reference to its member block device to adhere to one of a number of possible schemes, each associated with a specific access mechanism/transport/device type and differentiated by corresponding performance and/or attachment locality.
+{% hint style="info" %}
+Note that in the current version of Mayastor pools support only thick provisioning.
+{% endhint %}
 
-#### Permissible Schemes for the MSP CRD field `disks`
+A pool is defined declaratively, through the creation of a corresponding `MayastorPool` (MSP) custom resource on the cluster. The MSP must be created in the same namespace as Mayastor has been deployed.  User configurable parameters of this resource type include a unique name for the pool, the node name on which it will be hosted and a reference to a disk device which is accessible from that node. The pool definition requires the reference to its member block device to adhere to a discrete range of schemas, each associated with a specific access mechanism/transport/ or device type.
+
+#### Permissible Schemes for the MSP field `disks`
 
 | Type | Format | Example |
 | :--- | :--- | :--- |
@@ -18,20 +22,20 @@ A pool is defined declaratively, through the creation of a corresponding `Mayast
 | io\_uring | Device File | uring:///dev/sdx |
 | RAM drive | Custom | malloc:///malloc0?size\_mb=1024 |
 
-Once a Mayastor node has created a pool it is assumed that it henceforth has exclusive use of the associated block device; it should not be partitioned, formatted, or shared with another application or process. Any existing data on the device will be destroyed.
+Once a Mayastor node has created a pool it is assumed that it henceforth has exclusive use of the associated block device; it should not be partitioned, formatted, or shared with another application or process. Any pre-existing data on the device will be destroyed.
 
 {% hint style="warning" %}
-RAM drive isn't suitable for production as it uses volatile memory for backing the data. The memory for the disk is allocated from hugepages. Make sure to allocate sufficient amount of extra hugepages on storage node if you want to experiment with it.
+A RAM drive isn't suitable for use in production as it uses volatile memory for backing the data. The memory for this disk emulation is allocated from the hugepages pool. Make sure to allocate sufficient additional hugepages resource on any storage nodes which will provide this type of storage.
 {% endhint %}
 
-### Configure Pool\(s\) for Use with this Quickstart
+### Configure Pools for Use with this Quickstart
 
-To continue with this quick start exercise, a minimum of one pool is necessary, created and hosted on one of the Mayastor nodes in the cluster. However, the number of pools available limits the extent to which the synchronous n-way mirroring feature \("replication"\) of Persistent Volumes can be configured for testing and evaluation; the number of pools configured should be no lower than the desired maximum replication factor of the PVs to be created. Also, while placing data replicas ensure that appropriate redundancy is provided. Mayastor's control plane will avoid locating more than one replica of a PV on the same Mayastor node. Therefore, for example, the minimum viable configuration for a Mayastor deployment which is intended to test 3-way mirrored PVs must have three Mayastor Nodes, each having one Mayastor Pool, with each of those pools having one unique block device allocated to it.
+To continue with this quick start exercise, a minimum of one pool is necessary, created and hosted on one of the Mayastor nodes in the cluster. However, the number of pools available limits the extent to which the synchronous n-way mirroring feature \("replication"\) of Persistent Volumes can be configured for testing and evaluation; the number of pools configured should be no fewer than the desired maximum replication factor of the PVs to be created. Also, while placing data replicas ensure that appropriate redundancy is provided. Mayastor's control plane will avoid locating more than one replica of a volume on the same Mayastor node. Therefore, for example, the minimum viable configuration for a Mayastor deployment which is intended to test 3-way mirrored PVs must have three Mayastor Nodes, each having one Mayastor Pool, with each of those pools having one unique block device allocated to it.
 
 Using one or more the following examples as templates, create the required type and number of pools.
 
 {% tabs %}
-{% tab title="Example MSP CRD \(device file\)" %}
+{% tab title="Example MSP definition" %}
 ```text
 cat <<EOF | kubectl create -f -
 apiVersion: "openebs.io/v1alpha1"
@@ -61,7 +65,7 @@ spec:
 {% endtabs %}
 
 {% hint style="info" %}
-When following the examples in order to create your own Mayastor Pool\(s\), remember to replace the values for the fields "metadata.name", "spec.node" and "spec.disks" as appropriate to your cluster's intended configuration. Note that whilst the "disks" parameter accepts an array of scheme values, the current version of Mayastor supports only one disk device per pool.
+When using the examples given as guides to creating your own pools, remember to replace the values for the fields "metadata.name", "spec.node" and "spec.disks" as appropriate to your cluster's intended configuration. Note that whilst the "disks" parameter accepts an array of values, the current version of Mayastor supports only one disk device per pool.
 {% endhint %}
 
 ### Verify Pool Creation and Status
@@ -85,11 +89,15 @@ pool-on-node-2   aks-agentpool-12194210-2   online   4s
 {% endtab %}
 {% endtabs %}
 
+{% hint style="info" %}
+Pool configuration and state information can also be obtained by using the [Mayastor kubectl plugin](https://mayastor.gitbook.io/introduction/reference/kubectl-plugin)
+{% endhint %}
+
 ## Create Mayastor StorageClass\(s\)
 
-Mayastor dynamically provisions Persistent Volumes \(PV\) based on custom StorageClass definitions defined by the user. Parameters of the StorageClass resource definition are used to set the characteristics and behaviour of its associated PVs. For detailed description of the parameters see ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters). Most importantly StorageClass definition is used to control the level of data protection afforded to it \(that is, the number of synchronous data replicas which are maintained, for purposes of redundancy\). It is possible to create any number of custom StorageClass definitions to span range of storage class parameters permutations.
+Mayastor dynamically provisions Persistent Volumes \(PV\) based on StorageClass definitions created by the user. Parameters of the definition are used to set the characteristics and behaviour of its associated PVs. For a detailed description of these parameters see [storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters). Most importantly StorageClass definition is used to control the level of data protection afforded to it \(that is, the number of synchronous data replicas which are maintained, for purposes of redundancy\). It is possible to create any number of StorageClass definitions, spanning all permitted parameter permutations.
 
-We illustrate this quickstart guide with two examples of possible use cases; one which offers no data protection \(i.e. a single data replica\), and another having three data replicas. You may modify these as required to match your own desired test cases, within the limitations of the cluster under test.
+We illustrate this quickstart guide with two examples of possible use cases; one which offers no data redundancy \(i.e. a single data replica\), and another having three data replicas. You can modify these as required to match your own desired test cases, within the limitations of the cluster under test.
 
 {% tabs %}
 {% tab title="Command \(1 replica example\)" %}
