@@ -88,9 +88,9 @@ The etcd cluster deployed here is intended for demonstration purposes only. For 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/statefulset.yaml 
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/svc.yaml
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/etcd/svc-headless.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/statefulset.yaml 
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/svc.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/svc-headless.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -119,7 +119,7 @@ mayastor-etcd-0   3/3     Running   0          4m32s
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/csi-daemonset.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/csi-daemonset.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -232,7 +232,7 @@ msp-operator-7849d59fcd-mcw5b   1/1     Running   0          21s
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
 kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-deployment.yaml
-kubectl apply -f https://raw.githubusercontent.com/openbes/mayastor-control-plane/master/deploy/rest-service.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-service.yaml
 ```
 {% endtab %}
 
