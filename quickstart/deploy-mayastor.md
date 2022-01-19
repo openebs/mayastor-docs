@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided under multiple repositories(for [Control Plane](https://github.com/openebs/mayastor-control-plane), [Data Plane](https://github.com/openebs/mayastor) and [API](https://github.com/openebs/mayastor-api) components) under the OpenEBS project. The repository is configured for the GitFlow release pattern, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.
+In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the project's repositories ([control plane components](https://github.com/openebs/mayastor-control-plane), [data Plane components](https://github.com/openebs/mayastor)). These repositories are configured for the GitFlow release model, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.  Previous releases are identifiable by their annotated git tags.
 
 The steps and commands which follow are intended only for use with, and tested against, the latest release. Earlier releases or development versions may require a modified or different installation process.
 
@@ -79,11 +79,7 @@ nats-0        3/3     Running   0          61s
 
 ### etcd
 
-Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist runtime configuration.  The steps described below deploy a limited etcd cluster instance which can be used in conjunction with Mayastor for the purposes of this quickstart guide's testing scenarios.  
-
-{% hint style="warning" %}
-The etcd cluster deployed here is intended for demonstration purposes only. For production use, the user is responsible for the deployment of a suitable etcd instance which satisfies their use case and follows the recommended best practices for etcd.
-{% endhint %}
+Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist configuration.  The steps described below deploy a dedicated, clustered etcd  instance for Mayastor's own use.  This is the only configuration supported by this release.  
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
@@ -95,7 +91,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deplo
 {% endtab %}
 {% endtabs %}
 
-Verify that the deployment of etcd to the cluster was successful. Within the mayastor namespace there should be 3 replicas with the name "mayastor-etcd-", and with a reported status of "Running".
+Verify that the deployment of etcd to the cluster was successful. Within the mayastor namespace there should be 3 replicas with a name of the form "mayastor-etcd-" and with a reported status of "Running".
 
 {% tabs %}
 {% tab title="Command" %}
@@ -153,7 +149,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plan
 {% endtab %}
 {% endtabs %}
 
-Verify that the Core agent pod is running.
+Verify that the core agent pod is running.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -199,7 +195,7 @@ csi-controller-579f77f64-7dq7g   3/3     Running   0          39m
 {% endtab %}
 {% endtabs %}
 
-### MSP Operators
+### MSP Operator
  
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
@@ -271,7 +267,7 @@ mayastor   3         3         3       3            3           kubernetes.io/ar
 {% endtab %}
 {% endtabs %}
 
-For each resulting Mayastor pod instance, a Mayastor Node \(MSN\) custom resource definition should be created. List these definitions and verify that the count meets the expected number and that all nodes are reporting their State as `online`
+The number and status of mayastor pods can be observed by using the Mayastor kubectl plugin. Check that the expected number of nodes are reporting their State as `online`
 
 {% tabs %}
 {% tab title="Command" %}
