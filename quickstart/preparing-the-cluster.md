@@ -2,7 +2,7 @@
 
 ## Configure Mayastor Nodes
 
-Within the context of the Mayastor application, a "Mayastor Node" is a Kubernetes worker node on which is scheduled an instance of a Mayastor data plane pod, so is thus capable of hosting a Storage Pool and exporting Persistent Volumes\(PV\).  A MSN makes use of block storage device\(s\) attached to it to contribute storage capacity to its pool\(s\), which supply backing storage for the Persistent Volumes provisioned on the parent cluster by Mayastor.
+In the context of the Mayastor application, a "Mayastor Node" \(MSN\) is a Kubernetes worker node on which is scheduled an instance of a Mayastor data plane pod and is thus capable of hosting storage "pools" and exporting Persistent Volumes \(PV\) to application pods within the cluster.  A MSN makes use of block storage device\(s\) attached to it to contribute storage capacity to its pool\(s\), which supply backing storage for the Persistent Volumes provisioned on the parent cluster by Mayastor.
 
 Kubernetes worker nodes are not required to be MSNs in order to be able to mount Mayastor-provisioned Persistent Volumes for the application pods scheduled on them.  New MSN nodes can be provisioned within the cluster at any time after the initial deployment, as aggregate demands for capacity, performance and availability levels increase.
 
@@ -40,7 +40,7 @@ If you modify the Huge Page configuration of a node, you _must_ either restart k
 
 ### Label Mayastor Node Candidates
 
-All the worker nodes that will have Mayastor pods running on them must be labelled with the OpenEBS engine type "mayastor".  This label will be used as a selector by the Mayastor Daemonset, which will be deployed as a part of Mayastor data plane component installation. To add label to a node, execute:
+All worker nodes which will have Mayastor pods running on them must be labelled with the OpenEBS engine type "mayastor".  This label will be used as a selector by the Mayastor Daemonset, which is deployed as a part of Mayastor data plane component installation. To add this label to a node, execute:
 
 ```text
 kubectl label node <node_name> openebs.io/engine=mayastor
