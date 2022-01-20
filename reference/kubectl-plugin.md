@@ -6,6 +6,10 @@ The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor resour
 
 - Ensure that port <b>30011</b> is open. This port will be needed by Mayastor kubectl plugin to communicate to REST servers from outside the cluster.
 
+{% hint style="warning" %}
+The plugin requires access to the `Mayastor REST server` for execution. It gets the master node IP from the kube-config file. In case of any failure, the REST endpoint can be specified using the ‘–rest’ flag.
+{% endhint %}
+
 ### Installation
 
 - The Mayastor kubectl plugin is available for the Linux platform. The binary for the plugin can be found [here](https://github.com/mayadata-io/mayastor-control-plane/releases). 
@@ -27,7 +31,7 @@ kubectl-plugin 1.0.0
 {% endtab %}
 {% endtabs %}
 
-- 
+- Add the downloaded Mayastor kubectl plugin under $PATH.
 
 ### Using Mayastor kubectl plugin
 
