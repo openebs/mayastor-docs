@@ -50,7 +50,7 @@ If you used the storage class example from previous stage, then volume binding m
 
 ## Deploy the FIO Test Pod
 
-We schedule the application to one of the storage nodes in order to make the volume available to the application in spite of the node failures. That's why nodeSelector is used in the Pod specification. See ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters) for more in-depth explanation of how the scheduling works.
+We schedule the application to one of the storage nodes in order to make the volume available to the application in spite of the node failures. That's why nodeSelector is used in the Pod specification. See ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters#local) for more in-depth explanation of how the scheduling works.
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
