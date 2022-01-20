@@ -4,41 +4,35 @@ The objective of this section is to provide the user and evaluator of Mayastor w
 
 More detailed guides to Mayastor's components, their design and internal structure, and instructions for building Mayastor from source, are maintained within the [project's GitHub repository](https://github.com/openebs/Mayastor).
 
-## Topology
-
-![Figure 1. Example cluster deployment configured with three Mayastor Storage Nodes](../.gitbook/assets/basic_cluster_topology.png)
-
 ## Dramatis Personae
 
-| Name | Resource Type | Function | Occurrence in Cluster |
+| Name | Resource Type | Function | Frequency in Cluster |
 | :--- | :--- | :--- | :--- |
-| **moac** | Pod | Hosts control plane containers | Single |
-| moac | Service | Exposes MOAC REST service end point | Single |
-| moac | Deployment | Declares desired state for the MOAC pod | Single |
-|  |  |  |  |
-| **mayastor-csi** | Pod | Hosts CSI Driver node plugin containers | All worker nodes |
-| mayastor-csi | DaemonSet | Declares desired state for mayastor-csi pods | Single |
-|  |  |  |  |
-| **mayastor** | Pod | Hosts Mayastor I/O engine container | User-selected nodes |
-| mayastor | DaemonSet | Declares desired state for Mayastor pods | Single |
-|  |  |  |  |
-| **nats** | Pod | Hosts NATS Server container | Single |
-| nats | Deployment | Declares desired state for NATS pod | Single |
-| nats | Service | Exposes NATS message bus end point | Single |
-|  |  |  |  |
-| **mayastornodes** | CRD | Inventories and reflects the state of Mayastor pods | One per Mayastor Pod |
-| **mayastorpools** | CRD | Declares a Mayastor pool's desired state and reflects its current state | User-defined, zero to many |
-| **mayastorvolumes** | CRD | Inventories and reflects the state of Mayastor-provisioned Persistent Volumes | User-defined, zero to many |
+| **Control Plane** |
+| core-agent | Pod | Principle control plane actor | Single |
+| csi-controller | Pod | Hosts Mayastor's CSI controller implementation and CSI provisioner side car| Single |
+| rest | Pod | Hosts the public API REST server | Single |
+| *rest*  | Service | Exposes the REST API server via NodePort |
+| msp-operator | Pod | Hosts Mayastor's pool operator | Single |
+| mayastor-csi| Pod | Hosts CSI Driver node plugin containers | All worker nodes |
+| nats | Pod | Hosts NATS Server container | Single |
+| *nats* | Service | Exposes NATS message bus end point | Single |
+| *nats-config* | ConfigMap | NATS cluster configuration data |
+| etcd | Pod | Hosts etcd Server container | Single |
+| *mayastor-etcd* | Service | Exposes NATS message bus end point | Single |
+| *mayastor-etcd-headless* | Service | Exposes NATS message bus end point | Single |
+| **Data Plane**|
+| mayastor| Pod | Hosts Mayastor I/O engine| User-selected nodes |
+| **k8s Resource Types**  |
+| mayastorpools | CRD | Declares a Mayastor pool's desired state and reflects its current state | User-defined, one or many |
 
 ## Component Roles
 
-### MOAC
+### Control Plane
 
-A Mayastor deployment features a single MOAC pod, declared via a Deployment resource of the same name and has its API's gRPC endpoint exposed via a cluster Service, also of the same name. The MOAC pod is the principle control plane actor and encapsulates containers for both the Mayastor CSI Driver's controller implementation \(and its external-attacher sidecar\) and the MOAC component itself.
+A microservices patterned control plane, centered around a core agent with a publically exposed RESTful API.  This is extended by a dedicated operator responsible for managing the life cycle of "Mayastor Pools" (an abstraction for devices supplying the cluster with persistent backing storage), and a CSI compliant external provisioner (controller).  The source for the control plane components is located in its [own repository](https://github.com/mayadata-io/mayastor-control-plane)
 
-The MOAC component implements the bulk of the Mayastor-specific control plane. It is called by the CSI Driver controller in response to dynamic volume provisioning events, to orchestrate the creation of a nexus at the Mayastor pod of an appropriate node and also the creation of any additional data replicas on other nodes as may be required to satisfy the desired configuration state of the PVC \(i.e. replication factor &gt; 1\). MOAC is also responsible for the creation and status reporting of Storage Pools, for which purpose it implements a watch on the Kubernetes API server for relevant custom resource objects \(mayastorpools.openebs.io\).
-
-MOAC exposes a REST API endpoint on the cluster using a Kubernetes Service of the same name. This is currently used to support the export of volume metrics to Prometheus/Grafana, although this mechanism will change in later releases.
+ The control plane uses dedicated, clustered instances of etcd and NATS to persist configuration and state data, and as a message bus / transport for communcation with the data plane components, respectively.
 
 ### Mayastor
 
@@ -46,12 +40,12 @@ The Mayastor pods of a deployment are its principle data plane actors, encapsula
 
 The instance of the `mayastor` binary running inside the container performs four major classes of functions:
 
-* Present a gRPC interface to the MOAC control plane component, to allow the latter to orchestrate creation, configuration and deletion of Mayastor managed objects hosted by that instance
+* Present a gRPC interface to the control plane components, to allow the latter to orchestrate creation, configuration and deletion of Mayastor managed objects hosted by that instance
 * Create and manage storage pools hosted on that node
 * Create, export and manage nexus objects \(and by extension, volumes\) hosted on that node
 * Create and shares "replicas" from storage pools hosted on that node over NVMe-TCP
 
-When a Mayastor pod starts running, an init container attempts to verify connectivity to the NATS message bus in the Mayastor namespace. If a connection can be established the Mayastor container is started, and the Mayastor instance performs registration with MOAC over the message bus. In this way, MOAC maintains a registry of nodes \(specifically, running Mayastor instances\) and their current state. For each registered Mayastor container/instance, MOAC creates a MayastorNode custom resource within the Kubernetes API of the cluster.
+When a Mayastor pod starts running, an init container attempts to verify connectivity to the NATS message bus in the Mayastor namespace. If a connection can be established the Mayastor container is started, and the Mayastor instance performs registration with MOAC over the message bus. In this way, the core agent maintains a registry of nodes \(specifically, running Mayastor instances\) and their current state.
 
 The scheduling of Mayastor pods is determined declaratively by using a DaemonSet specification. By default, a `nodeSelector` field is used within the pod spec to select all worker nodes to which the user has attached the label `openebs.io/engine=mayastor` as recipients of a Mayastor pod. It is in this way that the MayastorNode count and location is set appropriate to the hardware configuration of the worker nodes \(i.e. which nodes host the block storage devices to be used\), and the capacity and performance demands of the cluster.
 
@@ -65,7 +59,11 @@ Further detail regarding the implementation of CSI driver components and their f
 
 ### NATS
 
-NATS is a high performance open source messaging system. It is used within Mayastor as the transport mechanism for registration messages passed between Mayastor I/O engine pods running in the cluster and the MOAC component which maintains an inventory of active Mayastor nodes and reflects this via CRUD actions on MayastorNode custom resources.
+[NATS](https://nats.io/) is a high performance open source messaging system. It is used by Mayastor as the transport mechanism for registration messages passed between Mayastor I/O engine pods running in the cluster and the core agent component, which maintains an inventory of active Mayastor nodes.  It is also used as the transport abstraction for inter data-plane / control-plane gRPC calls.
 
-In future releases of Mayastor, the control plane will transition towards a more microservice-like architecture following the saga pattern, whereupon a highly available NATS deployment within the Mayastor namespace will be employed as an event bus.
+### etcd
+
+"[etcd](https://github.com/etcd-io/etcd) is a distributed reliable key-value store for the most critical data of a distributed system"
+
+Mayastor uses etcd as a reliable persistent store for its configuration and state data.
 
