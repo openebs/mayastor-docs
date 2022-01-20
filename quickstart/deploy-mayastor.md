@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the project's repositories ([control plane components](https://github.com/openebs/mayastor-control-plane), [data Plane components](https://github.com/openebs/mayastor)). These repositories are configured for the GitFlow release model, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.  Previous releases are identifiable by their annotated git tags.
+In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the project's repositories ([control plane components](https://github.com/openebs/mayastor-control-plane), [data plane components](https://github.com/openebs/mayastor)). These repositories are configured for the GitFlow release model, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.  Previous releases are identifiable by their annotated git tags.
 
 The steps and commands which follow are intended only for use with, and tested against, the latest release. Earlier releases or development versions may require a modified or different installation process.
 
@@ -60,7 +60,7 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deplo
 {% endtab %}
 {% endtabs %}
 
-Verify that the deployment of the NATS application to the cluster was successful. Within the mayastor namespace ensure that there are 3 replicas with the name "nats-x", and with a reported status of Running.
+Verify that the deployment of the NATS application to the cluster was successful. Within the mayastor namespace ensure that there are 3 replicas with the name "nats-x", and with a reported status of "Running".
 
 {% tabs %}
 {% tab title="Command" %}
@@ -267,7 +267,7 @@ mayastor   3         3         3       3            3           kubernetes.io/ar
 {% endtab %}
 {% endtabs %}
 
-The number and status of mayastor pods can be observed by using the Mayastor kubectl plugin. Check that the expected number of nodes are reporting their State as `online`
+The number and status of mayastor pods can be observed by using the [Mayastor kubectl plugin](https://mayastor.gitbook.io/introduction/reference/kubectl-plugin). Check that the expected number of nodes are reporting their State as `online`
 
 {% tabs %}
 {% tab title="Command" %}

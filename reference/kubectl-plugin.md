@@ -49,7 +49,7 @@ SUBCOMMANDS:
 
 The plugin can be used to get the following resource information:
 
-1. **Volumes**
+- **Volumes**
 
 {% tabs %}
 {% tab title="Command" %}
@@ -69,7 +69,7 @@ ID                                    REPLICAS  TARGET-NODE  ACCESSIBILITY STATU
 {% endtabs %}
  
 
-2. **Pools**
+- **Pools**
 
 {% tabs %}
 {% tab title="Command" %}
@@ -90,7 +90,7 @@ mayastor-pool-3  5360320512      3258974208     aio:///dev/vdb?uuid=f324edb7-1ac
 {% endtab %}
 {% endtabs %}
 
-3. **Nodes**
+- **Nodes**
 
 {% tabs %}
 {% tab title="Command" %}
