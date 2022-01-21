@@ -25,6 +25,7 @@
 * [Operations](reference/operations.md)
 * [Storage Class Parameters](reference/storage-class-parameters.md)
 * [Mayastor Kubectl Plugin](reference/kubectl-plugin.md)
+* [Tested Third Party Software](reference/tested-third-party-software.md)
 
 ## Mayastor A-Z
 
