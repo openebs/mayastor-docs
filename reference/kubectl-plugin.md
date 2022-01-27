@@ -8,19 +8,21 @@ The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor resour
 
 {% hint style="info" %}
 The plugin requires access to the `Mayastor REST server` for execution. It usually obtains the correct endpoint from the kube-config file on its own. However, if the plugin is unable to access the endpoint, the master nodes's IP needs to be specified manually using the `--rest` or `-r` flag.  
+kubectl mayastor [OPTIONS] <SUBCOMMAND> --rest=http://<node-ip>:30011
 {% endhint %}
 
 ### Installation
 
 - The Mayastor kubectl plugin is available for the Linux platform. The binary for the plugin can be found [here](https://github.com/mayadata-io/mayastor-control-plane/releases). 
 
+- Add the downloaded Mayastor kubectl plugin under $PATH.
 
 To verify the installation, execute:
 
 {% tabs %}
 {% tab title="Command" %}
 ```text
-kubectl mayastor -v
+kubectl mayastor -V
 ```
 {% endtab %}
 
@@ -31,7 +33,6 @@ kubectl-plugin 1.0.0
 {% endtab %}
 {% endtabs %}
 
-- Add the downloaded Mayastor kubectl plugin under $PATH.
 
 ### Using Mayastor kubectl plugin
 

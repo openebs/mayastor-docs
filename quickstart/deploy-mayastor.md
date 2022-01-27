@@ -75,15 +75,26 @@ kubectl -n mayastor get pods --selector=app=nats
 
 {% tab title="Example Output" %}
 ```text
-NAME          READY   STATUS    RESTARTS   AGE
-nats-0        3/3     Running   0          61s
+NAME     READY   STATUS    RESTARTS   AGE
+nats-0   2/2     Running   0          50s
+nats-1   2/2     Running   0          30s
+nats-2   1/2     Running   0          10s
 ```
 {% endtab %}
 {% endtabs %}
 
 ### etcd
 
-Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist configuration.  The steps described below deploy a dedicated, clustered etcd  instance for Mayastor's own use.  This is the only configuration supported by this release.  
+Mayastor uses [etcd](https://etcd.io/), a distributed, reliable key-value store, to persist configuration.  The steps described below deploy a dedicated, clustered etcd  instance for Mayastor's own use. This is the only configuration supported by this release.  
+
+To deploy the PersistentVolumes that will be used by the etcd in the next step, execute:
+{% tabs %}
+{% tab title="Command \(GitHub Latest\)" %}
+```text
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/develop/deploy/etcd/storage/localpv.yaml
+```
+{% endtab %}
+{% endtabs %}
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
@@ -107,7 +118,9 @@ kubectl -n mayastor get pods --selector=app.kubernetes.io/name=etcd
 {% tab title="Example Output" %}
 ```text
 NAME              READY   STATUS    RESTARTS   AGE
-mayastor-etcd-0   3/3     Running   0          4m32s
+mayastor-etcd-0   1/1     Running   0          70m
+mayastor-etcd-1   1/1     Running   0          70m
+mayastor-etcd-2   1/1     Running   0          70m
 ```
 {% endtab %}
 {% endtabs %}
@@ -170,6 +183,40 @@ core-agents-5f4d9f786b-6vvxc   1/1     Running   0          117s
 {% endtab %}
 {% endtabs %}
 
+### REST
+
+{% tabs %}
+{% tab title="Command \(GitHub Latest\)" %}
+```text
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-service.yaml
+```
+{% endtab %}
+
+{% tab title="Example Output" %}
+```text
+deployment.apps/rest created
+service/rest created
+```
+{% endtab %}
+{% endtabs %}
+
+Verify that the REST pod is running.
+
+{% tabs %}
+{% tab title="Command" %}
+```text
+kubectl get pods -n mayastor --selector=app=rest
+```
+{% endtab %}
+
+{% tab title="Example Output" %}
+```text
+NAME                    READY   STATUS    RESTARTS   AGE
+rest-5cd9665499-cdgmm   1/1     Running   0          2m35s
+```
+{% endtab %}
+{% endtabs %}
 
 ### CSI Controller
 
@@ -226,23 +273,6 @@ msp-operator-7849d59fcd-mcw5b   1/1     Running   0          21s
 {% endtab %}
 {% endtabs %}
 
-### REST
-
-{% tabs %}
-{% tab title="Command \(GitHub Latest\)" %}
-```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-deployment.yaml
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-service.yaml
-```
-{% endtab %}
-
-{% tab title="Example Output" %}
-```text
-deployment.apps/rest created
-service/rest created
-```
-{% endtab %}
-{% endtabs %}
 
 ### Data Plane
 
@@ -282,7 +312,7 @@ The number and status of mayastor pods can be observed by using the [Mayastor ku
 {% tabs %}
 {% tab title="Command" %}
 ```text
-kubectl mayastor get nodes -n mayastor 
+kubectl mayastor get nodes
 ```
 {% endtab %}
 
