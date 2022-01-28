@@ -112,13 +112,13 @@ ms-volume-claim     Bound    pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi     
 
 {% tabs %}
 {% tab title="Command" %}
-```text
-kubectl get pv pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b
-```
-
 {% hint style="info" %}
 Substitute the example volume name with that shown under the "VOLUME" heading of the output returned by the preceding "get pvc" command, as executed in your own cluster
 {% endhint %}
+
+```text
+kubectl get pv pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b
+```
 {% endtab %}
 
 {% tab title="Example Output" %}

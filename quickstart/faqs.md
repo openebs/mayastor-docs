@@ -18,7 +18,7 @@ Mayastor has been built to leverage the performance potential of contemporary, h
 
 MayaData has performed its own benchmarking tests in collaboration with Intel, using latest generation Intel P5800X Optane devices "The World's Fastest Data Centre SSD". In those tests it was determined that, on average, across a range of read/write ratios and both with and without synchronous mirroring enabled, the overhead imposed by the Mayastor I/O path was well under 10% \(in fact, much closer to 6%\).
 
-Further information regarding the testing performed may be found [here](https://blog.mayadata.io/mayastor-nvme-of-tcp-performance)
+Further information regarding the testing performed may be found [here](https://openebs.io/blog/mayastor-nvme-of-tcp-performance)
 
 ## What is the on-disk format used by Disk Pools?  Is it also open source?
 
