@@ -78,7 +78,7 @@ kubectl -n mayastor get pods --selector=app=nats
 NAME     READY   STATUS    RESTARTS   AGE
 nats-0   2/2     Running   0          50s
 nats-1   2/2     Running   0          30s
-nats-2   1/2     Running   0          10s
+nats-2   2/2     Running   0          10s
 ```
 {% endtab %}
 {% endtabs %}
