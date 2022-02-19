@@ -91,7 +91,7 @@ To deploy the PersistentVolumes that will be used by the etcd in the next step, 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/develop/deploy/etcd/storage/localpv.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/storage/localpv.yaml
 ```
 {% endtab %}
 {% endtabs %}
