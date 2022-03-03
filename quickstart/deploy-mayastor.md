@@ -276,12 +276,6 @@ msp-operator-7849d59fcd-mcw5b   1/1     Running   0          21s
 
 ### Data Plane
 
-{% hint style="warning" %}
-The Kubernetes definition file provided for the deployment of the Mayastor Daemonset, and the helm chart template from which it is generated, are both subjects of a known issue affecting this release (v1.0.0).  Do NOT complete the following step without having first manually edited the mayastor-daemonset-yaml file linked (or generated, if building yourself).  The complete line `- "-P/var/local/mayastor/pools.yaml"` MUST be removed from the `args` section of the mayastor container spec (line 57).
-
-This error will be corrected in a future release.
-{% endhint %}
-
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
