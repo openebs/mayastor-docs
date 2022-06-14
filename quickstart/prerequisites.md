@@ -35,7 +35,7 @@ Note also, that when using the synchronous replication feature \(N+1 mirroring\)
 
 As of version 1.0, Mayastor supports the export and mounting of volumes over NVMe-oF TCP only. Worker node\(s\) on which a volume may be scheduled to be mounted must have the requisite initiator support installed and configured.
 
-In order to reliably mount application volumes over NVMe-oF TCP, a worker node's kernel version must be 5.3 or later and the `nvme-tcp`  kernel module must be loaded.
+In order to reliably mount application volumes over NVMe-oF TCP, a worker node's kernel version must be 5.13 or later and the `nvme-tcp`  kernel module must be loaded.
 
 
 
