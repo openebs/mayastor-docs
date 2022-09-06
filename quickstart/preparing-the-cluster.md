@@ -28,7 +28,7 @@ HugePages_Surp:        0
 
 ```
 
-If fewer than 1024 pages are available then the page count should be reconfigured on the worker nodeas as required, accounting for any other workloads which may be scheduled on the same node and which also require them.  For example:
+If fewer than 1024 pages are available then the page count should be reconfigured on the worker node as required, accounting for any other workloads which may be scheduled on the same node and which also require them.  For example:
 
 ```text
 echo 1024 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
