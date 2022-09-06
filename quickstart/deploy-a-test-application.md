@@ -50,12 +50,16 @@ If you used the storage class example from previous stage, then volume binding m
 
 ## Deploy the FIO Test Pod
 
-We schedule the application to one of the storage nodes in order to make the volume available to the application in spite of the node failures. That's why nodeSelector is used in the Pod specification. See ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters#local) for more in-depth explanation of how the scheduling works.
+The Mayastor CSI driver will cause the application pod and the corresponding Mayastor volume's NVMe target/controller ("Nexus") to be scheduled on the _same_ Mayastor Node, in order to assist with restoration of volume and application availabilty in the event of a storage node failure.
+
+{% hint style="warning" %}
+In this version, applications using PVs provisioned by Mayastor can only be successfully scheduled on Mayastor Nodes.  This behaviour is controlled by the `local:` parameter of the corresponding StorageClass, which by default is set to a value of `true`.  Therefore, this is the only supported value for this release - setting a non-local configuration may cause scheduling of the application pod to fail, as the PV cannot be mounted to a worker node other than a MSN.  This behaviour will change in a future release.
+{% endhint %}
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/master/deploy/fio.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v1.0.2/deploy/fio.yaml
 ```
 {% endtab %}
 
@@ -133,7 +137,7 @@ pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            Delete     
 
 The status of the volume should be "online".
 
-{% hint style="warning" %}
+{% hint style="info" %}
 To verify the status of volume [Mayastor Kubectl plugin](https://mayastor.gitbook.io/introduction/reference/kubectl-plugin) is used.
 {% endhint %}
 
@@ -158,7 +162,7 @@ ID                                    REPLICAS  TARGET-NODE                ACCES
 Verify that the pod has been deployed successfully, having the status "Running". It may take a few seconds after creating the pod before it reaches that status, proceeding via the "ContainerCreating" state.
 
 {% hint style="info" %}
-Note: The FIO pod resource declaration from the Mayastor master branch references a PVC named `ms-volume-claim`, consistent with the example PVC created in this section of the quickstart. If you have elected to name your PVC differently, deploy the Pod using the example YAML, modifying the `claimName`field appropriately.
+Note: The example FIO pod resource declaration included with this release Mayastor master references a PVC named `ms-volume-claim`, consistent with the example PVC created in this section of the quickstart. If you have elected to name your PVC differently, deploy the Pod using the example YAML, modifying the `claimName` field appropriately.
 {% endhint %}
 
 {% tabs %}
