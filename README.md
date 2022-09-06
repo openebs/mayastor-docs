@@ -22,11 +22,11 @@ While Mayastor utilizes NVMe-oF it does not require NVMe devices or cloud volume
 
 ## Where can I find Mayastor?
 
-The Mayastor product is associated with multiple repositories under the OpenEBS project. The list of repositories are as follows:
+The Mayastor product is associated with multiple repositories under the OpenEBS project. The list of repositories is as follows:
 - [openebs/mayastor](https://github.com/openebs/mayastor) : This repository contains specifications for Mayastor Data Plane components.
 - [openebs/mayastor-control-plane](https://github.com/openebs/mayastor-control-plane) : This repository contains specifications for Mayastor Control Plane components.
 - [openebs/mayastor-api](https://github.com/openebs/mayastor-api) : This repository contains protocol buffer definitions and OpenAPI specifications for Mayastor
-
+- [openebs/mayastor-extensions](https://github.com/openebs/mayastor-extensions) : This repository contains components and utilities that extend core Mayastor functionality. 
 
 
 

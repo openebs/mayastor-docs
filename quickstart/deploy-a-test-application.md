@@ -44,13 +44,21 @@ spec:
   storageClassName: INSERT_YOUR_STORAGECLASS_NAME_HERE
 ```
 {% endtab %}
+{% tab title="Sample Output" %}
+```text
+NAME              STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+ms-volume-claim   Bound    pvc-ebdfaa3f-5135-4266-b8ad-c8ac553c87fd   1Gi        RWO            mayastor-1     7s
+```
+{% endtab %}
 {% endtabs %}
 
-If you used the storage class example from previous stage, then volume binding mode is set to `WaitForFirstConsumer`. That means, that the volume won't be created until there is an application using the volume. We will go ahead and create the application pod and then check all resources that should have been created as part of that in kubernetes.
+{% hint style="note" %}
+If you used a storage class with the volume binding mode set to `WaitForFirstConsumer` the volume won't be created until there is an application using the volume.
+{% endhint %}
 
 ## Deploy the FIO Test Pod
 
-We schedule the application to one of the storage nodes in order to make the volume available to the application in spite of the node failures. That's why nodeSelector is used in the Pod specification. See ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters#local) for more in-depth explanation of how the scheduling works.
+We schedule the application to one of the storage nodes in order to make the volume available to the application in spite of the node failures. That's why `nodeSelector` is used in the Pod specification. See ["local" storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters#local) for more in-depth explanation of how the scheduling works.
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
@@ -102,8 +110,8 @@ kubectl get pvc ms-volume-claim
 
 {% tab title="Example Output" %}
 ```text
-NAME                STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS     AGE
-ms-volume-claim     Bound    pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            mayastor-1       15s
+NAME              STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+ms-volume-claim   Bound    pvc-ebdfaa3f-5135-4266-b8ad-c8ac553c87fd   1Gi        RWO            mayastor-1     3m56s
 ```
 {% endtab %}
 {% endtabs %}
@@ -117,14 +125,14 @@ Substitute the example volume name with that shown under the "VOLUME" heading of
 {% endhint %}
 
 ```text
-kubectl get pv pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b
+kubectl get pv pvc-ebdfaa3f-5135-4266-b8ad-c8ac553c87fd
 ```
 {% endtab %}
 
 {% tab title="Example Output" %}
 ```text
-NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                       STORAGECLASS     REASON   AGE
-pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi        RWO            Delete           Bound    default/ms-volume-claim     mayastor-1       16m
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                     STORAGECLASS   REASON   AGE
+pvc-ebdfaa3f-5135-4266-b8ad-c8ac553c87fd   1Gi        RWO            Delete           Bound    default/ms-volume-claim   mayastor-1              4m41s
 ```
 {% endtab %}
 {% endtabs %}
@@ -146,9 +154,8 @@ kubectl mayastor get volumes
 
 {% tab title="Example Output" %}
 ```text
-ID                                    REPLICAS  TARGET-NODE                ACCESSIBILITY STATUS  SIZE
-
-18e30e83-b106-4e0d-9fb6-2b04e761e18a  3         aks-agentpool-12194210-0   nvmf           Online  1073741824 
+ ID                                    REPLICAS  TARGET-NODE   ACCESSIBILITY  STATUS  SIZE 
+ ebdfaa3f-5135-4266-b8ad-c8ac553c87fd  1         node-1-14944  nvmf           Online  1073741824 
 ```
 {% endtab %}
 {% endtabs %}
