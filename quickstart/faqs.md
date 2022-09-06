@@ -61,7 +61,7 @@ No but these may be features of future releases.
 
 ## Which CPU architectures are supported?  What are the minimum hardware requirements?
 
-Mayastor nightly builds and releases are compiled and tested on x86. Some effort has been made to allow compilation on ARM platforms but this is currently considered experimental and is not subject to integration or end-to-end testing by Mayastor's maintainers.
+Mayastor nightly builds and releases are compiled and tested on x86-64, under Ubuntu 20.04 LTS with a 5.13 kernel. Some effort has been made to allow compilation on ARM platforms but this is currently considered experimental and is not subject to integration or end-to-end testing by Mayastor's maintainers.
 
 Minimum hardware requirements are discussed in the [quickstart section](https://mayastor.gitbook.io/introduction/quickstart/prerequisites) of this documentation.
 
