@@ -8,7 +8,7 @@ Before deploying and using Mayastor please consult the [Known Issues](https://ma
 
 In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the project's repositories ([control plane components](https://github.com/openebs/mayastor-control-plane), [data plane components](https://github.com/openebs/mayastor)). These repositories are configured for the GitFlow release model, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.  Previous releases are identifiable by their annotated git tags.
 
-The steps and commands which follow are intended only for use with, and have only be tested against, the _latest release for version 1.x_. Earlier releases or development versions may require a modified or different installation process and _will_ require that the namifest files appropriate to that specific release are used.  These are available in the repositories named above - use the files from the tagged commit appropriate to the release you wish to deploy.
+The steps and commands which follow are intended only for use with, and have only be tested against, the _latest release for version 1.x_. Earlier releases or development versions may require a modified or different installation process and _will_ require that the manifest files appropriate to that specific release are used.  These are available in the repositories named above - use the files from the tagged commit appropriate to the release you wish to deploy.
 
 ## Create Mayastor Application Resources
 
