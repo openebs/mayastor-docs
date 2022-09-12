@@ -56,11 +56,8 @@ etcd is a distributed reliable key-value store for the critical data of a distri
 
 The supportability tool is used to create support bundles (archive files) by interacting with multiple services present in the system. These bundles contain information about the entire Mayastor system, as well as specific Mayastor resources like volumes, pools and nodes, and can be used for debugging. It can collect the following information:
 - Topological information of Mayastor's resource(s) by interacting with the REST service
-
 - Historical logs by interacting with Loki. If Loki is unavailable, it interacts with the kube-apiserver to fetch logs.
-
 - Mayastor-specific Kubernetes resources by interacting with the kube-apiserver
-
 - Mayastor-specific information from etcd (internal) by interacting with the etcd server.
 
 ### Loki:
