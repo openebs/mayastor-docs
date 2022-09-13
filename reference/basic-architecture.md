@@ -38,7 +38,8 @@ The instance of the Mayastor running inside the container performs four major cl
 - Creates, exports, and manages volume controller objects hosted on that node.
 - Creates and exposes replicas from DiskPools hosted on that node over NVMe-TCP.
 
-When an io-engine pod starts running, an init container attempts to verify connectivity to the agent-core in the namespace where Mayastor has been deployed. If a connection is established, the Mayastor container is started, and the instance performs registration with the control plane. In this way, the agent-core maintains a registry of nodes and their current states.
+Before the io-engine pod starts running, an init container attempts to verify connectivity to the agent-core in the namespace where Mayastor has been deployed. If a connection is established, the io-engine pod registers itself over gRPC to the agent-core.
+In this way, the agent-core maintains a registry of nodes and their supported api-versions.
 
 The scheduling of these pods is determined declaratively by using a DaemonSet specification. By default, a nodeSelector field is used within the pod spec to select all worker nodes to which the user has attached the label `openebs.io/engine=mayastor` as recipients of an io-engine pod. In this way, the node count and location are set appropriately to the hardware configuration of the worker nodes, and the capacity and performance demands of the cluster.
 
