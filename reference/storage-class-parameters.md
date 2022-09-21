@@ -14,20 +14,6 @@ Expressed in seconds and it sets the `io_timeout` parameter in the linux block d
 The setting is supported only when using "nvmf" protocol.
 {% endhint %}
 
-## "local"
-
-A flag of the type Boolean, with the default value of true.  The flag controls the scheduling behaviour of nexus and replicas to storage nodes in the cluster.
-
-All the following values are interpreted as "true" and anything else as "false": 'y', 'Y', 'yes', 'Yes', 'YES', 'true', 'True', 'TRUE', 'on', 'On', 'ON'. 
-
-{% hint style="warning" %}
-This value must be set to true for correct operation of Mayastor provisioning and publishing.  It is recommended that  the `volumeBindingMode` in storage class be set to `WaitForFirstConsumer`.  This limitation will be removed in a future release
-{% endhint %}
-
-{% hint style="warning" %}
-A consequence of the above limitation is that applications pods which use Mayastor provisioned PVs may only be scheduled on nodes which are running Mayastor pods (i.e. data engine container).  That is to say, only on MSNs.  This limitaion will be removed in a future release.
-{% endhint %}
-
 ## "protocol"
 
 Supported values are "nvmf" and "iscsi". It is the protocol that is used for mounting the volume (target) on the application node. Not to be confused with the protocol that is used between nexus and replicas, that is always "nvmf". By "nvmf" here, we mean NVMe over TCP protocol - the next generation protocol that is supposed to replace iSCSI. We definitely recommend to use "nvmf". "iscsi" is not full-featured and provided only for users running older kernels that do not support NVMe over TCP yet but still would like to give Mayastor a try.
