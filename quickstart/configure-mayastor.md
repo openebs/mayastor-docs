@@ -13,7 +13,7 @@ The current version of DiskPool only supports thick provisioning.
 
 A pool is defined declaratively, through the creation of a corresponding `DiskPool` custom resource on the cluster. The DiskPool must be created in the same namespace where Mayastor has been deployed. User configurable parameters of this resource type include a unique name for the pool, the node name on which it will be hosted and a reference to a disk device which is accessible from that node. The pool definition requires the reference to its member block device to adhere to a discrete range of schemas, each associated with a specific access mechanism/transport/ or device type.
 
-#### Permissible Schemes for `spec.disks` under DiskPool CRD
+#### Permissible Schemes for `spec.disks` under DiskPool CR
 
 | Type | Format | Example |
 | :--- | :--- | :--- |
