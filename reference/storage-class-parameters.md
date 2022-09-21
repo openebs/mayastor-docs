@@ -16,7 +16,7 @@ The setting is supported only when using "nvmf" protocol.
 
 ## "protocol"
 
-Supported values are "nvmf" and "iscsi". It is the protocol that is used for mounting the volume (target) on the application node. Not to be confused with the protocol that is used between nexus and replicas, that is always "nvmf". By "nvmf" here, we mean NVMe over TCP protocol - the next generation protocol that is supposed to replace iSCSI. We definitely recommend to use "nvmf". "iscsi" is not full-featured and provided only for users running older kernels that do not support NVMe over TCP yet but still would like to give Mayastor a try.
+The parameter 'protocol' takes the value `nvmf`(NVMe over TCP protocol). It is used to mount the volume (target) on the application node.
 
 ## "repl"
 
