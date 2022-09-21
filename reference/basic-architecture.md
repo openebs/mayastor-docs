@@ -19,7 +19,7 @@ More detailed guides to Mayastor's components, their design and internal structu
 | etcd | Service | Exposes etcd DB endpoint | Single |
 | etcd-headless | Service | Exposes etcd DB endpoint | Single |
 | io-engine| DaemonSet | Hosts Mayastor I/O engine| User-selected nodes |
-| DiskPool | CRD | Declares a DiskPool's desired state and reflects its current state | User-defined, one or many |
+| DiskPool | CRD | Declares a Mayastor pool's desired state and reflects its current state | User-defined, one or many |
 | **Additional components**  |
 | metrics-exporter-pool | Sidecar container (within io-engine DaemonSet)| Exports pool related metrics in Prometheus format | All worker nodes |
 | pool-metrics-exporter | Service| Exposes exporter API endpoint to Prometheus | Single |
@@ -31,12 +31,12 @@ More detailed guides to Mayastor's components, their design and internal structu
 
 ### io-engine
 
-The io-engine pods encapsulate Mayastor containers, which implement the I/O path from the block devices at the persistence layer, up to the relevant initiators on the worker nodes mounting volume claims.
+The io-engine pod encapsulates Mayastor containers, which implement the I/O path from the block devices at the persistence layer, up to the relevant initiators on the worker nodes mounting volume claims.
 The instance of the Mayastor running inside the container performs four major classes of functions:
-- Presents a gRPC interface to the components which allow it to orchestrate the creation, configuration, and deletion of Mayastor-managed objects hosted by that instance.
 - Creates and manages DiskPools hosted on that node.
 - Creates, exports, and manages volume controller objects hosted on that node.
 - Creates and exposes replicas from DiskPools hosted on that node over NVMe-TCP.
+- Provides a gRPC interface service to orchestrate the creation, deletion and management of the above objects, hosted on that node.
 
 Before the io-engine pod starts running, an init container attempts to verify connectivity to the agent-core in the namespace where Mayastor has been deployed. If a connection is established, the io-engine pod registers itself over gRPC to the agent-core.
 In this way, the agent-core maintains a registry of nodes and their supported api-versions.
@@ -55,7 +55,7 @@ etcd is a distributed reliable key-value store for the critical data of a distri
 
 ### Supportability:
 
-The supportability tool is used to create support bundles (archive files) by interacting with multiple services present in the system. These bundles contain information about the entire Mayastor system, as well as specific Mayastor resources like volumes, pools and nodes, and can be used for debugging. It can collect the following information:
+The supportability tool is used to create support bundles (archive files) by interacting with multiple services present in the cluster where Mayastor is installed. These bundles contain information about Mayastor resources like volumes, pools and nodes, and can be used for debugging. The tool can collect the following information:
 - Topological information of Mayastor's resource(s) by interacting with the REST service
 - Historical logs by interacting with Loki. If Loki is unavailable, it interacts with the kube-apiserver to fetch logs.
 - Mayastor-specific Kubernetes resources by interacting with the kube-apiserver
@@ -67,4 +67,4 @@ The supportability tool is used to create support bundles (archive files) by int
 
 ### Promtail:
      
-    Promtail is a log collector built specifically for Loki. It uses the configuration file for target discovery and includes analogous features for labeling, transforming, and filtering logs from containers before ingesting them to Loki.
+    [Promtail](https://grafana.com/docs/loki/latest/clients/promtail/) is a log collector built specifically for Loki. It uses the configuration file for target discovery and includes analogous features for labeling, transforming, and filtering logs from containers before ingesting them to Loki.
