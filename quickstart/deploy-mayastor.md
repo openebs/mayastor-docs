@@ -36,7 +36,7 @@ helm search repo mayastor --versions
 {% tab title="Sample Output" %}
 ```text
  NAME             	CHART VERSION	APP VERSION  	DESCRIPTION                       
-mayastor/mayastor	v2.0.0        	v2.0.0       	Mayastor Helm chart for Kubernetes
+mayastor/mayastor	2.0.0        	2.0.0       	Mayastor Helm chart for Kubernetes
 ```
 {% endtab %}
 {% endtabs %}
@@ -82,9 +82,6 @@ kubectl get pods -n mayastor
 ```text
 NAME                                         READY   STATUS             RESTARTS   AGE
 mayastor-agent-core-6d9d498df-kz6t4          1/1     Running            0          25m
-mayastor-agent-ha-node-cx8vn                 1/1     Running            0          25m
-mayastor-agent-ha-node-fc98l                 1/1     Running            0          25m
-mayastor-agent-ha-node-tdcfx                 1/1     Running            0          25m
 mayastor-api-rest-5c79485686-sw2ll           1/1     Running            0          25m
 mayastor-csi-controller-65d6bc946-qvl2h      3/3     Running            0          25m
 mayastor-csi-node-g8ngz                      2/2     Running            0          25m
