@@ -81,24 +81,24 @@ kubectl get pods -n mayastor
 {% tab title="Sample Output" %}
 ```text
 NAME                                         READY   STATUS             RESTARTS   AGE
-mayastor-agent-core-6d9d498df-kz6t4          1/1     Running            0          25m
-mayastor-api-rest-5c79485686-sw2ll           1/1     Running            0          25m
-mayastor-csi-controller-65d6bc946-qvl2h      3/3     Running            0          25m
-mayastor-csi-node-g8ngz                      2/2     Running            0          25m
-mayastor-csi-node-w86kw                      2/2     Running            0          25m
-mayastor-csi-node-z6lc9                      2/2     Running            0          25m
-mayastor-etcd-0                              1/1     Running            0          25m
-mayastor-etcd-1                              1/1     Running            0          25m
-mayastor-etcd-2                              1/1     Running            0          25m
-mayastor-io-engine-72zp6                     2/2     Running            0          25m
-mayastor-io-engine-gk7z2                     2/2     Running            0          25m
-mayastor-io-engine-wfld7                     2/2     Running            0          25m
-mayastor-loki-0                              1/1     Running            0          25m
-mayastor-obs-callhome-5f47c6d78b-h7x98       1/1     Running            0          25m
-mayastor-operator-diskpool-b64b9b7bb-m7l6c   1/1     Running            0          25m
-mayastor-promtail-cw8lc                      1/1     Running            0          25m
-mayastor-promtail-kbp4t                      1/1     Running            0          25m
-mayastor-promtail-xnhcm                      1/1     Running            0          25m
+mayastor-agent-core-6d9d498df-kz6t4          1/1     Running            0          2m
+mayastor-api-rest-5c79485686-sw2ll           1/1     Running            0          2m
+mayastor-csi-controller-65d6bc946-qvl2h      3/3     Running            0          2m
+mayastor-csi-node-g8ngz                      2/2     Running            0          2m
+mayastor-csi-node-w86kw                      2/2     Running            0          2m
+mayastor-csi-node-z6lc9                      2/2     Running            0          2m
+mayastor-etcd-0                              1/1     Running            0          2m
+mayastor-etcd-1                              1/1     Running            0          2m
+mayastor-etcd-2                              1/1     Running            0          2m
+mayastor-io-engine-72zp6                     2/2     Running            0          2m
+mayastor-io-engine-gk7z2                     2/2     Running            0          2m
+mayastor-io-engine-wfld7                     2/2     Running            0          2m
+mayastor-loki-0                              1/1     Running            0          2m
+mayastor-obs-callhome-5f47c6d78b-h7x98       1/1     Running            0          2m
+mayastor-operator-diskpool-b64b9b7bb-m7l6c   1/1     Running            0          2m
+mayastor-promtail-cw8lc                      1/1     Running            0          2m
+mayastor-promtail-kbp4t                      1/1     Running            0          2m
+mayastor-promtail-xnhcm                      1/1     Running            0          2m
 ```
 {% endtab %}
 {% endtabs %}
