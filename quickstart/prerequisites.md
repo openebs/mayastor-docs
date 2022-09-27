@@ -267,7 +267,7 @@ roleRef:
 
 ## Minimum worker node count
 
-  The minimum supported worker node count is three nodes. When using the synchronous replication feature (N+1 mirroring), the number of worker nodes to which Mayastor is deployed should be no less than the desired replication factor.
+  The minimum supported worker node count is three nodes. When using the synchronous replication feature (N-way mirroring), the number of worker nodes to which Mayastor is deployed should be no less than the desired replication factor.
 
 
 ## Transport protocols
