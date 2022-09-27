@@ -6,11 +6,11 @@
 Before deploying and using Mayastor please consult the [Known Issues](https://mayastor.gitbook.io/introduction/quickstart/known-issues) section of this guide.
 {% endhint %}
 
-The steps and commands which follow are intended only for use with, and have only been tested against, the _latest release for version 2.x_. Earlier releases or development versions may require a modified or different installation process.
+The steps and commands which follow are intended only for use in conjunction with Mayastor version(s) 2.0.x.
 
 ## Installation via helm
 
-1. Add the `mayastor-extensions` helm repository.
+1.  Add the OpenEBS Mayastor Helm repository.
 {% tabs %}
 {% tab title="Command" %}
 ```text
@@ -51,7 +51,7 @@ To discover all the versions (including unstable versions), execute:
 {% tabs %}
 {% tab title="Command" %}
 ```text
-helm install mayastor mayastor/mayastor -n mayastor --create-namespace
+helm install mayastor mayastor/mayastor -n mayastor --create-namespace --version 2.0.0
 ```
 {% endtab %}
 {% tab title="Sample Output" %}
