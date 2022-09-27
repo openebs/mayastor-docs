@@ -112,8 +112,6 @@ parameters:
   protocol: nvmf
   repl: "1"
 provisioner: io.openebs.csi-mayastor
-reclaimPolicy: Delete
-volumeBindingMode: Immediate
 EOF
 ```
 {% endtab %}
@@ -130,8 +128,6 @@ parameters:
   protocol: nvmf
   repl: "3"
 provisioner: io.openebs.csi-mayastor
-reclaimPolicy: Delete
-volumeBindingMode: Immediate
 EOF
 ```
 {% endtab %}
