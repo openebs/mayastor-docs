@@ -12,7 +12,7 @@ More detailed guides to Mayastor's components, their design and internal structu
 | agent-core | Deployment | Principle control plane actor | Single |
 | csi-controller | Deployment | Hosts Mayastor's CSI controller implementation and CSI provisioner side car| Single |
 | api-rest | Pod | Hosts the public API REST server | Single |
-| *api-rest*  | Service | Exposes the REST API server via NodePort |
+| api-rest | Service | Exposes the REST API server |
 | operator-diskpool | Deployment | Hosts DiskPool operator | Single |
 | csi-node| DaemonSet | Hosts CSI Driver node plugin containers | All worker nodes |
 | etcd | StatefulSet | Hosts etcd Server container | Configurable(<i>Recommended: Three replicas)</i> |
@@ -32,7 +32,8 @@ More detailed guides to Mayastor's components, their design and internal structu
 ### io-engine
 
 The io-engine pod encapsulates Mayastor containers, which implement the I/O path from the block devices at the persistence layer, up to the relevant initiators on the worker nodes mounting volume claims.
-The instance of the Mayastor running inside the container performs four major classes of functions:
+
+The Mayastor process running inside this container performs four major functions:
 - Creates and manages DiskPools hosted on that node.
 - Creates, exports, and manages volume controller objects hosted on that node.
 - Creates and exposes replicas from DiskPools hosted on that node over NVMe-TCP.
