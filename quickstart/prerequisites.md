@@ -10,6 +10,13 @@ All worker nodes must satisfy the following requirements:
   * ext4 and optionally xfs
 * * [Helm](https://helm.sh/docs/intro/install/) version must be v3.7 or later.
 
+## **io-engine pods**
+Each worker node which will host an instance of a io-engine pod must have the following resources _free and available_ for _exclusive_ use by that pod:
+* Two CPU cores
+* 4GiB RAM
+* **HugePage support**
+  * A minimum of **2GiB of** **2MiB-sized** pages
+
 
 
 ## **Networking requirements**
