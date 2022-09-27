@@ -12,7 +12,7 @@ All worker nodes must satisfy the following requirements:
 
 * Each worker node which will host an instance of an io-engine pod must have the following resources _free and available_ for _exclusive_ use by that pod:
   * Two CPU cores
-  * 4GiB RAM
+  * 1GiB RAM
   * **HugePage support**
     * A minimum of **2GiB of** **2MiB-sized** pages
 
