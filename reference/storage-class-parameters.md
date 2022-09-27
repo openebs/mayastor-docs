@@ -2,6 +2,12 @@
 
 Storage class resource in Kubernetes is used to supply parameters to volumes when they are created. It is a convenient way of grouping volumes with common characteristics. All parameters take a string value. Brief explanation of each supported Mayastor parameter follows.
 
+
+{% hint style="info" %}
+The storage class parameter `local` has been deprecated in Mayastor version 2.0.
+{% endhint %}
+
+
 ## "fsType"
 
 File system that will be used when mounting the volume. The default file system when not specified is 'ext4'. We recommend to use 'xfs' that is considered to be more advanced and performant. Though make sure that XFS is installed on all nodes in the cluster before using it.
