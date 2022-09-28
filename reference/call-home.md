@@ -17,11 +17,11 @@ A summary of the data points collected is given below.
 
 |**K8s cluster ID**: This is a SHA-256 hashed value of the UID of your Kubernetes cluster's `kube-system` namespace.| 
 
-|**K8s node count**: The number of nodes in your Kubernetes cluster.| 
+|**K8s node count**: This is the number of nodes in your Kubernetes cluster.| 
 
-|**Product name**: The name given during Helm install. | 
+|**Product name**: This is the name given during Helm install. | 
 
-|**Product version**: The deployed version of Mayastor.| 
+|**Product version**: This is the deployed version of Mayastor.| 
 
 |**Deploy namespace**: This is a SHA-256 hashed value of the  name of the  Kubernetes namespace where Mayastor Helm chart is deployed.| 
 
