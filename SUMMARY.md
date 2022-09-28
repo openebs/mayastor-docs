@@ -25,7 +25,7 @@
 * [Operations](reference/operations.md)
 * [Storage Class Parameters](reference/storage-class-parameters.md)
 * [Mayastor Kubectl Plugin](reference/kubectl-plugin.md)
-* [Call-home-metrics] (reference/call-home.md)
+* [Call-home metrics](reference/call-home.md)
 * [Tested Third Party Software](reference/tested-third-party-software.md)
 
 ## Mayastor A-Z
