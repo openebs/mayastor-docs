@@ -1,15 +1,15 @@
 # Call-home metrics 
 
- In the interest of gaining perspective on storage usage trends, Mayastor collects some data metrics from the deployed Mayastor instances. Installing Mayastor using Helm chart (v2.0.0 onwards) deploys a Kubernetes deployment called `obs-callhome`on to the cluster. A Kubernetes pod from this deployment collects the data points from your Mayastor cluster. The collected data is anonymous and is encrypted at rest. 
+ By default, Mayastor collects some basic information related to the number and scale of user-deployed instances. The collected data is anonymous and is encrypted at rest. This data is used to understand storage usage trends, which in turn helps maintainers prioritize their contributions to maximize the benefit to the community as a whole. 
 
 {% hint style="info" %} 
 
-No identities, host names, passwords, or volume data are collected. **ONLY** the below-mentioned information is collected from the cluster.  
+No user-identifiable information, hostnames, passwords, or volume data are collected. **ONLY** the below-mentioned information is collected from the cluster. 
 
 {% endhint %} 
 
 
-A summary of the data points collected is given below.  
+A summary of the information collected is given below.
 
 | **Cluster information** | 
 
@@ -25,7 +25,7 @@ A summary of the data points collected is given below.
 
 |**Deploy namespace**: This is a SHA-256 hashed value of the  name of the  Kubernetes namespace where Mayastor Helm chart is deployed.| 
 
-|**Storage node count**: This is the number of nodes which Mayastor is configured to use for volume provisioning.| 
+|**Storage node count**: This is the number of nodes on which the Mayastor I/O engine is scheduled.| 
 
  
  
@@ -72,32 +72,13 @@ A summary of the data points collected is given below.
 |**Average replica count per volume**: This is the average number of replicas each Mayastor Volume has in your cluster.| 
 
 
+### How to disable the collection of usage data?
 
-To disable the collection of data metrics from the cluster, use the following command: 
+To disable the collection of data metrics from the cluster add `--set obs.callhome.enabled=false` flag to the Helm install command.
 
+### Where is the collected data stored?
 
-{% tabs %} 
-
-{% tab title="To disable during installation" %} 
-
-```text 
-
-helm install mayastor mayastor/mayastor -n mayastor --set obs.callhome.enabled=false --create-namespace --version 2.0.0 
-
-``` 
-
-{% endtab %} 
-{% tab title="To disable post installation" %} 
-
-```text 
-
-helm upgrade mayastor mayastor/mayastor -n mayastor --set obs.callhome.enabled=false --version 2.0.0 
-
-``` 
-
-{% endtab %} 
-
-{% endtabs %} 
+The collected information is stored on behalf of the OpenEBS project by DataCore Software Inc. in the data centers located in Texas.
 
  
  
