@@ -78,7 +78,7 @@ To disable the collection of data metrics from the cluster add `--set obs.callho
 
 ### Where is the collected data stored?
 
-The collected information is stored on behalf of the OpenEBS project by DataCore Software Inc. in the data centers located in Texas.
+The collected information is stored on behalf of the OpenEBS project by DataCore Software Inc. in data centers located in Texas.
 
  
  
