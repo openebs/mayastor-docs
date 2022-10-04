@@ -28,6 +28,7 @@ Mayastor's source code and documentation are distributed amongst a number of Git
 - [openebs/mayastor-control-plane](https://github.com/openebs/mayastor-control-plane) : contains the source code of the control plane components
 - [openebs/mayastor-api](https://github.com/openebs/mayastor-api) : contains common protocol buffer definitions and OpenAPI specifications for Mayastor components
 - [openebs/mayastor-dependencies](https://github.com/openebs/mayastor-dependencies) : contains dependencies common to the control and data plane repositories
+- [openebs/mayastor-extensions](https://github.com/openebs/mayastor-extensions) : contains components and utilities that provide extended functionalities like ease of installation, monitoring and observability aspects
 - [openebs/mayastor-docs](https://github.com/openebs/mayastor-docs) : contains Mayastor's user documenation 
 
 
