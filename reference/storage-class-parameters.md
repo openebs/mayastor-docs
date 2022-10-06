@@ -4,7 +4,9 @@ Storage class resource in Kubernetes is used to supply parameters to volumes whe
 
 
 {% hint style="info" %}
-The storage class parameter `local` has been deprecated in Mayastor version 2.0.
+
+The storage class parameter `local` has been deprecated and is a breaking change in Mayastor version 2.0. Ensure that this parameter is not used.
+ 
 {% endhint %}
 
 
