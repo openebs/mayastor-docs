@@ -279,7 +279,7 @@ msp-operator-7849d59fcd-mcw5b   1/1     Running   0          21s
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/v1.0.3/mayastor-daemonset.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/mayastor-daemonset.yaml
 ```
 {% endtab %}
 {% endtabs %}
