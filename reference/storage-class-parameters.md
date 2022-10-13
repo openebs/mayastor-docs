@@ -16,23 +16,17 @@ The setting is supported only when using "nvmf" protocol.
 
 ## "local"
 
-It is a boolean-type flag with the default value of false. All following values are interpreted as "true" and anything else as "false": 'y', 'Y', 'yes', 'Yes', 'YES', 'true', 'True', 'TRUE', 'on', 'On', 'ON'. The flag controls scheduling of nexus and replicas to storage nodes in the cluster. Mayastor always tries to schedule nexus and one of the replicas on the same node as the application that is using the volume for two reasons:
+A flag of the type Boolean, with the default value of true.  The flag controls the scheduling behaviour of nexus and replicas to storage nodes in the cluster.
 
-1. minimal number of network hops in the IO path and
-2. simplified failure recovery if the application and nexus run on the same node.
+All the following values are interpreted as "true" and anything else as "false": 'y', 'Y', 'yes', 'Yes', 'YES', 'true', 'True', 'TRUE', 'on', 'On', 'ON'. 
 
-The only difference depending on the flag's value is what happens when it isn't possible to schedule the application and nexus on the same node. If the value of "local" is true, then the application will become unscheduleable and will not start. If "local" is false, then the application will run regardless but on a different node than the nexus.
-
-{% hint style="info" %}
-Note that in order to enable the locality feature, the `volumeBindingMode` in storage class must be set to `WaitForFirstConsumer`.
+{% hint style="warning" %}
+This value must be set to true for correct operation of Mayastor provisioning and publishing.  It is recommended that  the `volumeBindingMode` in storage class be set to `WaitForFirstConsumer`.  This limitation will be removed in a future release
 {% endhint %}
 
-Is there any disadvantage of setting "local" to true? Well, there are at least two reasons why someone could want to use the default value of false:
-
-1. Nexus can be created only on a storage node. That implies that all stateful applications must run on the storage nodes as well, which is not ideal in case when there are only a few storage nodes in the cluster that are overloaded.
-2. The pod with the application will be limited to run only on a subset of storage nodes for its whole lifetime. The locality is enforced by means of "node affinity" on PVs which is immutable for the whole lifetime of the volume. Consider an example of a volume with three replicas. The PV will have node affinity set to three storage nodes that were initially chosen for hosting the replicas. The application using the volume could never run on different nodes then.
-
-In spite of the severe implications mention above we *still recommend* to set "local" to true because otherwise your data might become inaccessible to the application if the node with the nexus goes down.
+{% hint style="warning" %}
+A consequence of the above limitation is that applications pods which use Mayastor provisioned PVs may only be scheduled on nodes which are running Mayastor pods (i.e. data engine container).  That is to say, only on MSNs.  This limitaion will be removed in a future release.
+{% endhint %}
 
 ## "protocol"
 

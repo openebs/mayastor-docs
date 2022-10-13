@@ -2,14 +2,6 @@
 
 ## Installation Issues
 
-### Mayastor Helm chart builds the mayastor daemonset definition file incorrectly
-
-The Kubernetes definition file provided for the deployment of the Mayastor Daemonset (mayastor-daemonset.yaml) and the corresponding helm chart template from which it is generated, are both subjects of a known issue affecting this release (v1.0.0).  The complete line `- "-P/var/local/mayastor/pools.yaml"` MUST be removed from the `args` section of the mayastor container spec (line 57) before use.
-
-**Workaround:**  Edit the affected files as directed prior to deploying Mayastor
-
-**Fix:** A fix will be provided in a subsequent release
-
 ### A Mayastor pod restarts unexpectedly with exit code 132 whilst mounting a PVC
 
 The Mayastor process has been sent the SIGILL signal as the result of attempting to execute an illegal instruction. This indicates that the host node's CPU does not satisfy the prerequisite instruction set level for Mayastor \(SSE4.2 on x86-64\).
@@ -39,4 +31,4 @@ When rebooting a node that runs applications mounting Mayastor volumes, this can
 Deploying an application pod on a worker node which hosts Mayastor and Prometheus exporter causes that node to restart.
 The issue originated because of a kernel bug. Once the nexus disconnects, the entries under `/host/sys/class/hwmon/` should get removed, which does not happen in this case(The issue was fixed via this [kernel patch](https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2413147.html)).
 
-**Fix:** Use kernel version extra-5.31.0 or later if deploying Mayastor in conjunction with the Prometheus metrics exporter.
+**Fix:** Use kernel version 5.13 or later if deploying Mayastor in conjunction with the Prometheus metrics exporter.

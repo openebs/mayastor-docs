@@ -8,7 +8,7 @@ Before deploying and using Mayastor please consult the [Known Issues](https://ma
 
 In this Quickstart guide we demonstrate deploying Mayastor by using the Kubernetes manifest files provided within the project's repositories ([control plane components](https://github.com/openebs/mayastor-control-plane), [data plane components](https://github.com/openebs/mayastor)). These repositories are configured for the GitFlow release model, wherein the master branch contains official releases. By extension, the head of the master branch represents the latest official release.  Previous releases are identifiable by their annotated git tags.
 
-The steps and commands which follow are intended only for use with, and tested against, the latest release. Earlier releases or development versions may require a modified or different installation process.
+The steps and commands which follow are intended only for use with, and have only be tested against, the _latest release for version 1.x_. Earlier releases or development versions may require a modified or different installation process and _will_ require that the manifest files appropriate to that specific release are used.  These are available in the repositories named above - use the files from the tagged commit appropriate to the release you wish to deploy.
 
 ## Create Mayastor Application Resources
 
@@ -27,7 +27,7 @@ kubectl create namespace mayastor
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/operator-rbac.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/v1.0.3/deploy/operator-rbac.yaml
 ```
 {% endtab %}
 
@@ -45,7 +45,7 @@ clusterrolebinding.rbac.authorization.k8s.io/mayastor-cluster-role-binding creat
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/mayastorpoolcrd.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/v1.0.3/deploy/mayastorpoolcrd.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -59,7 +59,7 @@ Mayastor uses [NATS](https://nats.io/), an Open Source messaging system, as an e
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/nats-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/deploy/nats-deployment.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -91,7 +91,7 @@ To deploy the PersistentVolumes that will be used by the etcd in the next step, 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/storage/localpv.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/deploy/etcd/storage/localpv.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -99,9 +99,9 @@ kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deplo
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/statefulset.yaml 
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/svc.yaml
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/etcd/svc-headless.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/deploy/etcd/statefulset.yaml 
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/deploy/etcd/svc.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/deploy/etcd/svc-headless.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -132,7 +132,7 @@ mayastor-etcd-2   1/1     Running   0          70m
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/csi-daemonset.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/deploy/csi-daemonset.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -161,7 +161,7 @@ mayastor-csi   3         3         3       3            3           kubernetes.i
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/core-agents-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/v1.0.3/deploy/core-agents-deployment.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -188,8 +188,8 @@ core-agents-5f4d9f786b-6vvxc   1/1     Running   0          117s
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-deployment.yaml
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/rest-service.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/v1.0.3/deploy/rest-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/v1.0.3/deploy/rest-service.yaml
 ```
 {% endtab %}
 
@@ -224,7 +224,7 @@ rest-5cd9665499-cdgmm   1/1     Running   0          2m35s
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/csi-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/v1.0.3/deploy/csi-deployment.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -251,7 +251,7 @@ csi-controller-579f77f64-7dq7g   3/3     Running   0          39m
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/master/deploy/msp-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor-control-plane/v1.0.3/deploy/msp-deployment.yaml
 ```
 {% endtab %}
 {% endtabs %}
@@ -279,7 +279,7 @@ msp-operator-7849d59fcd-mcw5b   1/1     Running   0          21s
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/mayastor-daemonset.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/v1.0.3/mayastor-daemonset.yaml
 ```
 {% endtab %}
 {% endtabs %}
