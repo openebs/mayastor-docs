@@ -74,11 +74,11 @@ A summary of the information collected is given below.
 
 ### How to disable the collection of usage data
 
-To disable the collection of data metrics from the cluster, add `--set obs.callhome.enabled=false` flag to the Helm install command. The Helm command, along with the flag,  can either be executed during installation or can be re-executed post-installation.
+To disable the collection of data metrics from the cluster, add `--set obs.callhome.enabled=false` flag to the Helm install command. The Helm command, along with the flag, can either be executed during installation or can be re-executed post-installation.
 
 ### Where is the collected data stored?
 
-The collected information is stored on behalf of the OpenEBS project by DataCore Software Inc. in data centers located in Texas.
+The collected information is stored on behalf of the OpenEBS project by DataCore Software Inc. in data centers located in Texas, USA.
 
  
  
