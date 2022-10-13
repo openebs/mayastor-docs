@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Welcome to Mayastor!](README.md)]
+* [Welcome to Mayastor!](README.md)
 
 ## Release Notes
 
