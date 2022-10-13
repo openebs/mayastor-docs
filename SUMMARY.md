@@ -28,10 +28,4 @@
 * [Call-home metrics](reference/call-home.md)
 * [Tested Third Party Software](reference/tested-third-party-software.md)
 
-## Mayastor A-Z
-
-* [Glossary A-E](mayastor-a-z/glossary-a-e.md)
-* [Glossary F-K](mayastor-a-z/glossary-f-k.md)
-* [Glossary L-P](mayastor-a-z/glossary-l-p.md)
-* [Glossary Q-Z](mayastor-a-z/glossary-q-z.md)
 

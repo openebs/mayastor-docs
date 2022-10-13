@@ -4,66 +4,66 @@ The objective of this section is to provide the user and evaluator of Mayastor w
 
 More detailed guides to Mayastor's components, their design and internal structure, and instructions for building Mayastor from source, are maintained within the [project's GitHub repository](https://github.com/openebs/Mayastor).
 
+
+
 ## Dramatis Personae
 
 | Name | Resource Type | Function | Frequency in Cluster |
 | :--- | :--- | :--- | :--- |
 | **Control Plane** |
-| core-agent | Pod | Principle control plane actor | Single |
-| csi-controller | Pod | Hosts Mayastor's CSI controller implementation and CSI provisioner side car| Single |
-| rest | Pod | Hosts the public API REST server | Single |
-| *rest*  | Service | Exposes the REST API server via NodePort |
-| msp-operator | Pod | Hosts Mayastor's pool operator | Single |
-| mayastor-csi| Pod | Hosts CSI Driver node plugin containers | All worker nodes |
-| nats | Pod | Hosts NATS Server container | Single |
-| *nats* | Service | Exposes NATS message bus end point | Single |
-| *nats-config* | ConfigMap | NATS cluster configuration data |
-| etcd | Pod | Hosts etcd Server container | Single |
-| *mayastor-etcd* | Service | Exposes NATS message bus end point | Single |
-| *mayastor-etcd-headless* | Service | Exposes NATS message bus end point | Single |
-| **Data Plane**|
-| mayastor| Pod | Hosts Mayastor I/O engine| User-selected nodes |
-| **k8s Resource Types**  |
-| mayastorpools | CRD | Declares a Mayastor pool's desired state and reflects its current state | User-defined, one or many |
+| agent-core | Deployment | Principle control plane actor | Single |
+| csi-controller | Deployment | Hosts Mayastor's CSI controller implementation and CSI provisioner side car| Single |
+| api-rest | Pod | Hosts the public API REST server | Single |
+| api-rest | Service | Exposes the REST API server |
+| operator-diskpool | Deployment | Hosts DiskPool operator | Single |
+| csi-node| DaemonSet | Hosts CSI Driver node plugin containers | All worker nodes |
+| etcd | StatefulSet | Hosts etcd Server container | Configurable(<i>Recommended: Three replicas)</i> |
+| etcd | Service | Exposes etcd DB endpoint | Single |
+| etcd-headless | Service | Exposes etcd DB endpoint | Single |
+| io-engine| DaemonSet | Hosts Mayastor I/O engine| User-selected nodes |
+| DiskPool | CRD | Declares a Mayastor pool's desired state and reflects its current state | User-defined, one or many |
+| **Additional components**  |
+| metrics-exporter-pool | Sidecar container (within io-engine DaemonSet)| Exports pool related metrics in Prometheus format | All worker nodes |
+| pool-metrics-exporter | Service| Exposes exporter API endpoint to Prometheus | Single |
+| promtail | DaemonSet| Scrapes logs of Mayastor-specific pods and exports them to Loki| All worker nodes |
+| loki | StatefulSet| Stores the historical logs exported by promtail pods | Single |
+| loki | Service| Exposes the Loki API endpoint via ClusterIP | Single |
+
+
 
 ## Component Roles
 
-### Control Plane
+### io-engine
 
-A microservices patterned control plane, centered around a core agent with a publically exposed RESTful API.  This is extended by a dedicated operator responsible for managing the life cycle of "Mayastor Pools" (an abstraction for devices supplying the cluster with persistent backing storage), and a CSI compliant external provisioner (controller).  The source for the control plane components is located in its [own repository](https://github.com/mayadata-io/mayastor-control-plane)
+The io-engine pod encapsulates Mayastor containers, which implement the I/O path from the block devices at the persistence layer, up to the relevant initiators on the worker nodes mounting volume claims.
+The Mayastor process running inside this container performs four major functions:
+- Creates and manages DiskPools hosted on that node.
+- Creates, exports, and manages volume controller objects hosted on that node.
+- Creates and exposes replicas from DiskPools hosted on that node over NVMe-TCP.
+- Provides a gRPC interface service to orchestrate the creation, deletion and management of the above objects, hosted on that node.
+Before the io-engine pod starts running, an init container attempts to verify connectivity to the agent-core in the namespace where Mayastor has been deployed. If a connection is established, the io-engine pod registers itself over gRPC to the agent-core.
+In this way, the agent-core maintains a registry of nodes and their supported api-versions.
+The scheduling of these pods is determined declaratively by using a DaemonSet specification. By default, a nodeSelector field is used within the pod spec to select all worker nodes to which the user has attached the label `openebs.io/engine=mayastor` as recipients of an io-engine pod. In this way, the node count and location are set appropriately to the hardware configuration of the worker nodes, and the capacity and performance demands of the cluster.
 
- The control plane uses dedicated, clustered instances of etcd and NATS to persist configuration and state data, and as a message bus / transport for communcation with the data plane components, respectively.
 
-### Mayastor
-
-The Mayastor pods of a deployment are its principle data plane actors, encapsulating the Mayastor containers which implement the I/O path from the block devices at the persistence layer, up to the relevant initiators on the worker nodes mounting volume claims.
-
-The instance of the `mayastor` binary running inside the container performs four major classes of functions:
-
-* Present a gRPC interface to the control plane components, to allow the latter to orchestrate creation, configuration and deletion of Mayastor managed objects hosted by that instance
-* Create and manage storage pools hosted on that node
-* Create, export and manage nexus objects \(and by extension, volumes\) hosted on that node
-* Create and shares "replicas" from storage pools hosted on that node over NVMe-TCP
-
-When a Mayastor pod starts running, an init container attempts to verify connectivity to the NATS message bus in the Mayastor namespace. If a connection can be established the Mayastor container is started, and the Mayastor instance performs registration with MOAC over the message bus. In this way, the core agent maintains a registry of nodes \(specifically, running Mayastor instances\) and their current state.
-
-The scheduling of Mayastor pods is determined declaratively by using a DaemonSet specification. By default, a `nodeSelector` field is used within the pod spec to select all worker nodes to which the user has attached the label `openebs.io/engine=mayastor` as recipients of a Mayastor pod. It is in this way that the MayastorNode count and location is set appropriate to the hardware configuration of the worker nodes \(i.e. which nodes host the block storage devices to be used\), and the capacity and performance demands of the cluster.
-
-### Mayastor-CSI
-
-The mayastor-csi pods within a cluster implement the node plugin component of Mayastor's CSI driver. As such, their function is to orchestrate the mounting of Maystor provisioned volumes on worker nodes on which application pods consuming those volumes are scheduled. By default a mayastor-csi pod is scheduled on every node in the target cluster, as determined by a DaemonSet resource of the same name. These pods each encapsulate two containers, `mayastor-csi` and `csi-driver-registrar`
-
-It is not necessary for the node plugin to run on every worker node within a cluster and this behaviour can be modified if so desired through the application of appropriate node labeling and the addition of a corresponding `nodeSelector` entry within the pod spec of the mayastor-csi DaemonSet. It should be noted that if a node does not host a plugin pod, then it will not be possible to schedule pod on it which is configured to mount Mayastor volumes.
-
-Further detail regarding the implementation of CSI driver components and their function can be found within the Kubernetes CSI Developer Documentation.
-
-### NATS
-
-[NATS](https://nats.io/) is a high performance open source messaging system. It is used by Mayastor as the transport mechanism for registration messages passed between Mayastor I/O engine pods running in the cluster and the core agent component, which maintains an inventory of active Mayastor nodes.  It is also used as the transport abstraction for inter data-plane / control-plane gRPC calls.
+### csi-node
+The csi-node pods within a cluster implement the node plugin component of Mayastor's CSI driver. As such, their function is to orchestrate the mounting of Mayastor-provisioned volumes on worker nodes on which application pods consuming those volumes are scheduled. By default, a csi-node pod is scheduled on every node in the target cluster, as determined by a DaemonSet resource of the same name. Each of these pods encapsulates two containers, csi-node, and csi-driver-registrar.
+The node plugin does not need to run on every worker node within a cluster and this behavior can be modified, if desired, through the application of appropriate node labeling and the addition of a corresponding nodeSelector entry within the pod spec of the csi-node DaemonSet. However, it should be noted that if a node does not host a plugin pod, then it will not be possible to schedule an application pod on it, which is configured to mount Mayastor volumes.
 
 ### etcd
+   
+etcd is a distributed reliable key-value store for the critical data of a distributed system. Mayastor uses etcd as a reliable persistent store for its configuration and state data.
 
-"[etcd](https://github.com/etcd-io/etcd) is a distributed reliable key-value store for the most critical data of a distributed system"
+### Supportability:
+The supportability tool is used to create support bundles (archive files) by interacting with multiple services present in the cluster where Mayastor is installed. These bundles contain information about Mayastor resources like volumes, pools and nodes, and can be used for debugging. The tool can collect the following information:
+- Topological information of Mayastor's resource(s) by interacting with the REST service
+- Historical logs by interacting with Loki. If Loki is unavailable, it interacts with the kube-apiserver to fetch logs.
+- Mayastor-specific Kubernetes resources by interacting with the kube-apiserver
+- Mayastor-specific information from etcd (internal) by interacting with the etcd server.
 
-Mayastor uses etcd as a reliable persistent store for its configuration and state data.
+### Loki:
+   [Loki](https://grafana.com/oss/loki/) aggregates and centrally stores logs from all Mayastor containers which are deployed in the cluster.
 
+### Promtail:
+     
+    [Promtail](https://grafana.com/docs/loki/latest/clients/promtail/) is a log collector built specifically for Loki. It uses the configuration file for target discovery and includes analogous features for labeling, transforming, and filtering logs from containers before ingesting them to Loki.
