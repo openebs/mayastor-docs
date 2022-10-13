@@ -72,9 +72,9 @@ A summary of the information collected is given below.
 |**Average replica count per volume**: This is the average number of replicas each Mayastor Volume has in your cluster.| 
 
 
-### How to disable the collection of usage data?
+### How to disable the collection of usage data
 
-To disable the collection of data metrics from the cluster add `--set obs.callhome.enabled=false` flag to the Helm install command.
+To disable the collection of data metrics from the cluster, add `--set obs.callhome.enabled=false` flag to the Helm install command. The Helm command, along with the flag,  can either be executed during installation or can be re-executed post-installation.
 
 ### Where is the collected data stored?
 
