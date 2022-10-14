@@ -154,9 +154,9 @@ mayastor-csi   3         3         3       3            3           kubernetes.i
 {% endtab %}
 {% endtabs %}
 
-### Control Plane
+## Control Plane
 
-## Core Agents
+### Core Agents
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
@@ -183,7 +183,7 @@ core-agents-5f4d9f786b-6vvxc   1/1     Running   0          117s
 {% endtab %}
 {% endtabs %}
 
-## REST
+### REST
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
@@ -218,7 +218,7 @@ rest-5cd9665499-cdgmm   1/1     Running   0          2m35s
 {% endtab %}
 {% endtabs %}
 
-## CSI Controller
+### CSI Controller
 
 
 {% tabs %}
@@ -246,7 +246,7 @@ csi-controller-579f77f64-7dq7g   3/3     Running   0          39m
 {% endtab %}
 {% endtabs %}
 
-## MSP Operator
+### MSP Operator
  
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
@@ -274,7 +274,7 @@ msp-operator-7849d59fcd-mcw5b   1/1     Running   0          21s
 {% endtabs %}
 
 
-### Data Plane
+## Data Plane
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
