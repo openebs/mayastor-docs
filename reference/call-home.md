@@ -19,7 +19,7 @@ A summary of the information collected is given below.
 
 |**K8s node count**: This is the number of nodes in your Kubernetes cluster.| 
 
-|**Product name**: This is the name given during Helm install. | 
+|**Product name**: This field displays the name Mayastor | 
 
 |**Product version**: This is the deployed version of Mayastor.| 
 
@@ -79,13 +79,3 @@ To disable the collection of data metrics from the cluster, add `--set obs.callh
 ### Where is the collected data stored?
 
 The collected information is stored on behalf of the OpenEBS project by DataCore Software Inc. in data centers located in Texas, USA.
-
- 
- 
- 
- 
- 
- 
- 
-
- 
