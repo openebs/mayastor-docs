@@ -2,6 +2,10 @@
 
 * [Welcome to Mayastor!](README.md)
 
+## Release Notes
+
+* [Release History](releases/history.md)
+
 ## Quickstart
 
 * [Scope](quickstart/scope.md)
