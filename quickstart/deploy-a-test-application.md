@@ -59,7 +59,7 @@ In this version, applications using PVs provisioned by Mayastor can only be succ
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
 ```text
-kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v1.0.2/deploy/fio.yaml
+kubectl apply -f https://raw.githubusercontent.com/openebs/Mayastor/v1.0.3/deploy/fio.yaml
 ```
 {% endtab %}
 
