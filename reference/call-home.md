@@ -12,36 +12,23 @@ No user-identifiable information, hostnames, passwords, or volume data are colle
 A summary of the information collected is given below.
 
 | **Cluster information** | 
-
 | :--- | 
-
 |**K8s cluster ID**: This is a SHA-256 hashed value of the UID of your Kubernetes cluster's `kube-system` namespace.| 
-
 |**K8s node count**: This is the number of nodes in your Kubernetes cluster.| 
-
 |**Product name**: This field displays the name Mayastor | 
-
 |**Product version**: This is the deployed version of Mayastor.| 
-
 |**Deploy namespace**: This is a SHA-256 hashed value of the  name of the  Kubernetes namespace where Mayastor Helm chart is deployed.| 
-
 |**Storage node count**: This is the number of nodes on which the Mayastor I/O engine is scheduled.| 
 
  
  
 
 |**Pool information**| 
-
 | :--- | 
-
 |**Pool count**: This is the number of Mayastor DiskPools in your cluster.| 
-
 |**Pool maximum size**: This is the capacity of the Mayastor DiskPool with the highest capacity.| 
-
 |**Pool minimum size**: This is the capacity of the Mayastor DiskPool with the lowest capacity.| 
-
 |**Pool mean size**: This is the average capacity of the Mayastor DiskPools in your cluster.| 
-
 |**Pool capacity percentiles**: This calculates and returns the capacity distribution of Mayastor DiskPools for the 50th, 75th and the 90th percentiles.| 
 
  
@@ -49,26 +36,18 @@ A summary of the information collected is given below.
  
 
 |**Volume information**| 
-
 | :--- | 
-
 |**Volume count**: This is the number of Mayastor Volumes in your cluster.| 
-
 |**Volume minimum size**: This is the capacity of the Mayastor Volume with the lowest capacity.| 
-
 |**Volume mean size**: This is the average capacity of the Mayastor Volumes in your cluster.| 
-
 |**Volume capacity percentiles**: This calculates and returns the capacity distribution of Mayastor Volumes for the 50th, 75th and the 90th percentiles.| 
 
  
  
 
 |**Replica Information**| 
-
 | :--- | 
-
 |**Replica count**: This is the number of Mayastor Volume replicas in your cluster.| 
-
 |**Average replica count per volume**: This is the average number of replicas each Mayastor Volume has in your cluster.| 
 
 
