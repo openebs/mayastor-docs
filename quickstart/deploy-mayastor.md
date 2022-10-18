@@ -154,7 +154,7 @@ mayastor-csi   3         3         3       3            3           kubernetes.i
 {% endtab %}
 {% endtabs %}
 
-### Control Plane
+## Control Plane
 
 ### Core Agents
 
@@ -274,7 +274,7 @@ msp-operator-7849d59fcd-mcw5b   1/1     Running   0          21s
 {% endtabs %}
 
 
-### Data Plane
+## Data Plane
 
 {% tabs %}
 {% tab title="Command \(GitHub Latest\)" %}
