@@ -1,40 +1,15 @@
 # Tested Third Party Software
 
-## **Cluster Node OS**
+## **Recommended cluster node OS**
 
-## Linux
-
-| Ubuntu ||||
-| :--- | :--- | :--- | :--- |
-| Release | Kernel | Tested | Notes |
-| 20.04.3_LTS| ubuntu-5.8.0.63-generic | Jan 2022| |
-
-## Windows
-Not supported
+| **Linux**   | _Distribution:Ubuntu Version: 20.04 LTS Kernel version: 5.13.0-27-generic_ |
+|-------------|----------------------------------------------------------------------------|
+| **Windows** | _Not supported_                                                            |
 
 ## **Cluster Orchestration**
 
-## Kubernetes
+## Recommended Kubernetes versions:
 
-| 1.20 |||
-| :--- | :--- | :--- |
-| Release | Tested | Notes |
-| 1.20.9 | Jan 2022 | |
-
-| 1.21 |||
-| :--- | :--- | :--- |
-| Release | Tested | Notes |
-| 1.21.8 | Jan 2022 | |
-
-| 1.22 |||
-| :--- | :--- | :--- |
-| Release | Tested | Notes |
-| 1.22.5 | Jan 2022 | |
-
-| 1.23 |||
-| :--- | :--- | :--- |
-| Release | Tested | Notes |
-| 1.23.1 | Jan 2022 | |
-
-
-
+ * v1.21.8
+ * v1.22.3
+ * v1.23.1
