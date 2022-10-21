@@ -78,7 +78,7 @@ Verify the status of the pods by running the command:
 kubectl get pods -n mayastor
 ```
 {% endtab %}
-{% tab title="Sample Output" %}
+{% tab title="Sample Output for a three Mayastor node cluster" %}
 ```text
 NAME                                         READY   STATUS    RESTARTS   AGE
 mayastor-agent-core-6c485944f5-c65q6         2/2     Running   0          2m13s
@@ -104,4 +104,4 @@ mayastor-promtail-jc2mz                      1/1     Running   0          2m14s
 mayastor-promtail-mr8nf                      1/1     Running   0          2m14s
 ```
 {% endtab %}
-{% endtabs %}
+{% endtabs %} 
