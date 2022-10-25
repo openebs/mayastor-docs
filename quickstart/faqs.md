@@ -82,18 +82,18 @@ The supportability tool generates support bundles which are used for debugging p
 Below is the information collected by the supportability tool that might be identified as 'sensitive' based on the organization's data protection/privacy commitments and security policies.
 **Logs:**
 The default installation of Mayastor includes the deployment of a log aggregation subsystem based on Grafana Loki. All the pods deployed in the same namespace as Mayastor and labelled with `openebs.io/logging=true` will have their logs incorporated within this centralized collector. These logs may include the following information:
-- Kubernetes node hostnames
+- Kubernetes(K8s) node hostnames
 - IP addresses
     - container addresses
 - API endpoints
     - Mayastor
     - K8s
 - Container names
-- Kubernetes Persistent Volume names (provisioned by Mayastor)
+- K8s Persistent Volume names (provisioned by Mayastor)
 - DiskPool names
 - Block device details (except the content)
 - Pod names of the user applications using Mayastor-provisioned persistent volumes
- **Kubernetes Definition Files:**
+ **K8s Definition Files:**
  The support bundle includes definition files for all the Mayastor components. Some of these are listed below:
 - Deployments
 - DaemonSets
