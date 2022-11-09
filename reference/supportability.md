@@ -13,12 +13,6 @@ kubectl mayastor dump system -n mayastor -d <output_directory_path>
 ```
 {% endtab %}
 
-{% hint style="info" %}
-**Note:** If the nodes exist on a private network or the node ports are not exposed to an outside cluster, all the above commands need to pass these additional parameters:
-kubectl mayastor dump <resource> -d <output_directory> -r http://127.0.0.1:30011 -l http://127.0.0.1:3100 -e http://127.0.0.1:2379 -n mayastor
-{% endhint %}
-
-
 To view all the available options and sub-commands that can be used with the dump command, execute:
 
 {% tabs %}
