@@ -2,7 +2,7 @@
 
 ## Version 1.0
 * ### Latest Release: [v1.0.4](https://github.com/openebs/mayastor/releases/tag/v1.0.4)
-  * released: 09-Nov-2022
+  * released: 10-Nov-2022
 * ### Patch Releases:
   * [v1.0.3](https://github.com/openebs/mayastor/releases/tag/v1.0.3)
   * [v1.0.2](https://github.com/openebs/mayastor/releases/tag/v1.0.2)
