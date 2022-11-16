@@ -1,15 +1,19 @@
 # Table of contents
 
 * [Welcome to Mayastor!](README.md)
+* [Scope](scope.md)
+* [Basic Architecture](basic-architecture.md)
 
 ## Quickstart
 
-* [Scope](quickstart/scope.md)
 * [Prerequisites](quickstart/prerequisites.md)
 * [Preparing the Cluster](quickstart/preparing-the-cluster.md)
 * [Deploy Mayastor](quickstart/deploy-mayastor.md)
 * [Configure Mayastor](quickstart/configure-mayastor.md)
 * [Deploy a Test Application](quickstart/deploy-a-test-application.md)
+
+## Advanced Operations
+
 * [Tips and Tricks](quickstart/tips-and-tricks.md)
 * [Performance Tips](quickstart/performance-tips.md)
 * [Basic Troubleshooting](quickstart/troubleshooting.md)
@@ -19,7 +23,6 @@
 
 ## Reference
 
-* [Basic Architecture](reference/basic-architecture.md)
 * [I/O Path Description](reference/i-o-path-description.md)
 * [Replica Operations](reference/replica-operations.md)
 * [Operations](reference/operations.md)
