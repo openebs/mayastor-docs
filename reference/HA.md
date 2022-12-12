@@ -9,4 +9,4 @@ The HA feature consists of two components: the HA node agent and the cluster age
 **Note:**We strongly recommend keeping this feature enabled.
 {% endhint %}
 
-The HA feature is enabled by default; to disable it, edit the `charts.yaml` file and set  `agents.ha.enabled` as false. 
+The HA feature is enabled by default; to disable it, pass the parameter `--set=agents.ha.enabled=false` with the helm install command.
