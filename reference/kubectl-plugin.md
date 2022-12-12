@@ -27,7 +27,6 @@ kubectl-plugin 1.0.0
 
 ### Using Mayastor kubectl plugin
 
-
 ```
 USAGE:
     kubectl-mayastor [OPTIONS] <SUBCOMMAND>
@@ -54,7 +53,7 @@ SUBCOMMANDS:
     drain       'Drain' resources
     dump        `Dump` resources
     get         'Get' resources
-    help        Print this message or the help of the given subcommand(s)
+    help         Print this message or the help of the given subcommand(s)
     scale       'Scale' resources
     uncordon    'Uncordon' resources
 ```
