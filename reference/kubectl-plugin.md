@@ -188,3 +188,7 @@ The plugin requires access to the `Mayastor REST server` for execution. It gets 
 
 - The plugin currently does not have authentication support.
 - The plugin can operate only over HTTP.
+
+
+
+_[Learn more](https://github.com/openebs/mayastor-extensions/blob/develop/k8s/plugin/README.md)_
