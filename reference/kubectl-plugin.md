@@ -53,7 +53,7 @@ SUBCOMMANDS:
     drain       'Drain' resources
     dump        `Dump` resources
     get         'Get' resources
-    help         Print this message or the help of the given subcommand(s)
+    help        Print this message or the help of the given subcommand(s)
     scale       'Scale' resources
     uncordon    'Uncordon' resources
 ```
@@ -188,7 +188,5 @@ The plugin requires access to the `Mayastor REST server` for execution. It gets 
 
 - The plugin currently does not have authentication support.
 - The plugin can operate only over HTTP.
-
-
 
 _[Learn more](https://github.com/openebs/mayastor-extensions/blob/develop/k8s/plugin/README.md)_
