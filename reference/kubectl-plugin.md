@@ -2,15 +2,6 @@
 
 The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor resources such as nodes, pools and volumes. It is also used for operations such as scaling the replica count of volumes. 
 
-### Prerequisites
-
-- Ensure that port <b>30011</b> is open. This port will be needed by Mayastor kubectl plugin to communicate to REST servers from outside the cluster.
-
-{% hint style="info" %}
-The plugin requires access to the `Mayastor REST server` for execution. It usually obtains the correct endpoint from the kube-config file on its own. However, if the plugin is unable to access the endpoint, the master nodes's IP needs to be specified manually using the `--rest` or `-r` flag.  
-kubectl mayastor [OPTIONS] <SUBCOMMAND> --rest=http://<node-ip>:30011
-{% endhint %}
-
 ### Installation
 
 - The Mayastor kubectl plugin is available for the Linux platform. The binary for the plugin can be found [here](https://github.com/mayadata-io/mayastor-control-plane/releases). 
@@ -40,20 +31,31 @@ kubectl-plugin 1.0.0
 USAGE:
     kubectl-mayastor [OPTIONS] <SUBCOMMAND>
 
-FLAGS:
-    -h, --help       Prints help information
-    -V, --version    Prints version information
-
 OPTIONS:
-    -j, --jaeger <jaeger>      Trace rest requests to the Jaeger endpoint agent
-    -o, --output <output>      The Output, viz yaml, json [default: none]  [possible values: yaml, json, none]
-    -r, --rest <rest>          The rest endpoint, parsed from KUBECONFIG, if left empty 
-    -t, --timeout <timeout>    Timeout for the REST operations [default: 10s]
-
+    -h, --help
+            Print help information
+    -j, --jaeger <JAEGER>
+            Trace rest requests to the Jaeger endpoint agent
+    -k, --kube-config-path <KUBE_CONFIG_PATH>
+            Path to kubeconfig file
+    -n, --namespace <NAMESPACE>
+            Kubernetes namespace of mayastor service, defaults to mayastor [default: mayastor]
+    -o, --output <OUTPUT>
+            The Output, viz yaml, json [default: none]
+    -r, --rest <REST>
+            The rest endpoint to connect to
+    -t, --timeout <TIMEOUT>
+            Timeout for the REST operations [default: 10s]
+    -V, --version
+            Print version information
 SUBCOMMANDS:
-    get      'Get' resources
-    help     Prints this message or the help of the given subcommand(s)
-    scale    'Scale' resources
+    cordon      'Cordon' resources
+    drain       'Drain' resources
+    dump        `Dump` resources
+    get         'Get' resources
+    help        Print this message or the help of the given subcommand(s)
+    scale       'Scale' resources
+    uncordon    'Uncordon' resources
 ```
 
 The plugin can be used to get the following resource information:
@@ -186,7 +188,5 @@ The plugin requires access to the `Mayastor REST server` for execution. It gets 
 
 - The plugin currently does not have authentication support.
 - The plugin can operate only over HTTP.
-- In the case of a cluster with multiple master nodes, the plugin by default picks up the first master node IP for accessing the REST service. In case  the REST service is not accessible using the selected master node IP, the plugin would not be able to pick up an alternate master node IP by default.
 
-
-
+_[Learn more](https://github.com/openebs/mayastor-extensions/blob/develop/k8s/plugin/README.md)_

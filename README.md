@@ -24,7 +24,7 @@ Design goals for Mayastor include:
 
 Mayastor incorporates Intel's [Storage Performance Development Kit](https://spdk.io/). It has been designed from the ground up to leverage the protocol and compute efficiency of NVMe-oF semantics, and the performance capabilities of the latest generation of solid-state storage devices, in order to deliver a storage abstraction with performance overhead measured to be within the range of single-digit percentages.
 
-By comparison, most "shared everything" storage systems are widely thought to impart an overhead of at least 40% (and sometimes as much as 80% or more) as compared to the capabilities of the underlying devices or cloud volumes; additionally traditional shared storage scales in an unpredictale manner as I/O from many workloads interact and compete for resources.
+By comparison, most "shared everything" storage systems are widely thought to impart an overhead of at least 40% (and sometimes as much as 80% or more) as compared to the capabilities of the underlying devices or cloud volumes; additionally traditional shared storage scales in an unpredictable manner as I/O from many workloads interact and compete for resources.
 
 While Mayastor utilizes NVMe-oF it does not require NVMe devices or cloud volumes to operate and can work well with other device types.
 
