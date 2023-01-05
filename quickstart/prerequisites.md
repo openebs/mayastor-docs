@@ -5,7 +5,9 @@
 All worker nodes must satisfy the following requirements:
 
 * **x86-64** CPU cores with SSE4.2 instruction support
-* Linux kernel **5.13 or higher** with the following modules loaded:
+* _(Tested on)_ Linux kernel **5.15**
+  _(Recommended)_ Linux kernel **5.13 or higher**.   
+  The kernel should have the following modules loaded:
   * nvme-tcp
   * ext4 and optionally xfs
 * * [Helm](https://helm.sh/docs/intro/install/) version must be v3.7 or later.
