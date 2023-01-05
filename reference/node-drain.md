@@ -1,6 +1,6 @@
 ## Node Drain
 
-The node drain functionality marks the node as unschedulable and then gracefully moves all the containers of the node to another node. 
+The node drain functionality marks the node as unschedulable and then gracefully moves all the volume targets off the drained node. 
 This feature is in line with the [node drain functionality of Kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/).
 
 
@@ -14,7 +14,7 @@ kubectl-mayastor drain node <node_name> <label>
 To get the list of nodes on which the drain operation has been performed, execute:
 {% tab title="Command" %}
 ```text
-kubectl-mayastor get drain node
+kubectl-mayastor get drain nodes
 ```
 {% endtab %}
 
