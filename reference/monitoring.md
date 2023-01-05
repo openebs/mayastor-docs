@@ -67,7 +67,7 @@ spec:
 {% endtab %}
 
 {% hint style="info" %}
-Upon successful integration of the exporter with the Prometheus stack, the metrics will be available on the port 9090 and all the endpoints will be able to make HTTP calls.
+Upon successful integration of the exporter with the Prometheus stack, the metrics will be available on the port 9090 and HTTP endpoint /metrics.
 {% endhint %}
 
 
