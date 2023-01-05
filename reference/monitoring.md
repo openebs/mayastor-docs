@@ -15,10 +15,10 @@ The Mayastor pool metrics exporter runs as a sidecar container within every io-e
 
 {% tab title="Example metrics" %}
 ```text
-# HELP disk_pool_status mayastor name status
+# HELP disk_pool_status disk-pool status
 # TYPE disk_pool_status gauge
 disk_pool_status{node="worker-0",name="mayastor-disk-pool"} 1
-# HELP disk_pool_total_size_bytes mayastor name total size in bytes
+# HELP disk_pool_total_size_bytes total size of the disk-pool in bytes
 # TYPE disk_pool_total_size_bytes gauge
 disk_pool_total_size_bytes{node="worker-0",name="mayastor-disk-pool"} 5.360320512e+09
 # HELP disk_pool_used_size_bytes used disk-pool size in bytes
