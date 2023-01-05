@@ -71,4 +71,16 @@ Upon successful integration of the exporter with the Prometheus stack, the metri
 {% endhint %}
 
 
+## CSI metrics exporter
 
+| Name | Type | Unit | Description |
+| :--- | :--- | :--- | :--- |
+| kubelet_volume_stats_available_bytes | Gauge | Integer | Size of the available/usable volume (in bytes) | 
+| kubelet_volume_stats_capacity_bytes | Gauge | Integer | The total size of the volume (in bytes) |
+| kubelet_volume_stats_used_bytes | Gauge | Integer | Used size of the volume (in bytes) |
+| kubelet_volume_stats_inodes | Gauge |	Integer | The total number of inodes |
+| kubelet_volume_stats_inodes_free | Gauge | Integer | The total number of usable inodes. |
+| kubelet_volume_stats_inodes_used | Gauge | Integer | The total number of inodes that have been utilized to store metadata. |
+
+
+[Learn more](https://kubernetes.io/docs/concepts/storage/volume-health-monitoring/)
