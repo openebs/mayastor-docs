@@ -21,7 +21,7 @@ disk_pool_status{node="worker-0",name="mayastor-disk-pool"} 1
 # HELP disk_pool_total_size_bytes mayastor name total size in bytes
 # TYPE disk_pool_total_size_bytes gauge
 disk_pool_total_size_bytes{node="worker-0",name="mayastor-disk-pool"} 5.360320512e+09
-# HELP disk_pool_used_size_bytes mayastor name used size in bytes
+# HELP disk_pool_used_size_bytes used disk-pool size in bytes
 # TYPE disk_pool_used_size_bytes gauge
 disk_pool_used_size_bytes{node="worker-0",name="mayastor-disk-pool"} 2.147483648e+09
 ```
