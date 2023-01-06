@@ -16,8 +16,10 @@
 ## Advanced Operations
 
 * [Mayastor Kubectl Plugin](reference/kubectl-plugin.md)
-* [Supportability]()
-* [Monitoring]()
+* [Supportability](reference/supportability.md)
+* [Monitoring](reference/monitoring.md)
+* [Node Cordon](reference/node-cordon.md)
+* [Node Drain](reference/node-drain.md)
 
 ## Additional Information
 * [Tips and Tricks](quickstart/tips-and-tricks.md)
