@@ -66,4 +66,4 @@ The supportability tool is used to create support bundles (archive files) by int
 
 ### Promtail:
      
-    [Promtail](https://grafana.com/docs/loki/latest/clients/promtail/) is a log collector built specifically for Loki. It uses the configuration file for target discovery and includes analogous features for labeling, transforming, and filtering logs from containers before ingesting them to Loki.
+  [Promtail](https://grafana.com/docs/loki/latest/clients/promtail/) is a log collector built specifically for Loki. It uses the configuration file for target discovery and includes analogous features for labeling, transforming, and filtering logs from containers before ingesting them to Loki.
