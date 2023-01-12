@@ -30,8 +30,9 @@
 * [Call-home metrics](reference/call-home.md)
 * [Tested Third Party Software](reference/tested-third-party-software.md)
 
+<hr>
 
-## [Basic Troubleshooting](quickstart/troubleshooting.md)
-## [FAQs](quickstart/faqs.md)
-## [Known Limitations](quickstart/known-limitations.md)
-## [Known Issues](quickstart/known-issues.md)
+* [Basic Troubleshooting](quickstart/troubleshooting.md)
+* [FAQs](quickstart/faqs.md)
+* [Known Limitations](quickstart/known-limitations.md)
+* [Known Issues](quickstart/known-issues.md)
