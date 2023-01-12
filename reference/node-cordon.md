@@ -23,6 +23,7 @@ To view the labels associated with a cordoned node, execute:
 {% tab title="Command" %}
 ```text
 kubectl-mayastor get cordon node <node_name>
+```
 {% endtab %}
 
 
