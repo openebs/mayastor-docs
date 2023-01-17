@@ -22,6 +22,7 @@
 * [Node Drain](reference/node-drain.md)
 
 ## Additional Information
+* [Upgrade](reference/upgrades.md)
 * [Tips and Tricks](quickstart/tips-and-tricks.md)
 * [Performance Tips](quickstart/performance-tips.md)
 * [I/O Path Description](reference/i-o-path-description.md)
