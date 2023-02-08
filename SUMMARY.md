@@ -16,6 +16,7 @@
 ## Advanced Operations
 
 * [Mayastor Kubectl Plugin](reference/kubectl-plugin.md)
+* [High Availability](reference/HA.md)
 * [Supportability](reference/supportability.md)
 * [Monitoring](reference/monitoring.md)
 * [Node Cordon](reference/node-cordon.md)
