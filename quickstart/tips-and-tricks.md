@@ -17,7 +17,7 @@ Creating a memory-backed disk emulation entails using the "malloc" uri scheme wi
 
 ```text
 apiVersion: "openebs.io/v1alpha1"
-kind: MayastorPool
+kind: DiskPool
 metadata:
   name: mempool-1
   namespace: mayastor
@@ -54,7 +54,7 @@ Mayastor can use file-based disk emulation in place of physical pool disk device
 {% tab title="512 Byte Sector Size" %}
 ```text
 apiVersion: "openebs.io/v1alpha1"
-kind: MayastorPool
+kind: DiskPool
 metadata:
   name: filepool-1
   namespace: mayastor
@@ -67,7 +67,7 @@ spec:
 {% tab title="4kBSector Size" %}
 ```
 apiVersion: "openebs.io/v1alpha1"
-kind: MayastorPool
+kind: DiskPool
 metadata:
   name: filepool-1
   namespace: mayastor

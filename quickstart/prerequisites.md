@@ -10,7 +10,7 @@ All worker nodes must satisfy the following requirements:
   The kernel should have the following modules loaded:
   * nvme-tcp
   * ext4 and optionally xfs
-* * [Helm](https://helm.sh/docs/intro/install/) version must be v3.7 or later.
+  * [Helm](https://helm.sh/docs/intro/install/) version must be v3.7 or later.
 
 * Each worker node which will host an instance of an io-engine pod must have the following resources _free and available_ for _exclusive_ use by that pod:
   * Two CPU cores
