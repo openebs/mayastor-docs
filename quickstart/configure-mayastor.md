@@ -13,6 +13,10 @@ This version of Mayastor only supports thick provisioning.
 
 A pool is defined declaratively, through the creation of a corresponding `DiskPool` custom resource on the cluster. The DiskPool must be created in the same namespace where Mayastor has been deployed. User configurable parameters of this resource type include a unique name for the pool, the node name on which it will be hosted and a reference to a disk device which is accessible from that node. The pool definition requires the reference to its member block device to adhere to a discrete range of schemas, each associated with a specific access mechanism/transport/ or device type.
 
+:::note
+Mayastor versions before 2.0.1 had an upper limit on the number of retry attempts in the case of failure in "create events` in the DSP operator. With this release, the upper limit has been removed, which ensures that the DiskPool operator indefinitely reconciles with the CR.
+:::
+
 #### Permissible Schemes for `spec.disks` under DiskPool CR
 
 | Type | Format | Example |
@@ -81,15 +85,23 @@ kubectl get dsp -n mayastor
 
 {% tab title="Example Output" %}
 ```text
-NAME             NODE           STATUS   CAPACITY      USED   AVAILABLE
-pool-on-node-1   node-1-14944   Online   10724835328   0      10724835328
-pool-on-node-2   node-2-14944   Online   10724835328   0      10724835328
-pool-on-node-3   node-3-14944   Online   10724835328   0      10724835328
+NAME             NODE          STATE    POOL_STATUS   CAPACITY      USED   AVAILABLE
+pool-on-node-1   node-1-14944  Online   Online        10724835328   0      10724835328
+pool-on-node-2   node-2-14944  Online   Online        10724835328   0      10724835328
+pool-on-node-3   node-3-14944  Online   Online        10724835328   0      10724835328
 ```
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
+
+:::note
+Mayastor-2.0.1 adds two new fields to the DiskPool operator YAML:
+1. **status.cr_state**: The `cr_state`, which can either be _creating, created or terminating_, will be used by the operator to reconcile with the CR. 
+The `cr_state` is set to `Terminating` when a CR delete event is received.
+2. **status.pool_status**: The `pool_status` represents the status of the respective control plane pool resource. 
+:::
+
 Pool configuration and state information can also be obtained by using the [Mayastor kubectl plugin](https://mayastor.gitbook.io/introduction/reference/kubectl-plugin)
 {% endhint %}
 
