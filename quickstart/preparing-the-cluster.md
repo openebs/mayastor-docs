@@ -1,20 +1,8 @@
 # Preparing the Cluster
 
-## Configure Mayastor Nodes
-
-In the context of the Mayastor application, a "Mayastor Node" \(MSN\) is a Kubernetes worker node on which is scheduled an instance of a Mayastor data plane pod and which is thus capable of hosting storage "pools" and exporting Persistent Volumes \(PV\) to application pods within the cluster.  A MSN makes use of block storage device\(s\) attached to it to contribute storage capacity to its pool\(s\), which supply backing storage for the Persistent Volumes dynamically-provisioned on the cluster by Mayastor.
-
-{% hint style="info" %}
-In this version of Mayastor, a worker node _MUST_ be configured as a MSN in order for it to be able to mount PVs provisioned by the Mayastor control plane.  That is to say, application pods using Mayastor volumes can only be successfully scheduled on MSNs.  It is not necessary for a MSN to have any Pools configured on it, if it is required only to mount volumes for applications rather than host data replicas for them.
-
-This restriction will be removed in version 2.0
-{% endhint %}
-
-New MSN nodes can be provisioned within the cluster at any time after the initial deployment, as aggregate demands for capacity, performance and availability levels increase.
-
 ### Verify / Enable Huge Page Support
 
-_2MiB-sized_  Huge Pages must be supported and enabled on a MSN.  A minimum number of 1024 such pages \(i.e. 2GiB total\) must be available _exclusively_ to the Mayastor pod on each node, which should be verified thus:
+_2MiB-sized_  Huge Pages must be supported and enabled the nodes.  A minimum number of 1024 such pages \(i.e. 2GiB total\) must be available _exclusively_ to the Mayastor pod on each node, which should be verified thus:
 
 ```text
 grep HugePages /proc/meminfo
