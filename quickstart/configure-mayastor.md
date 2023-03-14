@@ -16,10 +16,11 @@ A pool is defined declaratively, through the creation of a corresponding `DiskPo
 #### Permissible Schemes for `spec.disks` under DiskPool CR
 
 {% hint style="info" %}
-It is <b>highly recommended</b> to specify the disk using its `UUID_number` to ensure unique identification.
-The usage of `dev/sdx` might result in data corruption issues.
+It is highly recommended to specify the disk using a unique device link that remains unaltered across node reboots. One such device link is its `UUID_number`.
 To get the UUID_number of a disk, execute:
-`sudo blkid | grep UUID=`
+`sudo blkid`
+
+Usage of the device name (for example, /dev/sdx) is not advised, as it may change if the node reboots, which might cause data corruption.
 {% endhint %}
 
 | Type | Format | Example |
