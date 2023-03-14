@@ -16,8 +16,8 @@ A pool is defined declaratively, through the creation of a corresponding `DiskPo
 #### Permissible Schemes for `spec.disks` under DiskPool CR
 
 {% hint style="info" %}
-It is highly recommended to specify the disk using a unique device link that remains unaltered across node reboots. One such device link is its `UUID_number`.
-To get the UUID_number of a disk, execute:
+It is highly recommended to specify the disk using a unique device link that remains unaltered across node reboots. One such device link is its `UUID`.
+To get the UUID of a disk, execute:
 `sudo blkid`
 
 Usage of the device name (for example, /dev/sdx) is not advised, as it may change if the node reboots, which might cause data corruption.
@@ -25,7 +25,7 @@ Usage of the device name (for example, /dev/sdx) is not advised, as it may chang
 
 | Type | Format | Example |
 | :--- | :--- | :--- |
-| Disk(non PCI) with disk-by-guid reference <i><b>(Best Practice)</b></i> | Device File | aio:////dev/disk/by-uuid/<uuid_number> OR uring:////dev/disk/by-uuid/<uuid_number> |
+| Disk(non PCI) with disk-by-guid reference <i><b>(Best Practice)</b></i> | Device File | aio:////dev/disk/by-uuid/<uuid> OR uring:////dev/disk/by-uuid/<uuid> |
 | Asynchronous Disk\(AIO\) | Device File | /dev/sdx |
 | Asynchronous Disk I/O \(AIO\) | Device File | aio:///dev/sdx |
 | io\_uring | Device File | uring:///dev/sdx |
@@ -54,7 +54,7 @@ metadata:
   namespace: mayastor
 spec:
   node: workernode-1-hostname
-  disks: ["aio:////dev/disk/by-uuid/<uuid_number>"]
+  disks: ["/dev/disk/by-uuid/<uuid>"]
 EOF
 ```
 {% endtab %}
