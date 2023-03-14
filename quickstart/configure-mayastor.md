@@ -15,12 +15,20 @@ A pool is defined declaratively, through the creation of a corresponding `DiskPo
 
 #### Permissible Schemes for `spec.disks` under DiskPool CR
 
+{% hint style="info" %}
+It is <b>highly recommended</b> to specify the disk using its `UUID_number` to ensure unique identification.
+The usage of `dev/sdx` might result in data corruption issues.
+To get the UUID_number of a disk, execute:
+`sudo blkid | grep UUID=`
+{% endhint %}
+
 | Type | Format | Example |
 | :--- | :--- | :--- |
+| Disk(non PCI) with disk-by-guid reference <i><b>(Best Practice)</b></i> | Device File | aio:////dev/disk/by-uuid/<uuid_number> OR uring:////dev/disk/by-uuid/<uuid_number> |
 | Asynchronous Disk\(AIO\) | Device File | /dev/sdx |
 | Asynchronous Disk I/O \(AIO\) | Device File | aio:///dev/sdx |
 | io\_uring | Device File | uring:///dev/sdx |
-| Disk(non PCI) with disk-by-guid reference <i>(Best Practice)</i> | Device File | aio:////dev/disk/by-uuid/<uuid_number> OR uring:////dev/disk/by-uuid/<uuid_number> |
+
 
 Once a node has created a pool it is assumed that it henceforth has exclusive use of the associated block device; it should not be partitioned, formatted, or shared with another application or process. Any pre-existing data on the device will be destroyed.
 
@@ -45,7 +53,7 @@ metadata:
   namespace: mayastor
 spec:
   node: workernode-1-hostname
-  disks: ["/dev/sdx"]
+  disks: ["aio:////dev/disk/by-uuid/<uuid_number>"]
 EOF
 ```
 {% endtab %}
