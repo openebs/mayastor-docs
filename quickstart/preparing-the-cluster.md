@@ -2,7 +2,7 @@
 
 ### Verify / Enable Huge Page Support
 
-_2MiB-sized_  Huge Pages must be supported and enabled on the nodes. A minimum number of 1024 such pages \(i.e. 2GiB total\) must be available _exclusively_ to the Mayastor pod on each node, which should be verified thus:
+_2MiB-sized_  Huge Pages must be supported and enabled on the mayastor storage nodes. A minimum number of 1024 such pages \(i.e. 2GiB total\) must be available _exclusively_ to the Mayastor pod on each node, which should be verified thus:
 
 ```text
 grep HugePages /proc/meminfo
