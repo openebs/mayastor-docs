@@ -10,6 +10,12 @@ The steps and commands which follow are intended only for use in conjunction wit
 
 ## Installation via helm
 
+{% hint style="info" %}
+Installing Mayastor via the Helm chart sets the storageClass parameters, both for Loki's central log storage and for etcd's StatefulSets, as defaults. To provision a hostPath PV, make the following changes in the values.yaml file:
+- loki.persistence.storageClassName: manual
+- etcd.persistence.storageClassName: manual
+{% endhint %}
+
 1.  Add the OpenEBS Mayastor Helm repository.
 {% tabs %}
 {% tab title="Command" %}
