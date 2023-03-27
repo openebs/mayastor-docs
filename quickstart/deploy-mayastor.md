@@ -11,7 +11,7 @@ The steps and commands which follow are intended only for use in conjunction wit
 ## Installation via helm
 
 {% hint style="info" %}
-Installing Mayastor via the Helm chart sets the storageClass parameters, both for Loki's central log storage and for etcd's StatefulSets, as defaults. To provision a hostPath PV, make the following changes in the values.yaml file:
+Installing Mayastor via the Helm chart sets the StorageClass as 'default' for Loki and etcd StatefulSets. This will work in clusters which have a StorageClass named 'default'. If there is no 'default' StorageClass in the cluster, storage provisioning will fail for Loki and etcd. In such cases, one can change the StorageClass to 'manual' which will provision a PersistentVolume of type hostPath. To do this, make the following changes in the `values.yaml` file:
 - loki.persistence.storageClassName: manual
 - etcd.persistence.storageClassName: manual
 {% endhint %}
