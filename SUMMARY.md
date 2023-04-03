@@ -28,7 +28,6 @@
 * [Performance Tips](quickstart/performance-tips.md)
 * [I/O Path Description](reference/i-o-path-description.md)
 * [Replica Operations](reference/replica-operations.md)
-* [Operations](reference/operations.md)
 * [Call-home metrics](reference/call-home.md)
 * [Tested Third Party Software](reference/tested-third-party-software.md)
 

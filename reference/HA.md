@@ -11,7 +11,7 @@ The volume's replica count must be higher than 1 for a new target to be establis
 ### How do I disable this feature? 
 
 {% hint style="info" %}
-**Note:**We strongly recommend keeping this feature enabled.
+We strongly recommend keeping this feature enabled.
 {% endhint %}
 
 The HA feature is enabled by default; to disable it, pass the parameter `--set=agents.ha.enabled=false` with the helm install command.
