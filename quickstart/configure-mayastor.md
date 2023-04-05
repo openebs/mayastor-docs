@@ -104,15 +104,14 @@ pool-on-node-3   node-3-14944  Online   Online        10724835328   0      10724
 
 {% hint style="info" %}
 
-:::note
 Mayastor-2.0.1 adds two new fields to the DiskPool operator YAML:
 1. **status.cr_state**: The `cr_state`, which can either be _creating, created or terminating_, will be used by the operator to reconcile with the CR. 
 The `cr_state` is set to `Terminating` when a CR delete event is received.
 2. **status.pool_status**: The `pool_status` represents the status of the respective control plane pool resource. 
-:::
+{% endhint %}
 
 Pool configuration and state information can also be obtained by using the [Mayastor kubectl plugin](https://mayastor.gitbook.io/introduction/reference/kubectl-plugin)
-{% endhint %}
+
 
 ## Create Mayastor StorageClass\(s\)
 
