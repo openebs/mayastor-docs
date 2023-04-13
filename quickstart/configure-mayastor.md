@@ -117,7 +117,10 @@ Pool configuration and state information can also be obtained by using the [Maya
 
 Mayastor dynamically provisions PersistentVolumes \(PVs\) based on StorageClass definitions created by the user. Parameters of the definition are used to set the characteristics and behaviour of its associated PVs. For a detailed description of these parameters see [storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters). Most importantly StorageClass definition is used to control the level of data protection afforded to it \(that is, the number of synchronous data replicas which are maintained, for purposes of redundancy\). It is possible to create any number of StorageClass definitions, spanning all permitted parameter permutations.
 
-We illustrate this quickstart guide with two examples of possible use cases; one which offers no data redundancy \(i.e. a single data replica\), and another having three data replicas. You can modify these as required to match your own desired test cases, within the limitations of the cluster under test.
+We illustrate this quickstart guide with two examples of possible use cases; one which offers no data redundancy \(i.e. a single data replica\), and another having three data replicas. 
+{% hint style="info" %}
+Both the example YAMLs given below have [thin provisioning](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor/storage-class-parameters#thin) enabled. You can modify these as required to match your own desired test cases, within the limitations of the cluster under test.
+{% endhint %}
 
 {% tabs %}
 {% tab title="Command \(1 replica example\)" %}
@@ -131,6 +134,7 @@ parameters:
   ioTimeout: "30"
   protocol: nvmf
   repl: "1"
+  thin: true
 provisioner: io.openebs.csi-mayastor
 EOF
 ```
@@ -147,6 +151,7 @@ parameters:
   ioTimeout: "30"
   protocol: nvmf
   repl: "3"
+  thin: true
 provisioner: io.openebs.csi-mayastor
 EOF
 ```

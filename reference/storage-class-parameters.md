@@ -29,3 +29,15 @@ The parameter 'protocol' takes the value `nvmf`(NVMe over TCP protocol). It is u
 ## "repl"
 
 The string value should be a number and the number should be greater than zero. Mayastor control plane will try to keep always this many copies of the data if possible. If set to one then the volume does not tolerate any node failure. If set to two, then it tolerates one node failure. If set to three, then two node failures, etc.
+
+## "thin"
+
+The volumes can either be `thick` or `thin` provisioned. Adding the `thin` parameter to the StorageClass YAML allows the volume to be thinly provisioned. To do so, add `thin: true` under the `parameters` spec, in the StorageClass YAML. [Sample YAML](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor#create-mayastor-storageclass-s)
+When the volumes are thinly provisioned, the user needs to monitor the pools, and if these pools run out of space, new pools must be added (if they do not already exist). This is because when a pool with more than one replica runs out of space, Mayastor moves the largest out-of-space replica to another pool and then executes a rebuild. It then checks if all the replicas have sufficient space; if not, it moves the next largest replica to another pool, and this process continues till all the replicas have sufficient space.
+
+{% hint style="info" %}
+Note:
+1. By default, the volumes are provisioned as `thick`. 
+2. For a pool of a particular size, say 10 gigabytes, a volume > 10 gigabytes cannot be created, as Mayastor 2.1.0 does not support pool expansion.
+3. All of the volume replicas can either be thin or thick; mixing is not supported at the moment.
+{% endhint %}
