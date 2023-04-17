@@ -134,7 +134,6 @@ parameters:
   ioTimeout: "30"
   protocol: nvmf
   repl: "1"
-  thin: true
 provisioner: io.openebs.csi-mayastor
 EOF
 ```
@@ -151,7 +150,6 @@ parameters:
   ioTimeout: "30"
   protocol: nvmf
   repl: "3"
-  thin: true
 provisioner: io.openebs.csi-mayastor
 EOF
 ```
