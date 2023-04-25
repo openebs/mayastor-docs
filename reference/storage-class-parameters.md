@@ -34,6 +34,11 @@ The string value should be a number and the number should be greater than zero. 
 
 The volumes can either be `thick` or `thin` provisioned. Adding the `thin` parameter to the StorageClass YAML allows the volume to be thinly provisioned. To do so, add `thin: true` under the `parameters` spec, in the StorageClass YAML. [Sample YAML](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor#create-mayastor-storageclass-s)
 When the volumes are thinly provisioned, the user needs to monitor the pools, and if these pools start to run out of space, then either new pools must be added or volumes deleted to prevent thinly provisioned volumes from getting degraded or faulted. This is because when a pool with more than one replica runs out of space, Mayastor moves the largest out-of-space replica to another pool and then executes a rebuild. It then checks if all the replicas have sufficient space; if not, it moves the next largest replica to another pool, and this process continues till all the replicas have sufficient space.
+
+{% hint style="info" %}
+The volumes can be monitored using [exporter metrics](https://mayastor.gitbook.io/introduction/advanced-operations/monitoring).
+{% endhint %}
+
 The `agents.core.capacity.thin` spec consists of the following configurable parameters.
 
 1. **poolCommitment** parameter specifies the maximum allowed pool commitment limit (in percent).
