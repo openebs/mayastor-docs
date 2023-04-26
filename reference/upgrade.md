@@ -19,7 +19,7 @@ kubectl mayastor upgrade
 ```
 {% endtab %}
 
-To view all the available options and sub-commands that can be used with the upgrade command, execute:
+To view all the available  options and sub-commands that can be used with the upgrade command, execute:
 
 {% tabs %}
 {% tab title="Command" %}
@@ -84,7 +84,7 @@ To view the logs of upgrade job, execute:
 
 {% tab title="Command" %}
 ```text
-kubectl logs <upgrade-job-pod-name> -n <mayastor-namespace>
+kubectl get -n <namespace> logs job/job-name
 ```
 {% endtab %}
 
