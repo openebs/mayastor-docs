@@ -2,6 +2,10 @@
 
 Upgrade to the latest Mayastor version is supported only from 2.1.0 or later. To upgrade from a previous version, visit [Manual steps to upgrade Mayastor](manual-steps-to-upgrade-mayastor). 
 
+### Supported upgrade paths
+
+- From 2.0.x to 2.1.0
+
 {% hint style="info" %}
 The process of upgrade utilises the [Mayastor Kubectl Plugin](https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin) and is non-disruptive only for volumes with more than one healthy replicas.
 {% endhint %}
