@@ -6,7 +6,7 @@ Mayastor uses etcd as a persistent datastore for its configuration. As a first s
 
 
 {% hint style="warning" %}
-The following changes are breaking changes when upgrading from a Mayastor version prior to 2.0.0. 
+As compared to Mayastor 1.0, the Mayastor 2.0 feature-set introduces breaking changes in some of the components, due to which the upgrade process from 1.0 to 2.0 is not seamless. The list of such changes are given below:
 **ETCD:**
   - Control Plane: The prefixes for control plane have changed from `/namespace/$NAMESPACE/control-plane/` to `/openebs.io/mayastor/apis/v0/clusters/$KUBE_SYSTEM_UID/namespaces/$NAMESPACE/`
   - Data Plane: The Data Plane nexus information containing a list of healthy children has been moved from `$nexus_uuid` to `/openebs.io/mayastor/apis/v0/clusters/$KUBE_SYSTEM_UID/namespaces/$NAMESPACE/volume/$volume_uuid/nexus/$nexus_uuid/info`
@@ -374,7 +374,7 @@ _Using the command given below, the data-plane pods (now io-engine pods) will be
     {% endtabs %}   
 
     {% tabs %}
-    {% tab title="Command to check the volume" %}
+    {% tab title="Command to check the status of Mayastor volumes" %}
     ```text
     kubectl mayastor get volumes
     ```
