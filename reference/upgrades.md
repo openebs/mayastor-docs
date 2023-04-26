@@ -7,10 +7,11 @@ Upgrade to the latest Mayastor version is supported only from 2.1.0 or later. To
 - From 2.0.x to 2.1.0
 
 {% hint style="info" %}
-The process of upgrade utilises the [Mayastor Kubectl Plugin](https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin) and is non-disruptive only for volumes with more than one healthy replicas.
+- The process of upgrade utilises the [Mayastor Kubectl Plugin](https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin).
+- The upgrade process is generally non-disruptive for volumes with a replication factor greater than 1 and all replicas being healthy, prior to starting the upgrade.
 {% endhint %}
 
-To upgrade all the Mayastor components of a cluster, execute:
+To upgrade Mayastor deployment on the Kubernetes cluster,
 
 {% tab title="Command" %}
 ```text
@@ -18,7 +19,7 @@ kubectl mayastor upgrade
 ```
 {% endtab %}
 
- Mayastor 2.1.0 has the capability to perform selective-component upgrades. To view the flags that can be passed in order to achieve a non-disruptive selective upgrade, execute the following command:
+Mayastor 2.1.0 has the capability to perform selective-component upgrades. To view the flags that can be passed in order to achieve a non-disruptive selective upgrade, execute the following command:
 
 {% tabs %}
 {% tab title="Command" %}
@@ -83,7 +84,7 @@ To view the logs of upgrade job, execute:
 
 {% tab title="Command" %}
 ```text
-kubectl -n <namespace> job/job-name
+kubectl get logs job/job-name -n <namespace>
 ```
 {% endtab %}
 
