@@ -1,7 +1,8 @@
-## Manual Upgrade
+## Legacy Upgrade Support
 
-Upgrading Mayastor from a version prior to 2.0.0 needs manual intervention. Follow the steps given below.
-To get started, take an etcd snapshot. The detailed steps for taking a snapshot can be found in the etcd [documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).
+A legacy installation of Mayastor (1.0.5 and below) cannot be seamlessly upgraded and needs manual intervention.
+Follow the below steps if you wish to upgrade from Mayastor 1.0.x to Mayastor 2.1.0 and above.
+Mayastor uses etcd as a persistent datastore for its configuration. As a first step, take a snapshot of the etcd. The detailed steps for taking a snapshot can be found in the etcd [documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).
 
 
 {% hint style="warning" %}
@@ -11,14 +12,12 @@ The following changes are breaking changes when upgrading from a Mayastor versio
   - Data Plane: The Data Plane nexus information containing a list of healthy children has been moved from `$nexus_uuid` to `/openebs.io/mayastor/apis/v0/clusters/$KUBE_SYSTEM_UID/namespaces/$NAMESPACE/volume/$volume_uuid/nexus/$nexus_uuid/info`
 
 **RPC:**
-  - Control Plane: The RCP for the control plane has been changed from NATS to gRPC.
+  - Control Plane: The RPC for the control plane has been changed from NATS to gRPC.
   - Data Plane: The registration heartbeat has been changed from NATS to gRPC. 
 
 **Pool CRDs:**
   - The pool CRDs have been renamed `DiskPools` (previously, MayastorPools).
   {% endhint %}
-
-
 
 1. In order to start the upgrade process, the following previously deployed components have to be deleted. 
 
@@ -44,7 +43,7 @@ The following changes are breaking changes when upgrading from a Mayastor versio
 In the above command, add the previously installed Mayastor version in the format v1.x.x
 {% endhint %}
 
-2. Once all the above components have been successfully removed, pull the latest helm chart from [Mayastor-extension repo](https://github.com/openebs/mayastor-extensions) and save it to a file, say `helm_templates.yaml`. To do so, execute:
+2. Once all the above components have been successfully removed, fetch the latest helm chart from [Mayastor-extension repo](https://github.com/openebs/mayastor-extensions) and save it to a file, say `helm_templates.yaml`. To do so, execute:
 
    {% tab title="Command" %}
     ```text
@@ -76,7 +75,7 @@ In the above command, add the previously installed Mayastor version in the forma
     {% endtab %}
 
     {% hint style="info" %}
-    In the above method of installation, HA is disabled by default. The steps to enable HA are described later in this document.
+    In the above method of installation, the nexus (target) High Availability (HA) is disabled by default. The steps to enable HA are described later in this document.
     {% endhint %} 
 
     - Verify the status of the pods. Upon successful deployment, all the pods will be in a running state.
@@ -322,7 +321,7 @@ _Using the command given below, the data-plane pods (now io-engine pods) will be
     {% endtab %}
     {% endtabs %}
 
-7. This concludes the process of manual upgrade. Run the below commands to verify the upgrade,
+7. This concludes the process of legacy upgrade. Run the below commands to verify the upgrade,
     {% tabs %}
     {% tab title="Command to check the helm list" %}
     ```text
@@ -375,7 +374,7 @@ _Using the command given below, the data-plane pods (now io-engine pods) will be
     {% endtabs %}   
 
     {% tabs %}
-    {% tab title="Command to check the application and volume" %}
+    {% tab title="Command to check the volume" %}
     ```text
     kubectl mayastor get volumes
     ```

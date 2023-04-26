@@ -24,7 +24,7 @@
 
 ## Additional Information
 * [Upgrade](reference/upgrades.md) 
-  * [Manual Upgrade](reference/manual-upgrade.md)
+  * [Legacy Upgrade Support](reference/manual-upgrade.md)
 * [Tips and Tricks](quickstart/tips-and-tricks.md)
 * [Performance Tips](quickstart/performance-tips.md)
 * [I/O Path Description](reference/i-o-path-description.md)
