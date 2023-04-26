@@ -23,7 +23,8 @@
 * [Node Drain](reference/node-drain.md)
 
 ## Additional Information
-* [Upgrade](reference/upgrades.md) 
+
+* [Upgrade](reference/upgrade.md)
   * [Legacy Upgrade Support](reference/legacy-upgrade.md)
 * [Tips and Tricks](quickstart/tips-and-tricks.md)
 * [Performance Tips](quickstart/performance-tips.md)
