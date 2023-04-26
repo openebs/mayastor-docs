@@ -7,7 +7,7 @@ Upgrade to the latest Mayastor version is supported only from 2.1.0 or later. To
 - From 2.0.x to 2.1.0
 
 {% hint style="info" %}
-- The process of upgrade utilises the [Mayastor Kubectl Plugin](https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin).
+- The upgrade operation utilises the [Mayastor Kubectl Plugin](https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin).
 - The upgrade process is generally non-disruptive for volumes with a replication factor greater than 1 and all replicas being healthy, prior to starting the upgrade.
 {% endhint %}
 
@@ -84,7 +84,7 @@ To view the logs of upgrade job, execute:
 
 {% tab title="Command" %}
 ```text
-kubectl get -n <namespace> logs job/job-name
+kubectl logs <upgrade-job-pod-name> -n <mayastor-namespace>
 ```
 {% endtab %}
 
