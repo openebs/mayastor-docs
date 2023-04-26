@@ -49,6 +49,6 @@ The `agents.core.capacity.thin` spec present in the Mayastor helm chart consists
 {% hint style="info" %}
 Note:
 1. By default, the volumes are provisioned as `thick`. 
-2. For a pool of a particular size, say 10 Gigabytes, a volume > 10 gigabytes cannot be created, as Mayastor 2.1.0 does not support pool expansion.
+2. For a pool of a particular size, say 10 Gigabytes, a volume > 10 Gigabytes cannot be created, as Mayastor 2.1.0 does not support pool expansion.
 3. The replicas for a given volume can be either all thick or all thin. Same volume cannot have a combination of thick and thin replicas
 {% endhint %}
