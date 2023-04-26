@@ -19,7 +19,7 @@ kubectl mayastor upgrade
 ```
 {% endtab %}
 
-Mayastor 2.1.0 has the capability to perform selective-component upgrades. To view the flags that can be passed in order to achieve a non-disruptive selective upgrade, execute the following command:
+To view all the available  options and sub-commands that can be used with the upgrade command, execute:
 
 {% tabs %}
 {% tab title="Command" %}
@@ -84,7 +84,7 @@ To view the logs of upgrade job, execute:
 
 {% tab title="Command" %}
 ```text
-kubectl get logs job/job-name -n <namespace>
+kubectl get -n <namespace> logs job/job-name
 ```
 {% endtab %}
 
