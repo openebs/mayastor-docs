@@ -39,7 +39,7 @@ When the volumes are thinly provisioned, the user needs to monitor the pools, an
 The capacity usage on a pool can be monitored using [exporter metrics](https://mayastor.gitbook.io/introduction/advanced-operations/monitoring#pool-metrics-exporter).
 {% endhint %}
 
-The `agents.core.capacity.thin` spec consists of the following configurable parameters.
+The `agents.core.capacity.thin` spec present in the Mayastor helm chart consists of the following configurable parameters that can be used to control the scheduling of thinly provisioned replicas:
 
 1. **poolCommitment** parameter specifies the maximum allowed pool commitment limit (in percent).
 2. **volumeCommitment** parameter specifies the minimum amount of free space that must be present in each replica pool in order to create new replicas for an existing volume. This value is specified as a percentage of the volume size.
