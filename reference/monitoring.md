@@ -11,7 +11,7 @@ The Mayastor pool metrics exporter runs as a sidecar container within every io-e
 | disk_pool_total_size_bytes | Gauge | Integer | Total size of the pool |
 | disk_pool_used_size_bytes | Gauge | Integer | Used size of the pool |
 | disk_pool_status | Gauge | Integer | Status of the pool (0, 1, 2, 3) = {"Unknown", "Online", "Degraded", "Faulted"} |
-
+| disk_pool_committed_size | Gauge | Integer | Committed size of the pool in bytes |
 
 {% tab title="Example metrics" %}
 ```text
@@ -24,6 +24,9 @@ disk_pool_total_size_bytes{node="worker-0",name="mayastor-disk-pool"} 5.36032051
 # HELP disk_pool_used_size_bytes used disk-pool size in bytes
 # TYPE disk_pool_used_size_bytes gauge
 disk_pool_used_size_bytes{node="worker-0",name="mayastor-disk-pool"} 2.147483648e+09
+# HELP disk_pool_committed_size_bytes Committed size of the pool in bytes
+# TYPE disk_pool_committed_size_bytes gauge
+disk_pool_committed_size_bytes{node="worker-0", name="mayastor-disk-pool"} 9663676416
 ```
 {% endtab %}
 
