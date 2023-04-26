@@ -29,3 +29,26 @@ The parameter 'protocol' takes the value `nvmf`(NVMe over TCP protocol). It is u
 ## "repl"
 
 The string value should be a number and the number should be greater than zero. Mayastor control plane will try to keep always this many copies of the data if possible. If set to one then the volume does not tolerate any node failure. If set to two, then it tolerates one node failure. If set to three, then two node failures, etc.
+
+## "thin"
+
+The volumes can either be `thick` or `thin` provisioned. Adding the `thin` parameter to the StorageClass YAML allows the volume to be thinly provisioned. To do so, add `thin: true` under the `parameters` spec, in the StorageClass YAML. [Sample YAML](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor#create-mayastor-storageclass-s)
+When the volumes are thinly provisioned, the user needs to monitor the pools, and if these pools start to run out of space, then either new pools must be added or volumes deleted to prevent thinly provisioned volumes from getting degraded or faulted. This is because when a pool with more than one replica runs out of space, Mayastor moves the largest out-of-space replica to another pool and then executes a rebuild. It then checks if all the replicas have sufficient space; if not, it moves the next largest replica to another pool, and this process continues till all the replicas have sufficient space.
+
+{% hint style="info" %}
+The capacity usage on a pool can be monitored using [exporter metrics](https://mayastor.gitbook.io/introduction/advanced-operations/monitoring#pool-metrics-exporter).
+{% endhint %}
+
+The `agents.core.capacity.thin` spec present in the Mayastor helm chart consists of the following configurable parameters that can be used to control the scheduling of thinly provisioned replicas:
+
+1. **poolCommitment** parameter specifies the maximum allowed pool commitment limit (in percent).
+2. **volumeCommitment** parameter specifies the minimum amount of free space that must be present in each replica pool in order to create new replicas for an existing volume. This value is specified as a percentage of the volume size.
+3. **volumeCommitmentInitial** minimum amount of free space that must be present in each replica pool in order to create new replicas for a new volume. This value is specified as a percentage of the volume size.
+
+
+{% hint style="info" %}
+Note:
+1. By default, the volumes are provisioned as `thick`. 
+2. For a pool of a particular size, say 10 Gigabytes, a volume > 10 Gigabytes cannot be created, as Mayastor 2.1.0 does not support pool expansion.
+3. The replicas for a given volume can be either all thick or all thin. Same volume cannot have a combination of thick and thin replicas
+{% endhint %}
