@@ -1,6 +1,6 @@
 ## Upgrading Mayastor
 
-Upgrade to the latest Mayastor version is supported only from 2.1.0 or later. To upgrade from a previous version, visit [Manual steps to upgrade Mayastor](manual-steps-to-upgrade-mayastor). 
+Mayastor supports seamless upgrades starting with target version 2.1.0 and later, and source versions 2.0.0 and later. To upgrade from a previous version(1.0.5 or prior) to 2.1.0 or later, visit [Legacy Upgrade Support](legacy-upgrade). 
 
 ### Supported upgrade paths
 
@@ -11,7 +11,7 @@ Upgrade to the latest Mayastor version is supported only from 2.1.0 or later. To
 - The upgrade process is generally non-disruptive for volumes with a replication factor greater than 1 and all replicas being healthy, prior to starting the upgrade.
 {% endhint %}
 
-To upgrade Mayastor deployment on the Kubernetes cluster,
+To upgrade Mayastor deployment on the Kubernetes cluster, execute:
 
 {% tab title="Command" %}
 ```text
