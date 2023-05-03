@@ -13,7 +13,7 @@ kubectl cp -n mayastor mayastor-etcd-0:/tmp/snapshot.db ./snapshot.db
 ls -lrt snapshot.db
 ```
 {% endtab %}
- The detailed steps for taking a snapshot can be found in the etcd [documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).
+ <i>For more information visit [etcd documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).</i>
 
 
 {% hint style="warning" %}
