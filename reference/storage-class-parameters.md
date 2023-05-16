@@ -52,3 +52,19 @@ Note:
 2. For a pool of a particular size, say 10 Gigabytes, a volume > 10 Gigabytes cannot be created, as Mayastor 2.1.0 does not support pool expansion.
 3. The replicas for a given volume can be either all thick or all thin. Same volume cannot have a combination of thick and thin replicas
 {% endhint %}
+
+
+## affinityGroup
+
+An `affinityGroup` represents a collection of volumes that belong to instances of a particular type of Kubernetes application, specifically the StatefulSet. When a StatefulSet is deployed, each instance within the StatefulSet creates its individual Persistent Volume Claim (PVC) and Persistent Volume (PV), which collectively form the `affinityGroup`. Each volume within the `affinityGroup` corresponds to an instance of the StatefulSet.
+
+This feature enforces the following rules to ensure proper replica placement and distribution:
+
+1. Anti-Affinity among replicas of the same volume:
+Replicas belonging to the same volume within an `affinityGroup` are prevented from being placed in the same pool or on the same node. This rule aims to avoid volume creation failures that may occur due to an insufficient number of pools available for placement.
+
+2. Anti-Affinity among replicas of different volumes: 
+This feature also enforces anti-affinity rules among replicas of different volumes within an `affinityGroup`. This rule ensures that replicas of different volumes are distributed in such a way that there is no single point of failure. By avoiding colocation of replicas from different volumes on the same node, the feature enhances the resilience and availability of the stateful application.
+
+By default, the `affinityGroup` feature is disabled. To enable it, modify the storage class YAML by setting the `parameters.affinityGroup` parameter to true.
+
