@@ -54,24 +54,24 @@ Note:
 {% endhint %}
 
 
-## affinityGroup
+## "stsAffinityGroup" 
 
-An `affinityGroup` represents a collection of volumes that belong to instances of Kubernetes StatefulSet. When a StatefulSet is deployed, each instance within the StatefulSet creates its own individual volume, which collectively forms the `affinityGroup`. Each volume within the `affinityGroup` corresponds to a pod of the StatefulSet.
+ `stsAffinityGroup` represents a collection of volumes that belong to instances of Kubernetes StatefulSet. When a StatefulSet is deployed, each instance within the StatefulSet creates its own individual volume, which collectively forms the `stsAffinityGroup`. Each volume within the `stsAffinityGroup` corresponds to a pod of the StatefulSet.
 
-This feature enforces the following rules to ensure the proper placement and distribution of replicas and targets :
+This feature enforces the following rules to ensure the proper placement and distribution of replicas and targets so that there isn't any single point of failure affecting multiple instances of StatefulSet.
 
-1. Anti-Affinity among volumes having single replicas :
+1. Anti-Affinity among single-replica volumes :
  This rule ensures that replicas of different volumes are distributed in such a way that there is no single point of failure. By avoiding the colocation of replicas from different volumes on the same node.
 
-2. Anti-Affinity among volumes having multiple replicas : 
+2.  Anti-Affinity among multi-replica volumes : 
 
-If the affinity group volumes have multiple replicas, they already have some level of redundancy. This feature ensures that in such cases, the replicas are distributed optimally.
+If the affinity group volumes have multiple replicas, they already have some level of redundancy. This feature ensures that in such cases, the replicas are distributed optimally for the stsAffinityGroup volumes.
 
 
 3. Anti-affinity among targets :
 
-The [High Availability](https://mayastor.gitbook.io/introduction/advanced-operations/ha) feature ensures target availability.
-The `affinityGroup` ensures that in such cases, the replicas are distributed optimally.
+The [High Availability](https://mayastor.gitbook.io/introduction/advanced-operations/ha) feature ensures that there is no single point of failure for the targets.
+The `stsAffinityGroup` ensures that in such cases, the targets are distributed optimally for the stsAffinityGroup volumes.
 
-By default, the `affinityGroup` feature is disabled. To enable it, modify the storage class YAML by setting the `parameters.affinityGroup` parameter to true.
+By default, the `stsAffinityGroup` feature is disabled. To enable it, modify the storage class YAML by setting the `parameters.stsAffinityGroup` parameter to true.
 
