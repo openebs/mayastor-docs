@@ -56,15 +56,22 @@ Note:
 
 ## affinityGroup
 
-An `affinityGroup` represents a collection of volumes that belong to instances of a particular type of Kubernetes application, specifically the StatefulSet. When a StatefulSet is deployed, each instance within the StatefulSet creates its individual Persistent Volume Claim (PVC) and Persistent Volume (PV), which collectively form the `affinityGroup`. Each volume within the `affinityGroup` corresponds to an instance of the StatefulSet.
+An `affinityGroup` represents a collection of volumes that belong to instances of Kubernetes StatefulSet. When a StatefulSet is deployed, each instance within the StatefulSet creates its own individual volume, which collectively forms the `affinityGroup`. Each volume within the `affinityGroup` corresponds to a pod of the StatefulSet.
 
-This feature enforces the following rules to ensure proper replica placement and distribution:
+This feature enforces the following rules to ensure the proper placement and distribution of replicas and targets :
 
-1. Anti-Affinity among replicas of the same volume:
-Replicas belonging to the same volume within an `affinityGroup` are prevented from being placed in the same pool or on the same node. This rule aims to avoid volume creation failures that may occur due to an insufficient number of pools available for placement.
+1. Anti-Affinity among volumes having single replicas :
+ This rule ensures that replicas of different volumes are distributed in such a way that there is no single point of failure. By avoiding the colocation of replicas from different volumes on the same node.
 
-2. Anti-Affinity among replicas of different volumes: 
-This feature also enforces anti-affinity rules among replicas of different volumes within an `affinityGroup`. This rule ensures that replicas of different volumes are distributed in such a way that there is no single point of failure. By avoiding colocation of replicas from different volumes on the same node, the feature enhances the resilience and availability of the stateful application.
+2. Anti-Affinity among volumes having multiple replicas : 
+
+If the affinity group volumes have multiple replicas, they already have some level of redundancy. This feature ensures that in such cases, the replicas are distributed optimally.
+
+
+3. Anti-affinity among targets :
+
+The [High Availability](https://mayastor.gitbook.io/introduction/advanced-operations/ha) feature ensures target availability.
+The `affinityGroup` ensures that in such cases, the replicas are distributed optimally.
 
 By default, the `affinityGroup` feature is disabled. To enable it, modify the storage class YAML by setting the `parameters.affinityGroup` parameter to true.
 
