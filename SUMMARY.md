@@ -17,6 +17,7 @@
 
 * [Mayastor Kubectl Plugin](reference/kubectl-plugin.md)
 * [High Availability](reference/HA.md)
+* [Replica Rebuilds](reference/replica-rebuild.md)
 * [Supportability](reference/supportability.md)
 * [Monitoring](reference/monitoring.md)
 * [Node Cordon](reference/node-cordon.md)
