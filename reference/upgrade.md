@@ -1,6 +1,6 @@
 ## Upgrading Mayastor
 
-Mayastor supports seamless upgrades starting with target version 2.1.0 and later, and source versions 2.0.0 and later. To upgrade from a previous version(1.0.5 or prior) to 2.1.0 or later, visit [Legacy Upgrade Support](legacy-upgrade). 
+Mayastor supports seamless upgrades starting with target version 2.1.0 and later, and source versions 2.0.0 and later. To upgrade from a previous version(1.0.5 or prior) to 2.1.0 or later, visit [Legacy Upgrade Support](https://mayastor.gitbook.io/introduction/additional-information/upgrade/legacy-upgrade). 
 
 ### Supported upgrade paths
 
@@ -92,6 +92,6 @@ kubectl logs <upgrade-job-pod-name> -n <mayastor-namespace>
 {% hint style="info" %}
 1. The time taken to upgrade is directly proportional to the number of Mayastor nodes and Mayastor volumes.
 2. To upgrade to a particular Mayastor version, ensure you are using the same version of kubectl plugin.
-3. The above process of upgrade creates one ClusterRole, one ClusterRoleBinding and one ServiceAccount in the namespace where Mayastor is installed.
+3. The above process of upgrade creates one Job in the namespace where Mayastor is installed, one ClusterRole, one ClusterRoleBinding and one ServiceAccount.
 {% endhint %}
 
