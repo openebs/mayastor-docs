@@ -4,7 +4,7 @@ Sidebar: Volume snapshot
 ---
 
 
-**Volume snapshots** are copies of a persistent volume claims (PVCs) at a specific point in time. They can be used to restore a volume to a previous state or create a new volume. Mayastor provides support for industry standard copy-on-write (COW) snapshots, which is a popular methodology for taking snapshots by keeping track of only those blocks that have changed.
+**Volume snapshots** are copies of a persistent volumes at a specific point in time. They can be used to restore a volume to a previous state or create a new volume. Mayastor provides support for industry standard copy-on-write (COW) snapshots, which is a popular methodology for taking snapshots by keeping track of only those blocks that have changed.
 Mayastor incremental snapshot capability enhances data migration and portability in Kubernetes clusters across different cloud providers or data centers. Using standard kubectl commands, you can seamlessly perform operations on snapshots and clones in a fully Kubernetes-native manner.
 
 Use cases for volume snapshots include:
@@ -91,9 +91,6 @@ You can create a snapshot with or without an application using PVCs. Follow the 
 
 ### Step 1: Create a Kubernetes VolumeSnapshotClass object
 
-**Create a file to store VolumeSnapshotClass details**
-
-
 
 {% tabs %}
 
@@ -161,7 +158,7 @@ volumesnapshotclass.snapshot.storage.k8s.io/csi-mayastor-snapshotclass created
 
 ### Step 2: Create the snapshot
 
-**Create a file to define a snapshot**
+
 
 {% tabs %}
 
@@ -249,7 +246,7 @@ mayastor-pvc-snap-1   false     ms-volume-claim     1Gi csi-mayastor-snapshotcla
 
     
 :::note
-In the upcoming version, READYTOUSE field will be set to **true** after adding the support for cloning.
+The READYTOUSE field will be set as **true** in the upcoming version which will have the support to create a clone from the snapshot.
 :::
     
 ----
