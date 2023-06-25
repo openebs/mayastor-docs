@@ -60,6 +60,25 @@ EOF
 
 {% endtab %}
 
+{% tabs %}
+
+{% tab title="YAML (single replica)" %}
+
+```text
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: mayastor-1
+parameters:
+  ioTimeout: "30"
+  protocol: nvmf
+  repl: "1"
+provisioner: io.openebs.csi-mayastor
+
+```
+
+{% endtab %}
+
 {% endtabs %}
 
 3. Create a PVC using [these](https://mayastor.gitbook.io/introduction/quickstart/deploy-a-test-application#define-the-pvc) steps and check if the status of the PVC is **Bound**.
