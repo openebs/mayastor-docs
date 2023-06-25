@@ -4,7 +4,7 @@ Sidebar: Volume snapshot
 ---
 
 
-**Volume snapshots** are copies of a persistent volumes at a specific point in time. They can be used to restore a volume to a previous state or create a new volume. Mayastor provides support for industry standard copy-on-write (COW) snapshots, which is a popular methodology for taking snapshots by keeping track of only those blocks that have changed.
+**Volume snapshots** are copies of persistent volumes at a specific point in time. They can be used to restore a volume to a previous state or create a new volume. Mayastor provides support for industry standard copy-on-write (COW) snapshots, which is a popular methodology for taking snapshots by keeping track of only those blocks that have changed.
 Mayastor incremental snapshot capability enhances data migration and portability in Kubernetes clusters across different cloud providers or data centers. Using standard kubectl commands, you can seamlessly perform operations on snapshots and clones in a fully Kubernetes-native manner.
 
 Use cases for volume snapshots include:
@@ -17,8 +17,10 @@ Use cases for volume snapshots include:
 Volume snapshots allow the creation of read-only incremental copies of volumes, enabling you to maintain a history of your data. These volume snapshots possess the following characteristics:
 - **Consistency**: The data stored within a snapshot remains consistent across all replicas of the volume, whether local or remote.
 - **Immutability**: Once a snapshot is successfully created, the data contained within it cannot be modified.
+- **Thin Provisioning**: Thin provisioning will be enabled explicitly when creating the volume. It allows volumes to be allocated with minimal initial capacity and dynamically grow as data is written.
 
-Mayastor supports the following operations related to volume snapshots:
+
+Currently, Mayastor supports the following operations related to volume snapshots:
 
 1. Creating a snapshot for a PVC
 2. Listing available snapshots for a PVC
@@ -32,7 +34,7 @@ Mayastor supports the following operations related to volume snapshots:
 
 
 1. Deploy and configure Mayastor by following the steps given [here](https://mayastor.gitbook.io/introduction/quickstart/deploy-mayastor) and create disk pools. 
-2. Create Mayastor StorageClass with a single replica. 
+2. Create a Mayastor StorageClass with thin provisioning enabled. Add the `thin: true` parameter in the StorageClass YAML to enable thin provisioning.
 
 :::note
 Currently Mayastor only supports snapshots for volumes with a single replica. Snapshot support for volumes with more than one replica will be available in the future versions.
@@ -86,7 +88,7 @@ ms-volume-claim     Bound    pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi     
  
 ## Create a Snapshot
 
-You can create a snapshot with or without an application using PVCs. Follow the steps below to create a volume snapshot:
+You can create a snapshot **with or without an application using PVCs**. Follow the steps below to create a volume snapshot:
 
 
 ### Step 1: Create a Kubernetes VolumeSnapshotClass object
@@ -244,10 +246,6 @@ mayastor-pvc-snap-1   false     ms-volume-claim     1Gi csi-mayastor-snapshotcla
 {% endtab %}
 {% endtabs %}
 
-    
-:::note
-The READYTOUSE field will be set as **true** in the upcoming version which will have the support to create a clone from the snapshot.
-:::
     
 ----
 
