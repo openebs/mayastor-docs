@@ -36,7 +36,7 @@ The control plane waits for 10 minutes before initiating the full rebuild proces
 
 ### Replica rebuild history 
 
-The data-plane handles both full and partial replica rebuilds. To view history of the rebuilds that an existing volume target has undergone during its lifecycle untill now, you can use the `kubectl` command.
+The data-plane handles both full and partial replica rebuilds. To view history of the rebuilds that an existing volume target has undergone during its lifecycle until now, you can use the `kubectl` command.
 
 
 {% tabs %}
