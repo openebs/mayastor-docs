@@ -12,7 +12,6 @@ Use cases for volume snapshots include:
 - Utilization of clones for troubleshooting.
 - Development against a read-only copy of data.
 
-
 Volume snapshots allow the creation of read-only incremental copies of volumes, enabling you to maintain a history of your data. These volume snapshots possess the following characteristics:
 - **Consistency**: The data stored within a snapshot remains consistent across all replicas of the volume, whether local or remote.
 - **Immutability**: Once a snapshot is successfully created, the data contained within it cannot be modified.
@@ -24,7 +23,7 @@ Currently, Mayastor supports the following operations related to volume snapshot
 3. Deleting a snapshot for a PVC
 
 :::note
-This version of Mayastor does not support creation of snapshot clones or creation volumes out of snapshots.
+The current version does not support creation of a clone or a new volume from a snapshot.
 :::
 
 ------------------
