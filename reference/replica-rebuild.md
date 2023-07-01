@@ -1,12 +1,11 @@
 ## Replica Rebuilds
 
-<!--
-
 With the previous versions, the control plane ensured replica redundancy by monitoring all volume targets and checking for any volume targets that were in `Degraded` state, indicating that one or more replicas of that volume targets were faulty. When a matching volume targets is found, the faulty replica is removed. Then, a new replica is created and added to the volume targets object. As part of adding the new child data-plane, a full rebuild was initiated from one of the existing `Online` replicas.
 However, the drawback to the above approach was that even if a replica was inaccessible for a short period (e.g., due to a node restart), a full rebuild was triggered. This may not have a significant impact on replicas with small sizes, but it is not desirable for large replicas.
 
 The partial rebuild feature, overcomes the above problem and helps in achieving faster rebuild times. When volume target encounters IO error on a child/replica, it marks the child as `Faulted` (removing it from the I/O path) and begins to maintain a write log for all subsequent writes. The Core agent starts a default 10 minute wait for the replica to come back. If the child's replica is online again within timeout, the control-plane requests the volume target to online the child and add it to the IO path along with a partial rebuild process using the aforementioned write log.
--->
+
+<!--
 
 **Full rebuild** and **partial rebuild** are two approaches used in the context of replica redundancy and data recovery in a distributed storage system.
 
@@ -28,30 +27,36 @@ The Core agent, responsible for managing the replica status, waits for a pre-con
 
 By implementing a partial rebuild strategy, the storage system can achieve faster rebuild times and avoid unnecessary full rebuilds for replicas that experience temporary interruptions or failures.
 
+-->
+
 {% hint style="info %}
 The control plane waits for 10 minutes before initiating the full rebuild process, as the `--faulted-child-wait-period` is set to 10 minutes. To configure this parameter, edit values.yaml.
 {% endhint %}
 
-## Replica rebuild history 
 
-The data-plane handles both full and partial replica rebuilds. To view the logs of these rebuilds, you can use either the `kubectl` command or make an API call.
+### Replica rebuild history 
+
+The data-plane handles both full and partial replica rebuilds. To view history of the rebuilds that an existing volume target has undergone during its lifecycle untill now, you can use the `kubectl` command.
 
 
 {% tabs %}
 {% tab title="Command" %}
 ```text
-kubectl dummy
+kubectl get rebuild-history {your_volume_UUID} 
 ```
 {% endtab %}
 
-{% tab title="CURL" %}
+{% tab title="Output" %}
 ```text
-curl -X 'GET' \  'http://{your_localhost}/v0/volumes/{your_volume_UUID}/rebuild' \  -H 'accept: application/json'
+DST                                   SRC                                   STATE      BLK-TOTAL  BLK-RECOVERED  BLK-TRANSFERRED  BLK-SIZE  IS-PARTIAL  START-TIME                      END-TIME 
+1324c40a-150e-4d7b-8ce1-d93e170fecbf  cadd71b8-d385-4acd-a538-c3b2393bf395  Completed  14KiB      14KiB          0 B              512B      true        2023-06-27T14:34:57.532859848Z  2023-06-27T14:34:57.533855129Z
 ```
 {% endtab %}
 {% endtabs %}
 
+<!--
 After hitting the curl command with the appropriate localhost and volume UUID (for example: `curl -X 'GET' \  'http://localhost:8081/v0/volumes/bd53de62-e6bb-4b72-a01a-4dcb7aa4d98b/rebuild' \  -H 'accept: application/json'`), you will receive a sample response like the following:
+
 
 {% tabs %}
 {% tab title="Response" %}
@@ -76,6 +81,7 @@ After hitting the curl command with the appropriate localhost and volume UUID (f
 ```
 {% endtab %}
 {% endtabs %}
+-->
 
 :::note
 The volume's rebuild history records are stored and maintained as long as the volume target remains intact without any disruptions caused by node failures or recreation.
