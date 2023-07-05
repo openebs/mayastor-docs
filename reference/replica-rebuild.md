@@ -34,25 +34,76 @@ The control plane waits for 10 minutes before initiating the full rebuild proces
 {% endhint %}
 
 
-### Replica rebuild history 
+### Replica Rebuild History 
 
-The data-plane handles both full and partial replica rebuilds. To view history of the rebuilds that an existing volume target has undergone during its lifecycle until now, you can use the `kubectl` command.
+The data-plane handles both full and partial replica rebuilds. To view history of the rebuilds that an existing volume target has undergone during its lifecycle until now, you can use the given `kubectl` command.
 
+To get the output in table format: 
 
 {% tabs %}
 {% tab title="Command" %}
 ```text
-kubectl get rebuild-history {your_volume_UUID} 
+kubectl mayastor get rebuild-history {your_volume_UUID} 
 ```
 {% endtab %}
 
 {% tab title="Output" %}
 ```text
-DST                                   SRC                                   STATE      BLK-TOTAL  BLK-RECOVERED  BLK-TRANSFERRED  BLK-SIZE  IS-PARTIAL  START-TIME                      END-TIME 
-1324c40a-150e-4d7b-8ce1-d93e170fecbf  cadd71b8-d385-4acd-a538-c3b2393bf395  Completed  14KiB      14KiB          0 B              512B      true        2023-06-27T14:34:57.532859848Z  2023-06-27T14:34:57.533855129Z
+DST                                   SRC                                   STATE      TOTAL  RECOVERED  TRANSFERRED  IS-PARTIAL  START-TIME            END-TIME
+b5de71a6-055d-433a-a1c5-2b39ade05d86  0dafa450-7a19-4e21-a919-89c6f9bd2a97  Completed  7MiB   7MiB       0 B          true        2023-07-04T05:45:47Z  2023-07-04T05:45:47Z
+b5de71a6-055d-433a-a1c5-2b39ade05d86  0dafa450-7a19-4e21-a919-89c6f9bd2a97  Completed  7MiB   7MiB       0 B          true        2023-07-04T05:45:46Z  2023-07-04T05:45:46Z
 ```
 {% endtab %}
 {% endtabs %}
+
+To get the output in JSON format: 
+
+{% tabs %}
+{% tab title="Command" %}
+```text
+kubectl mayastor get rebuild-history {your_volume_UUID} -ojson
+```
+{% endtab %}
+
+{% tab title="Output" %}
+```text
+{
+  "targetUuid": "c9eb4172-e90c-40ca-9db0-26b2ae372b28",
+  "records": [
+    {
+      "childUri": "nvmf://10.1.0.9:8420/nqn.2019-05.io.openebs:b5de71a6-055d-433a-a1c5-2b39ade05d86?uuid=b5de71a6-055d-433a-a1c5-2b39ade05d86",
+      "srcUri": "bdev:///0dafa450-7a19-4e21-a919-89c6f9bd2a97?uuid=0dafa450-7a19-4e21-a919-89c6f9bd2a97",
+      "rebuildJobState": "Completed",
+      "blocksTotal": 14302,
+      "blocksRecovered": 14302,
+      "blocksTransferred": 0,
+      "blocksRemaining": 0,
+      "blockSize": 512,
+      "isPartial": true,
+      "startTime": "2023-07-04T05:45:47.765932276Z",
+      "endTime": "2023-07-04T05:45:47.766825274Z"
+    },
+    {
+      "childUri": "nvmf://10.1.0.9:8420/nqn.2019-05.io.openebs:b5de71a6-055d-433a-a1c5-2b39ade05d86?uuid=b5de71a6-055d-433a-a1c5-2b39ade05d86",
+      "srcUri": "bdev:///0dafa450-7a19-4e21-a919-89c6f9bd2a97?uuid=0dafa450-7a19-4e21-a919-89c6f9bd2a97",
+      "rebuildJobState": "Completed",
+      "blocksTotal": 14302,
+      "blocksRecovered": 14302,
+      "blocksTransferred": 0,
+      "blocksRemaining": 0,
+      "blockSize": 512,
+      "isPartial": true,
+      "startTime": "2023-07-04T05:45:46.242015389Z",
+      "endTime": "2023-07-04T05:45:46.242927463Z"
+    }
+  ]
+}
+```
+{% endtab %}
+{% endtabs %}
+
+> For example: kubectl mayastor get rebuild-history e898106d-e735-4edf-aba2-932d42c3c58d -ojson
+
 
 <!--
 After hitting the curl command with the appropriate localhost and volume UUID (for example: `curl -X 'GET' \  'http://localhost:8081/v0/volumes/bd53de62-e6bb-4b72-a01a-4dcb7aa4d98b/rebuild' \  -H 'accept: application/json'`), you will receive a sample response like the following:
