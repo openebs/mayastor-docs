@@ -104,36 +104,6 @@ kubectl mayastor get rebuild-history {your_volume_UUID} -ojson
 
 > For example: kubectl mayastor get rebuild-history e898106d-e735-4edf-aba2-932d42c3c58d -ojson
 
-
-<!--
-After hitting the curl command with the appropriate localhost and volume UUID (for example: `curl -X 'GET' \  'http://localhost:8081/v0/volumes/bd53de62-e6bb-4b72-a01a-4dcb7aa4d98b/rebuild' \  -H 'accept: application/json'`), you will receive a sample response like the following:
-
-
-{% tabs %}
-{% tab title="Response" %}
-```text
-{
-  "targetUuid": "3c222a50-68df-4e5c-8e5a-33535009fc25",
-  "records": [
-    {
-      "childUri": "nvmf://10.1.0.9:8420/nqn.2019-05.io.openebs:e5631b79-3223-4eeb-8df6-512cb6dc9b54?uuid=e5631b79-3223-4eeb-8df6-512cb6dc9b54",
-      "srcUri": "bdev:///4bc36f32-fc83-4786-bc1a-58b6d5cefb81?uuid=4bc36f32-fc83-4786-bc1a-58b6d5cefb81",
-      "rebuildJobState": "Completed",
-      "blocksTotal": 14302,
-      "blocksRecovered": 14302,
-      "blocksTransferred": 0,
-      "blockSize": 512,
-      "isPartial": true,
-      "startTime": "2023-06-27T05:09:13.680866230Z",
-      "endTime": "2023-06-27T05:09:13.681847385Z"
-    }
-  ]
-}
-```
-{% endtab %}
-{% endtabs %}
--->
-
 :::note
 The volume's rebuild history records are stored and maintained as long as the volume target remains intact without any disruptions caused by node failures or recreation.
 :::
