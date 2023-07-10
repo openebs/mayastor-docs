@@ -1,8 +1,8 @@
 # Mayastor kubectl plugin
 
-The ‘Mayastor kubectl plugin’ can be used to view and manage Mayastor resources such as nodes, pools and volumes. It is also used for operations such as scaling the replica count of volumes. 
+The **Mayastor kubectl plugin** can be used to view and manage Mayastor resources such as nodes, pools and volumes. It is also used for operations such as scaling the replica count of volumes. 
 
-### Installation
+## Install kubectl plugin
 
 - The Mayastor kubectl plugin is available for the Linux platform. The binary for the plugin can be found [here](https://github.com/mayadata-io/mayastor-control-plane/releases). 
 
@@ -25,7 +25,12 @@ kubectl-plugin 1.0.0
 {% endtabs %}
 
 
-### Using Mayastor kubectl plugin
+---------
+
+
+## Use kubectl plugin to retrieve data 
+
+Sample command to use kubectl plugin:
 
 ```
 USAGE:
@@ -58,9 +63,9 @@ SUBCOMMANDS:
     uncordon    'Uncordon' resources
 ```
 
-The plugin can be used to get the following resource information:
+You can use the following plugins:
 
-- **Volumes**
+### Get Mayastor Volumes
 
 {% tabs %}
 {% tab title="Command" %}
@@ -80,7 +85,7 @@ ID                                    REPLICAS  TARGET-NODE  ACCESSIBILITY STATU
 {% endtabs %}
  
 
-- **Pools**
+### Get Mayastor Pools
 
 {% tabs %}
 {% tab title="Command" %}
@@ -101,7 +106,7 @@ mayastor-pool-3  5360320512      3258974208     aio:///dev/vdb?uuid=f324edb7-1ac
 {% endtab %}
 {% endtabs %}
 
-- **Nodes**
+### Get Maystore Nodes
 
 {% tabs %}
 {% tab title="Command" %}
@@ -126,9 +131,9 @@ mayastor-3  10.1.0.8:10124  Online
  kubectl mayastor get &lt;resource_name&gt; &lt;resource_id&gt;
  {% endhint %}
 
-The Mayastor kubectl plugin can also be used for performing the following operations:
 
-- Scaling the replica count of a volume
+### Scale the replica count of a volume
+
 {% tabs %}
 {% tab title="Command" %}
 ```text
@@ -144,7 +149,7 @@ Volume 0c08667c-8b59-4d11-9192-b54e27e0ce0f Scaled Successfully 🚀
 {% endtabs %}
 
 
-- Retrieving resource specs in any desired format
+### Retrieve resource specs in any desired format
 
 {% tabs %}
 {% tab title="Command" %}
@@ -160,7 +165,7 @@ kubectl mayastor -ojson get <resource_type>
 {% endtab %}
 {% endtabs %}
 
-- Retrieving replica topology for specific volumes.
+### Retrieve replica topology for specific volumes
 
 {% tabs %}
 {% tab title="Command" %}
@@ -171,9 +176,8 @@ kubectl mayastor get volume-replica-topology <volume_id>
 
 {% tab title="Expected Output" %}
 ```text
-ID                                    NODE      POOL              STATUS
-93b1e1e9-ffcd-4c56-971e-294a530ea5cd  ksnode-2  pool-on-ksnode-2  Online
-88d89a92-40cf-4147-97d4-09e64979f548  ksnode-3  pool-on-ksnode-3  Online
+ ID                                    NODE         POOL    STATUS  CAPACITY  ALLOCATED  SNAPSHOTS  CHILD-STATUS  REASON  REBUILD 
+ a34dbaf4-e81a-4091-b3f8-f425e5f3689b  io-engine-1  pool-1  Online  12MiB     0 B        12MiB      <none>        <none>  <none> 
 ```
 {% endtab %}
 {% endtabs %}
@@ -183,8 +187,27 @@ ID                                    NODE      POOL              STATUS
 The plugin requires access to the `Mayastor REST server` for execution. It gets the master node IP from the kube-config file. In case of any failure, the REST endpoint can be specified using the ‘–rest’ flag.
 {% endhint %}
 
+### List available volume snapshots
 
-### Limitations:
+{% tabs %}
+{% tab title="Command" %}
+```text
+kubectl mayastor get volume-snapshots
+```
+{% endtab %}
+
+{% tab title="Expected Output" %}
+```text
+ ID                                    TIMESTAMP             SOURCE-SIZE  ALLOCATED-SIZE  TOTAL-ALLOCATED-SIZE  SOURCE-VOL 
+ 25823425-41fa-434a-9efd-a356b70b5d7c  2023-07-07T13:20:17Z  10MiB        12MiB           12MiB                 ec4e66fd-3b33-4439-b504-d49aba53da26 
+```
+{% endtab %}
+{% endtabs %}
+
+--------
+
+
+## Limitations of kubectl plugin
 
 - The plugin currently does not have authentication support.
 - The plugin can operate only over HTTP.
