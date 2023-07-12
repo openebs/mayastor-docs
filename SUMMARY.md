@@ -32,12 +32,16 @@
 * [Performance Tips](quickstart/performance-tips.md)
 * [I/O Path Description](reference/i-o-path-description.md)
 * [Replica Operations](reference/replica-operations.md)
-* [Call-home metrics](reference/call-home.md)
+* [Call-home Metrics](reference/call-home.md)
 * [Tested Third Party Software](reference/tested-third-party-software.md)
 
-<hr>
+## Platform Support
+* [Mayastor Installation on MicroK8s](platform-support/microk8s_installation.md)
+
+
+## Troubleshooting
 
 * [Basic Troubleshooting](quickstart/troubleshooting.md)
-* [FAQs](quickstart/faqs.md)
 * [Known Limitations](quickstart/known-limitations.md)
 * [Known Issues](quickstart/known-issues.md)
+* [FAQs](quickstart/faqs.md)
