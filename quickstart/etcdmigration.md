@@ -4,6 +4,10 @@ Title: ETCD Migration Procedure
 
 By following the given steps, you can successfully migrate ETCD from one node to another during maintenance activities like node drain etc., ensuring the continuity and integrity of the ETCD data.
 
+:::note
+Take a snapshot of the ETCD. Click [here](https://etcd.io/docs/v3.3/op-guide/recovery/) for the detailed documentation.
+:::
+
 
 ## Step 1: Draining the ETCD Node
 
