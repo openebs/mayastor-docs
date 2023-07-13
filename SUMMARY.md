@@ -35,8 +35,8 @@
 * [Replica Operations](reference/replica-operations.md)
 * [Call-home Metrics](reference/call-home.md)
 * [Tested Third Party Software](reference/tested-third-party-software.md)
-* [ETCD migration](quickstart/etcdmigration.md)
-* [Scale ETCD members](quickstart/scaling_etcd.md)
+* [ETCD Migration](quickstart/etcdmigration.md)
+* [Scale ETCD Members](quickstart/scaling_etcd.md)
 
 ## Platform Support
 * [Mayastor Installation on MicroK8s](platform-support/microk8s-installation.md)

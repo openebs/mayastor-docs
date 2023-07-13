@@ -33,6 +33,10 @@ pool-2   worker-2   Online   Online        374710730752   21793603584   35291712
 {% endtab %}
 {% endtabs %}
 
+:::note
+Take a snapshot of the ETCD. Click [here](https://etcd.io/docs/v3.3/op-guide/recovery/) for the detailed documentation.
+:::
+
 * From etcd-0/1/2, we can see that all the values are registered in the database. Once we scale up ETCD with "n" replicas, all the key-value pairs should be available across all the pods.
 
 To scale up or scale down the ETCD members, the following steps can be performed:
