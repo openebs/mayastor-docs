@@ -24,7 +24,6 @@
 * [Node Drain](reference/node-drain.md)
 * [Volume Snapshots](reference/snapshot.md)
 
-
 ## Additional Information
 
 * [Upgrade](reference/upgrade.md)
@@ -35,8 +34,8 @@
 * [Replica Operations](reference/replica-operations.md)
 * [Call-home Metrics](reference/call-home.md)
 * [Tested Third Party Software](reference/tested-third-party-software.md)
-* [ETCD Migration](quickstart/etcdmigration.md)
-* [Scale ETCD Members](quickstart/scaling_etcd.md)
+* [Migrate ETCD](quickstart/migrate-etcd.md)
+* [Scale ETCD](quickstart/scale-etcd.md)
 
 ## Platform Support
 * [Mayastor Installation on MicroK8s](platform-support/microk8s-installation.md)
