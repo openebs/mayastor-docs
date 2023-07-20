@@ -4,18 +4,15 @@ Title: Scaling up ETCD members
 
 By default, Mayastor allows the creation of three ETCD members. If you wish to increase the number of etcd replicas, you will encounter an error. However, you can make the necessary configuration changes discussed in this guide to make it work.
 
-
-
-
 ## Overview of StatefulSets
-
 
 StatefulSets are Kubernetes resources designed for managing stateful applications. They provide stable network identities and persistent storage for pods. StatefulSets ensure ordered deployment and scaling, support persistent volume claims, and manage the state of applications. They are commonly used for databases, messaging systems, and distributed file systems. Here's how StatefulSets function:
 * For a StatefulSet with N replicas, when pods are deployed, they are created sequentially in order from {0..N-1}.
 * When pods are deleted, they are terminated in reverse order from {N-1..0}.
 * Before a scaling operation is applied to a pod, all of its predecessors must be running and ready.
 * Before a pod is terminated, all of its successors must be completely shut down.
-* Currently, we have a three-node cluster with 3 ETCD replicas and three pools created in the cluster.
+* Mayastor uses ETCD database as statefulsets.
+* Currently, we have a three-node cluster with 3 ETCD replicas.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -39,8 +36,7 @@ Take a snapshot of the ETCD. Click [here](https://etcd.io/docs/v3.3/op-guide/rec
 
 * From etcd-0/1/2, we can see that all the values are registered in the database. Once we scale up ETCD with "n" replicas, all the key-value pairs should be available across all the pods.
 
-To scale up or scale down the ETCD members, the following steps can be performed:
-
+To scale up the ETCD members, the following steps can be performed:
 
 1. Add a new ETCD member
 2. Add a peer URL
