@@ -63,7 +63,7 @@ SUBCOMMANDS:
     uncordon    'Uncordon' resources
 ```
 
-You can use the following plugins:
+You can use the plugin with the following options:
 
 ### Get Mayastor Volumes
 
