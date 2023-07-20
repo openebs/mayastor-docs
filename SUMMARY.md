@@ -36,7 +36,7 @@
 * [Tested Third Party Software](reference/tested-third-party-software.md)
 
 ## Platform Support
-* [Mayastor Installation on MicroK8s](platform-support/microk8s_installation.md)
+* [Mayastor Installation on MicroK8s](platform-support/microk8s-installation.md)
 
 
 ## Troubleshooting
