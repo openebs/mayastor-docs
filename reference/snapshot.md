@@ -97,7 +97,7 @@ ms-volume-claim     Bound    pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi     
  
 ## Create a Snapshot
 
-You can create a snapshot (with or without an application) using the PVC. Follow the steps below to create a volume snapshot:
+You can create a snapshot (with or without an application using) the PVC. Follow the steps below to create a volume snapshot:
 
 
 ### Step 1: Create a Kubernetes VolumeSnapshotClass object
