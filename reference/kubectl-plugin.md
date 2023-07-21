@@ -106,7 +106,7 @@ mayastor-pool-3  5360320512      3258974208     aio:///dev/vdb?uuid=f324edb7-1ac
 {% endtab %}
 {% endtabs %}
 
-### Get Maystore Nodes
+### Get Mayastor Nodes
 
 {% tabs %}
 {% tab title="Command" %}
@@ -149,7 +149,7 @@ Volume 0c08667c-8b59-4d11-9192-b54e27e0ce0f Scaled Successfully 🚀
 {% endtabs %}
 
 
-### Retrieve resource specs in any desired format
+### Retrieve resource in any output format
 
 {% tabs %}
 {% tab title="Command" %}
