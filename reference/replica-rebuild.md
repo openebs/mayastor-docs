@@ -81,6 +81,6 @@ kubectl mayastor get rebuild-history {your_volume_UUID} -ojson
 
 > For example: kubectl mayastor get rebuild-history e898106d-e735-4edf-aba2-932d42c3c58d -ojson
 
-:::note
+{% hint style="note" %}
 The volume's rebuild history records are stored and maintained as long as the volume target remains intact without any disruptions caused by node failures or recreation.
-:::
+{% endhint %}

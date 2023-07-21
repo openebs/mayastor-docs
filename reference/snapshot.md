@@ -22,9 +22,9 @@ Currently, Mayastor supports the following operations related to volume snapshot
 2. Listing available snapshots for a PVC
 3. Deleting a snapshot for a PVC
 
-:::note
+{% hint style="note" %}
 The current version does not support creation of a clone or a new volume from a snapshot.
-:::
+{% endhint %}
 
 ------------------
 
@@ -35,9 +35,9 @@ The current version does not support creation of a clone or a new volume from a 
 1. Deploy and configure Mayastor by following the steps given [here](quickstart/deploy-mayastor.md) and create disk pools. 
 2. Create a Mayastor StorageClass with single replica.
 
-:::note
+{% hint style="note" %}
 Currently Mayastor only supports snapshots for volumes with a single replica. Snapshot support for volumes with more than one replica will be available in the future versions.
-:::
+{% endhint %}
 
 {% tabs %}
 {% tab title="Command (single replica)" %}
@@ -206,9 +206,9 @@ volumesnapshot.snapshot.storage.k8s.io/mayastor-pvc-snap-1 created
 {% endtab %}
 {% endtabs %}
 
-:::note
+{% hint style="note" %}
 When a snapshot is created on a **thick**-provisioned volume, the storage system automatically converts it into a **thin**-provisioned volume.
-:::
+{% endhint %}
 
 ---------
 
