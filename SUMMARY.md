@@ -22,6 +22,7 @@
 * [Monitoring](reference/monitoring.md)
 * [Node Cordon](reference/node-cordon.md)
 * [Node Drain](reference/node-drain.md)
+* [Volume Snapshots](reference/snapshot.md)
 
 ## Additional Information
 
