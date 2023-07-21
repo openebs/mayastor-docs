@@ -53,6 +53,6 @@ microk8s kubectl patch felixconfigurations default --patch '{"spec":{"featureDet
 
 > For more details about this issue, refer to the [GitHub issue](https://github.com/canonical/microk8s/issues/3695).
 
-:::info
+{% hint style="info" %}
 For further **configuration of Mayastor** including storage pools, storage class, persistent volume claims, and application setup, refer to the [offical documentation](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor). 
-:::
+{% endhint %}
