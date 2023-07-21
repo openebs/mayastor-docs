@@ -149,7 +149,9 @@ Volume 0c08667c-8b59-4d11-9192-b54e27e0ce0f Scaled Successfully 🚀
 {% endtabs %}
 
 
-### Retrieve resource in any output format
+### Retrieve resource in any of the output formats (table, JSON or YAML)
+
+> Table is the default output format. 
 
 {% tabs %}
 {% tab title="Command" %}
@@ -164,6 +166,7 @@ kubectl mayastor -ojson get <resource_type>
 ```
 {% endtab %}
 {% endtabs %}
+
 
 ### Retrieve replica topology for specific volumes
 
