@@ -13,7 +13,7 @@ To install Mayastor using Helm on MicroK8s, execute the following command:
 {% tabs %}
 {% tab title="Command" %}
 ```text 
-helm install mayastor mayastor/mayastor -n mayastor --create-namespace --version 2.2.0  --set values.csi.node.kubeletDir="/var/snap/microk8s/common/var/lib/kubelet
+helm install mayastor mayastor/mayastor -n mayastor --create-namespace  --set values.csi.node.kubeletDir="/var/snap/microk8s/common/var/lib/kubelet
 ```
 {% endtab %}
 
@@ -51,10 +51,8 @@ microk8s kubectl patch felixconfigurations default --patch '{"spec":{"featureDet
 {% endtab %}
 {% endtabs %}
 
-
 > For more details about this issue, refer to the [GitHub issue](https://github.com/canonical/microk8s/issues/3695).
 
 :::info
-
 For further **configuration of Mayastor** including storage pools, storage class, persistent volume claims, and application setup, refer to the [offical documentation](https://mayastor.gitbook.io/introduction/quickstart/configure-mayastor). 
 :::
