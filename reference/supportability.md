@@ -30,7 +30,7 @@ Usage: kubectl-mayastor dump [OPTIONS] <COMMAND>
 Commands:
   system  Collects entire system information
   etcd    Collects information from etcd
-  help    Print this message or the help of the given subcommand(s)
+  help    Print this message or the help for the given subcommand(s)
 
 Options:
   -r, --rest <REST>
@@ -42,7 +42,7 @@ Options:
   -s, --since <SINCE>
           Period states to collect all logs from last specified duration [default: 24h]
   -l, --loki-endpoint <LOKI_ENDPOINT>
-          Endpoint of LOKI service, if left empty then it will try to parse endpoint from Loki service(K8s service resource), if the tool is unable to parse from service then logs will be collected using Kube-apiserver
+          LOKI endpoint, if left empty then it will try to parse endpoint from Loki service(K8s service resource), if the tool is unable to parse from service then logs will be collected using Kube-apiserver
   -e, --etcd-endpoint <ETCD_ENDPOINT>
           Endpoint of ETCD service, if left empty then will be parsed from the internal service name
   -d, --output-directory-path <OUTPUT_DIRECTORY_PATH>
