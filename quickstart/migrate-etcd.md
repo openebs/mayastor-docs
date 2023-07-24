@@ -1,16 +1,16 @@
 ---
-Title: ETCD Migration Procedure
+Title: Etcd Migration Procedure
 ---
 
-By following the given steps, you can successfully migrate ETCD from one node to another during maintenance activities like node drain etc., ensuring the continuity and integrity of the ETCD data.
+By following the given steps, you can successfully migrate etcd from one node to another during maintenance activities like node drain etc., ensuring the continuity and integrity of the etcd data.
 
 :::note
-Take a snapshot of the ETCD. Click [here](https://etcd.io/docs/v3.3/op-guide/recovery/) for the detailed documentation.
+Take a snapshot of the etcd. Click [here](https://etcd.io/docs/v3.5/op-guide/recovery/) for the detailed documentation.
 :::
 
-## Step 1: Draining the ETCD Node
+## Step 1: Draining the etcd Node
 
-1. Assuming we have a three-node cluster with three ETCD replicas, verify the ETCD pods with the following commands:
+1. Assuming we have a three-node cluster with three etcd replicas, verify the etcd pods with the following commands:
 
 **Command to verify pods**:
 
@@ -48,7 +48,7 @@ kubectl exec -it mayastor-etcd-0 -n mayastor -- bash
 {% endtabs %}
 
 
-3. In this example, we drain the ETCD node **worker-0** and migrate it to the next available node (in this case, the worker-4 node), use the following command:
+3. In this example, we drain the etcd node **worker-0** and migrate it to the next available node (in this case, the worker-4 node), use the following command:
 
 **Command to drain the node**:
 
@@ -76,12 +76,12 @@ node/worker-0 drained
 {% endtab %}
 {% endtabs %}
 
-## Step 2: Migrating ETCD to the New Node
+## Step 2: Migrating etcd to the New Node
 
-1. After draining the **worker-0** node, the ETCD pod will be scheduled on the next available node, which is the worker-4 node.
+1. After draining the **worker-0** node, the etcd pod will be scheduled on the next available node, which is the worker-4 node.
 2. The pod may end up in a **CrashLoopBackOff status** with specific errors in the logs.
-3. When the pod is scheduled on the new node, it attempts to bootstrap the member again, but since the member is already registered in the cluster, it fails to start the ETCD server with the error message **member already bootstrapped**.
-4. To fix this issue, change the cluster's initial state from **new** to **existing** by editing the StatefulSet for ETCD:
+3. When the pod is scheduled on the new node, it attempts to bootstrap the member again, but since the member is already registered in the cluster, it fails to start the etcd server with the error message **member already bootstrapped**.
+4. To fix this issue, change the cluster's initial state from **new** to **existing** by editing the StatefulSet for etcd:
 
 **Command to check new etcd pod status**
 
@@ -122,9 +122,9 @@ kubectl edit sts mayastor-etcd -n mayastor
 {% endtab %}
 {% endtabs %}
 
-## Step 3: Validating ETCD Key-Value Pairs
+## Step 3: Validating etcd Key-Value Pairs
 
-Run the appropriate command from the migrated ETCD pod to validate the key-value pairs and ensure they are the same as in the existing ETCD. This step is crucial to avoid any data loss during the migration process.
+Run the appropriate command from the migrated etcd pod to validate the key-value pairs and ensure they are the same as in the existing etcd. This step is crucial to avoid any data loss during the migration process.
 
 
 {% tabs %}
