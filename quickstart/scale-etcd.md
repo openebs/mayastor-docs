@@ -1,8 +1,8 @@
 ---
-Title: Scaling up ETCD members
+Title: Scaling up etcd members
 ---
 
-By default, Mayastor allows the creation of three ETCD members. If you wish to increase the number of etcd replicas, you will encounter an error. However, you can make the necessary configuration changes discussed in this guide to make it work.
+By default, Mayastor allows the creation of three etcd members. If you wish to increase the number of etcd replicas, you will encounter an error. However, you can make the necessary configuration changes discussed in this guide to make it work.
 
 ## Overview of StatefulSets
 
@@ -11,8 +11,7 @@ StatefulSets are Kubernetes resources designed for managing stateful application
 * When pods are deleted, they are terminated in reverse order from {N-1..0}.
 * Before a scaling operation is applied to a pod, all of its predecessors must be running and ready.
 * Before a pod is terminated, all of its successors must be completely shut down.
-* Mayastor uses ETCD database as statefulsets.
-* Currently, we have a three-node cluster with 3 ETCD replicas.
+* Mayastor uses etcd database for persisting configuration and state information. Etcd is setup as a Kubernetes StatefulSet when Mayastor is installed.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -31,21 +30,21 @@ pool-2   worker-2   Online   Online        374710730752   21793603584   35291712
 {% endtabs %}
 
 :::note
-Take a snapshot of the ETCD. Click [here](https://etcd.io/docs/v3.3/op-guide/recovery/) for the detailed documentation.
+Take a snapshot of the etcd. Click [here](https://etcd.io/docs/v3.5/op-guide/recovery/) for the detailed documentation.
 :::
 
-* From etcd-0/1/2, we can see that all the values are registered in the database. Once we scale up ETCD with "n" replicas, all the key-value pairs should be available across all the pods.
+* From etcd-0/1/2, we can see that all the values are registered in the database. Once we scale up etcd with "n" replicas, all the key-value pairs should be available across all the pods.
 
-To scale up the ETCD members, the following steps can be performed:
+To scale up the etcd members, the following steps can be performed:
 
-1. Add a new ETCD member
+1. Add a new etcd member
 2. Add a peer URL
 3. Create a PV (Persistent Volume)
 4. Validate key-value pairs
 
 ----------
 
-## Step 1: Adding a New ETCD Member (Scaling Up ETCD Replica)
+## Step 1: Adding a New etcd Member (Scaling Up etcd Replica)
 
 To increase the number of replicas to 4, use the following `kubectl scale` command:
 
@@ -149,7 +148,7 @@ persistentvolume/etcd-volume-3 created
 
 ## Step 4: Validate Key-Value Pairs
 
-Run the following command from the new ETCD pod and ensure that the values are the same as those in etcd-0/1/2. Otherwise, it indicates a data loss issue.
+Run the following command from the new etcd pod and ensure that the values are the same as those in etcd-0/1/2. Otherwise, it indicates a data loss issue.
 
 {% tabs %}
 {% tab title="Command" %}
