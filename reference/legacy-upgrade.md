@@ -2,7 +2,18 @@
 
 A legacy installation of Mayastor (1.0.5 and below) cannot be seamlessly upgraded and needs manual intervention.
 Follow the below steps if you wish to upgrade from Mayastor 1.0.x to Mayastor 2.1.0 and above.
-Mayastor uses etcd as a persistent datastore for its configuration. As a first step, take a snapshot of the etcd. The detailed steps for taking a snapshot can be found in the etcd [documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).
+Mayastor uses etcd as a persistent datastore for its configuration. As a first step, take a snapshot of the etcd. To do so, execute:
+{% tab title="Commands" %}
+```text
+kubectl exec -it mayastor-etcd-0 -n mayastor -- bash
+kubectl cp -n mayastor mayastor-etcd-0:/tmp/snapshot.db ./snapshot.db
+ls -lrt snapshot.db
+kubectl exec -it mayastor-etcd-0 -n mayastor -- bash
+kubectl cp -n mayastor mayastor-etcd-0:/tmp/snapshot.db ./snapshot.db
+ls -lrt snapshot.db
+```
+{% endtab %}
+ <i>For more information visit [etcd documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).</i>
 
 
 {% hint style="warning" %}
