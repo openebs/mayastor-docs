@@ -1,6 +1,6 @@
 ## Upgrading Mayastor
 
-Mayastor supports seamless upgrades starting with target version 2.3.0 and later, and source versions 2.0.0 and later. To upgrade from a previous version(1.0.5 or prior) to 2.3.0 or later, visit [Legacy Upgrade Support](https://mayastor.gitbook.io/introduction/additional-information/upgrade/legacy-upgrade). 
+Mayastor supports seamless upgrades starting with target version 2.1.0 and later, and source versions 2.0.0 and later. To upgrade from a previous version(1.0.5 or prior) to 2.1.0 or later, visit [Legacy Upgrade Support](https://mayastor.gitbook.io/introduction/additional-information/upgrade/legacy-upgrade). 
 
 ### Supported upgrade paths
 
