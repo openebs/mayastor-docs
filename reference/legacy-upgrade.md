@@ -1,7 +1,7 @@
 ## Legacy Upgrade Support
 
 A legacy installation of Mayastor (1.0.5 and below) cannot be seamlessly upgraded and needs manual intervention.
-Follow the below steps if you wish to upgrade from Mayastor 1.0.x to Mayastor 2.1.0 and above.
+Follow the below steps if you wish to upgrade from Mayastor 1.0.x to Mayastor 2.3.0 and above.
 Mayastor uses etcd as a persistent datastore for its configuration. As a first step, take a snapshot of the etcd. The detailed steps for taking a snapshot can be found in the etcd [documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).
 
 
@@ -328,7 +328,7 @@ helm list -n mayastor
 {% tab title="Sample Output" %}
 ```text
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
-mayastor        mayastor        1               2023-04-25 19:20:53.43928058 +0000 UTC  deployed        mayastor-2.1.0                  2.1.0
+mayastor        mayastor        1               2023-04-25 19:20:53.43928058 +0000 UTC  deployed        mayastor-2.3.0                  2.3.0
 ```
 {% endtab %}
 {% endtabs %}

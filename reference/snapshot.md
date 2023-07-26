@@ -36,8 +36,9 @@ The current version does not support creation of a clone or a new volume from a 
 2. Create a Mayastor StorageClass with single replica.
 
 {% hint style="note" %}
-Currently Mayastor only supports snapshots for volumes with a single replica. Snapshot support for volumes with more than one replica will be available in the future versions.
+Currently, Mayastor only supports snapshots for volumes with a single replica. Snapshot support for volumes with more than one replica will be available in the future versions.
 {% endhint %}
+
 
 {% tabs %}
 {% tab title="Command (single replica)" %}
@@ -55,8 +56,6 @@ provisioner: io.openebs.csi-mayastor
 EOF
 ```
 {% endtab %}
-
-{% tabs %}
 {% tab title="YAML (single replica)" %}
 ```text
 apiVersion: storage.k8s.io/v1
