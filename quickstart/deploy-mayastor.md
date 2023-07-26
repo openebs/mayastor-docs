@@ -6,7 +6,7 @@
 Before deploying and using Mayastor please consult the [Known Issues](https://mayastor.gitbook.io/introduction/quickstart/known-issues) section of this guide.
 {% endhint %}
 
-The steps and commands which follow are intended only for use in conjunction with Mayastor version(s) 2.1.x.
+The steps and commands which follow are intended only for use in conjunction with Mayastor version(s) 2.1.x and above.
 
 ## Installation via helm
 
@@ -42,7 +42,7 @@ helm search repo mayastor --versions
 {% tab title="Sample Output" %}
 ```text
  NAME             	CHART VERSION	APP VERSION  	DESCRIPTION                       
-mayastor/mayastor	2.1.0        	2.1.0       	Mayastor Helm chart for Kubernetes
+mayastor/mayastor	2.3.0        	2.3.0       	Mayastor Helm chart for Kubernetes
 ```
 {% endtab %}
 {% endtabs %}
@@ -53,11 +53,11 @@ To discover all the versions (including unstable versions), execute:
 {% endhint %}
 
 
-3. Run the following command to install Mayastor _version 2.1.
+3. Run the following command to install Mayastor _version 2.3.
 {% tabs %}
 {% tab title="Command" %}
 ```text
-helm install mayastor mayastor/mayastor -n mayastor --create-namespace --version 2.1.0
+helm install mayastor mayastor/mayastor -n mayastor --create-namespace --version 2.3.0
 ```
 {% endtab %}
 {% tab title="Sample Output" %}
