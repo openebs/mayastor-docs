@@ -4,6 +4,14 @@ description: 'The native NVMe-oF CAS engine of OpenEBS'
 
 # Welcome to Mayastor!
 
+{% hint style="danger" %}
+### This documentation is staged on an unstable branch  
+
+It is provided here as a convenience to the writers, reviewers and editors of Mayastor's user documentation, to provide easy visualisation of content before publishing.  It MUST NOT be used to guide the installation or use of Mayastor, other than for pre-release testing outside of production.  As a staging branch, it is expected at times to contain errors and to be incomplete.  
+
+The official Mayastor User Reference for the latest GA release can be found [here](https://mayastor.gitbook.io/) 
+{% endhint %}
+
 ## What is Mayastor?
 
 **Mayastor** is a performance optimised "Container Attached Storage" (CAS) solution of the CNCF project [**OpenEBS**](https://openebs.io/). The goal of OpenEBS is to extend Kubernetes with a declarative data plane, providing flexible persistent storage for stateful applications.
