@@ -100,9 +100,15 @@ kubectl edit sts mayastor-etcd -n mayastor
 {% endtab %}
 {% endtabs %}
 
+
+
 ## Step 3: Create a Persistent Volume
 
 Create a PV with the following YAML. Change the pod name/claim name based on the pod's unique identity.
+
+{% hint style="note" %}
+This is only for the volumes created with "manual" storage class. 
+{% endhint %}
 
 {% tabs %}
 {% tab title="YAML" %}
