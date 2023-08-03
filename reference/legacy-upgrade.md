@@ -328,7 +328,7 @@ helm list -n mayastor
 {% tab title="Sample Output" %}
 ```text
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
-mayastor        mayastor        1               2023-04-25 19:20:53.43928058 +0000 UTC  deployed        mayastor-2.3.0                  2.3.0
+mayastor        mayastor        1               2023-04-25 19:20:53.43928058 +0000 UTC  deployed        mayastor-2.1.0                  2.1.0
 ```
 {% endtab %}
 {% endtabs %}
