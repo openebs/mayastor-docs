@@ -30,7 +30,7 @@ While Mayastor utilizes NVMe-oF it does not require NVMe devices or cloud volume
 
 ## Where can I find Mayastor?
 
-Mayastor's source code and documentation are distributed amongst a number of GitHub repositories under the OpenEBS organisation.  The following list describes some of the main repositories but is not exhaustive. 
+Mayastor's source code and documentation are distributed amongst a number of GitHub repositories under the OpenEBS organisation. The following list describes some of the main repositories but is not exhaustive. 
 
 - [openebs/mayastor](https://github.com/openebs/mayastor) : contains the source code of the data plane components
 - [openebs/mayastor-control-plane](https://github.com/openebs/mayastor-control-plane) : contains the source code of the control plane components
