@@ -98,7 +98,7 @@ cat /sys/devices/system/cpu/isolated
 To edit the `io-engine` daemonset and set the `-l` parameter of mayastor to specify CPU cores that Mayastor reactors should run on, follow these steps:
 
 {% hint style="note" %}
-You can modify the `-l` parameter value to specify the CPU cores where Mayastor reactors should run. In the below example, Mayastor runs on the third and fourth CPU cores.
+CPU core numbering usually starts from 0. In the below example, Mayastor runs on the third and fourth CPU cores.
 {% endhint %}
 
 
