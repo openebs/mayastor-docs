@@ -93,17 +93,51 @@ cat /sys/devices/system/cpu/isolated
 {% endtab %}
 {% endtabs %}
 
-### Deploy Mayastor daemonset
+### Deploy IO-engine daemonset
 
-Edit the `mayastor-daemonset.yaml` file and set the `-l` parameter of mayastor to specify CPU cores that Mayastor reactors should run on. In the following example we run mayastor on the third and fourth CPU core:
+Follow these steps for deploying the Mayastor-io-engine DaemonSet and specifying CPU cores for Mayastor reactors:
 
-```yaml
-  ...
-  containers:
-    - name: mayastor
-      ...
-      args:
-        ...
-        - "-l3,4"
+1. Verify the current status of the `mayastor-io-engine` DaemonSet using the following command:
+
+{% tabs %}
+{% tab title="Command" %}
+```text
+kubectl get ds mayastor-io-engine -n mayastor
+```
+{% endtab %}
+
+{% tab title="Output" %}
+```text
+NAME                 DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                                         AGE
+mayastor-io-engine   3         3         3       0            3           kubernetes.io/arch=amd64,openebs.io/engine=mayastor   22d
+```
+{% endtab %}
+{% endtabs %}
+
+2.  Edit the `mayastor-io-engine` DaemonSet configuration using the `kubectl edit` command:
+
+```
+kubectl edit ds mayastor-io-engine -n mayastor
 ```
 
+> This will open the DaemonSet configuration in your default text editor.
+
+3. Locate the section that defines the `io-engine` container within the DaemonSet configuration. If this section doesn't exist, add it within the containers list.
+
+```
+...
+containers:
+  - name: io-engine
+    ...
+    args:
+      ...
+      - "-l2,3"
+
+```
+
+{% hint style="note" %}
+Modify the `-l` parameter value to specify the CPU cores where Mayastor reactors should run. In the above example, Mayastor runs on the third and fourth CPU cores.
+{% endhint %}
+
+
+4. Save the changes and exit the text editor.
