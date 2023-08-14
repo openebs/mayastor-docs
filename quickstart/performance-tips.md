@@ -95,12 +95,7 @@ cat /sys/devices/system/cpu/isolated
 
 ### Deploy IO-engine daemonset
 
-To edit the `io-engine` daemonset and set the `-l` parameter of mayastor to specify CPU cores that Mayastor reactors should run on, follow these steps:
-
-{% hint style="note" %}
-CPU core numbering usually starts from 0. In the below example, Mayastor runs on the third and fourth CPU cores.
-{% endhint %}
-
+Edit the `io-engine` daemonset and set the `-l` parameter of mayastor to specify CPU cores that Mayastor reactors should run on. In the following example we run mayastor on the third and fourth CPU core:
 
 1. Verify the current status of the `mayastor-io-engine` DaemonSet using the following command:
 
@@ -127,7 +122,7 @@ kubectl edit ds mayastor-io-engine -n mayastor
 
 > This will open the DaemonSet configuration in your default text editor.
 
-3. Locate the section that defines the `io-engine` container within the DaemonSet configuration. If this section doesn't exist, add it within the containers list.
+3. Locate the section that defines the `io-engine` container within the DaemonSet configuration.
 
 ```
 ...
