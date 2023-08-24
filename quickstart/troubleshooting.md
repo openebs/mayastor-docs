@@ -296,77 +296,12 @@ Thread 1 (Thread 0x7f782559f040 (LWP 56)):
 {% endtabs %}
 
 -------------
+    
+## Get DSP
 
-## Post Migration issues
-    
-If you are migrating from previous Mayastor versions to the latest version, Mayastor 2.4, please follow the instructions in this section.
-
-{% hint style="note" %}
-Existing schemas in Custom Resource (CR) definitions will be updated from v1alpha1 to v1beta1 after upgrading to Mayastor 2.4. Existing CRs will be migrated to v1beta1.
-{% endhint %}
-    
-#### Expected Error #1: Get DSP
-
-Running `kubectl get dsp -n mayastor` could result in the following error due to the v1alpha1 schema in the discovery cache:
-    
-```
-Error from server (NotFound): Unable to list "openebs.io/v1alpha1, Resource=diskpools": the server could not find the requested resource (get diskpools.openebs.io)    
-```
-
-**Error resolution**: Run the command with `diskpools.openebs.io` to get all migrated v1beta1 CRs, after which the `get dsp` command can be used.
-    
-{% tabs %}
-{% tab title="Command" %}
-```text
-kubectl get diskpools.openebs.io -n mayastor
-```
-{% endtab %}
-
-{% tab title="Output" %}
-```text
-NAME     NODE            STATE     POOL_STATUS   CAPACITY      USED   AVAILABLE
-pool-0   node-0-106597   Created   Online        10724835328   0      10724835328
-pool-1   node-1-106597   Created   Online        10724835328   0      10724835328
-pool-2   node-2-106597   Created   Online        10724835328   0      10724835328
-```
-    
-Post this kubectl discovery cache is updated with v1beta1 object for dsp. So users can continue using ```kubectl get dsp -n mayastor```
-    
-{% endtab %}
-{% endtabs %}
+Running `kubectl get dsp -n mayastor` could result in the error due to the `v1alpha1` schema in the discovery cache. To resolve the error, run the command `kubectl get diskpools.openebs.io -n mayastor`. After this kubectl discovery cache will be updated with `v1beta1` object for dsp. 
  
-#### Expected Error #2: Create API
+## Create API
 
-When creating a Disk Pool, you might encounter an error related to v1alpha1 CR definitions. If you run `kubectl create -f dsp.yaml`, you can expect the following error if dsp.yaml has dsp manifests with v1alpha1 as CR schema version. 
-    
-```
-unable to recognize "dsp.yaml": no matches for kind "DiskPool" in version "openebs.io/v1alpha1"
-```
+When creating a Disk Pool with `kubectl create -f dsp.yaml`, you might encounter an error related to `v1alpha1` CR definitions. To resolve the error, ensure your CR definition is updated to `v1beta1` in the YAML file (for example, `apiVersion: openebs.io/v1beta1`).
 
-**Error resolution:**  Ensure your CR definition is updated to v1beta1 in the YAML file. 
-
-
-{% tabs %}
-{% tab title="YAML" %}
-```text
-cat <<EOF | kubectl create -f -
-apiVersion: openebs.io/v1beta1 // Update from openebs.io/v1alpha1 to openebs.io/v1beta1 
-kind: DiskPool
-metadata:
-  name: pool-on-node-1
-  namespace: mayastor
-spec:
-  node: workernode-1-hostname
-  disks: ["/dev/disk/by-uuid/<uuid>"]
-EOF
-```
-{% endtab %}
-
-{% tab title="Output" %}
-```text
-diskpool.openebs.io/pool-0 created
-```
-{% endtab %}
-{% endtabs %}
-
-    
