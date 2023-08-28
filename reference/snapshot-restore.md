@@ -11,7 +11,7 @@ Volume restore from an existing snapshot will create exact replicas of storage v
 To begin, you'll need to create a StorageClass that defines the properties of the snapshot to be restored. Refer to [Storage Class Parameters](reference\storage-class-parameters.md) for more details. Use the following command to create the StorageClass:
 
 {% hint style="info" %}
-thin: "true" and repl: "1" are the only supported combination.
+thin: "true" and repl: "1" is the only supported combination.
 {% endhint %}
 
 {% tabs %}
