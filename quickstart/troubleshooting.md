@@ -299,7 +299,7 @@ Thread 1 (Thread 0x7f782559f040 (LWP 56)):
 
 ##  Diskpool behaviour  
 
-The below behaviour may be encountered while uprading from older releases to Mayastor 2.4 release and above. Use the following commands for resolution: 
+The below behaviour may be encountered while uprading from older releases to Mayastor 2.4 release and above.
 
 ### Get Dsp
 
@@ -309,4 +309,6 @@ Running `kubectl get dsp -n mayastor` could result in the error due to the `v1al
 
 When creating a Disk Pool with `kubectl create -f dsp.yaml`, you might encounter an error related to `v1alpha1` CR definitions. To resolve this, ensure your CR definition is updated to `v1beta1` in the YAML file (for example, `apiVersion: openebs.io/v1beta1`).
 
-User can validate above listed schema changes by executing ```kubectl get crd diskpools.openebs.io``` post migration.
+{% hint style="note" %}
+You can validate the schema changes by executing `kubectl get crd diskpools.openebs.io`.
+{% endhint %}
