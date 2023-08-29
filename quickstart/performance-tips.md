@@ -93,46 +93,16 @@ cat /sys/devices/system/cpu/isolated
 {% endtab %}
 {% endtabs %}
 
-### Deploy IO-engine daemonset
+### Update mayastor helm chart for CPU core specification
 
-Edit the `io-engine` daemonset and set the `-l` parameter of mayastor to specify CPU cores that Mayastor reactors should run on. In the following example we run mayastor on the third and fourth CPU core:
+To allot specific CPU cores for Mayastor's reactors, follow these steps:
 
-1. Verify the current status of the `mayastor-io-engine` DaemonSet using the following command:
+1. Ensure that you have the Mayastor kubectl plugin installed, matching the version of your Mayastor Helm chart deployment ([releases](https://github.com/openebs/mayastor/releases)). You can find installation instructions in the [Mayastor kubectl plugin documentation](https://github.com/openebs/mayastor-extensions/blob/develop/k8s/plugin/README.md).
 
-{% tabs %}
-{% tab title="Command" %}
-```text
-kubectl get ds mayastor-io-engine -n mayastor
-```
-{% endtab %}
-
-{% tab title="Output" %}
-```text
-NAME                 DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                                         AGE
-mayastor-io-engine   3         3         3       0            3           kubernetes.io/arch=amd64,openebs.io/engine=mayastor   22d
-```
-{% endtab %}
-{% endtabs %}
-
-2.  Edit the `mayastor-io-engine` DaemonSet configuration using the `kubectl edit` command:
+2. Execute the following command to update Mayastor's configuration. Replace `<namespace>` with the appropriate Kubernetes namespace where Mayastor is deployed.
 
 ```
-kubectl edit ds mayastor-io-engine -n mayastor
+kubectl mayastor upgrade -n <namespace> --set-args 'io_engine.coreList={3,4}'
 ```
 
-> This will open the DaemonSet configuration in your default text editor.
-
-3. Locate the section that defines the `io-engine` container within the DaemonSet configuration.
-
-```
-...
-containers:
-  - name: io-engine
-    ...
-    args:
-      ...
-      - "-l2,3"
-
-```
-
-4. Save the changes and exit the text editor.
+In the above command, `io_engine.coreList={3,4}` specifies that Mayastor's reactors should operate on the third and fourth CPU cores.
