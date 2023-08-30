@@ -97,7 +97,7 @@ cat /sys/devices/system/cpu/isolated
 
 To allot specific CPU cores for Mayastor's reactors, follow these steps:
 
-1. Ensure that you have the Mayastor kubectl plugin installed, matching the version of your Mayastor Helm chart deployment ([releases](https://github.com/openebs/mayastor/releases)). You can find installation instructions in the [Mayastor kubectl plugin documentation](https://github.com/openebs/mayastor-extensions/blob/develop/k8s/plugin/README.md).
+1. Ensure that you have the Mayastor kubectl plugin installed, matching the version of your Mayastor Helm chart deployment ([releases](https://github.com/openebs/mayastor/releases)). You can find installation instructions in the [Mayastor kubectl plugin documentation]( https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin).
 
 2. Execute the following command to update Mayastor's configuration. Replace `<namespace>` with the appropriate Kubernetes namespace where Mayastor is deployed.
 
