@@ -295,3 +295,20 @@ Thread 1 (Thread 0x7f782559f040 (LWP 56)):
 {% endtab %}
 {% endtabs %}
 
+-------------
+
+##  Diskpool behaviour  
+
+The below behaviour may be encountered while uprading from older releases to Mayastor 2.4 release and above.
+
+### Get Dsp
+
+Running `kubectl get dsp -n mayastor` could result in the error due to the `v1alpha1` schema in the discovery cache. To resolve this, run the command `kubectl get diskpools.openebs.io -n mayastor`. After this kubectl discovery cache will be updated with `v1beta1` object for dsp. 
+ 
+### Create API
+
+When creating a Disk Pool with `kubectl create -f dsp.yaml`, you might encounter an error related to `v1alpha1` CR definitions. To resolve this, ensure your CR definition is updated to `v1beta1` in the YAML file (for example, `apiVersion: openebs.io/v1beta1`).
+
+{% hint style="note" %}
+You can validate the schema changes by executing `kubectl get crd diskpools.openebs.io`.
+{% endhint %}
