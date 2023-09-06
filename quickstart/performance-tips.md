@@ -93,17 +93,16 @@ cat /sys/devices/system/cpu/isolated
 {% endtab %}
 {% endtabs %}
 
-### Deploy Mayastor daemonset
+### Update mayastor helm chart for CPU core specification
 
-Edit the `mayastor-daemonset.yaml` file and set the `-l` parameter of mayastor to specify CPU cores that Mayastor reactors should run on. In the following example we run mayastor on the third and fourth CPU core:
+To allot specific CPU cores for Mayastor's reactors, follow these steps:
 
-```yaml
-  ...
-  containers:
-    - name: mayastor
-      ...
-      args:
-        ...
-        - "-l3,4"
+1. Ensure that you have the Mayastor kubectl plugin installed, matching the version of your Mayastor Helm chart deployment ([releases](https://github.com/openebs/mayastor/releases)). You can find installation instructions in the [Mayastor kubectl plugin documentation]( https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin).
+
+2. Execute the following command to update Mayastor's configuration. Replace `<namespace>` with the appropriate Kubernetes namespace where Mayastor is deployed.
+
+```
+kubectl mayastor upgrade -n <namespace> --set-args 'io_engine.coreList={3,4}'
 ```
 
+In the above command, `io_engine.coreList={3,4}` specifies that Mayastor's reactors should operate on the third and fourth CPU cores.

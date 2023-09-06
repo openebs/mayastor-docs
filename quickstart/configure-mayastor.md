@@ -47,7 +47,7 @@ Using one or more the following examples as templates, create the required type 
 {% tab title="Example DiskPool definition" %}
 ```text
 cat <<EOF | kubectl create -f -
-apiVersion: "openebs.io/v1alpha1"
+apiVersion: "openebs.io/v1beta1"
 kind: DiskPool
 metadata:
   name: pool-on-node-1
@@ -61,7 +61,7 @@ EOF
 
 {% tab title="YAML" %}
 ```text
-apiVersion: "openebs.io/v1alpha1"
+apiVersion: "openebs.io/v1beta1"
 kind: DiskPool
 metadata:
   name: INSERT_POOL_NAME_HERE
@@ -75,6 +75,12 @@ spec:
 
 {% hint style="info" %}
 When using the examples given as guides to creating your own pools, remember to replace the values for the fields "metadata.name", "spec.node" and "spec.disks" as appropriate to your cluster's intended configuration. Note that whilst the "disks" parameter accepts an array of values, the current version of Mayastor supports only one disk device per pool.
+{% endhint %}
+
+{% hint style="note" %}
+
+Existing schemas in Custom Resource (CR) definitions (in older versions) will be updated from v1alpha1 to v1beta1 after upgrading to Mayastor 2.4 and above. To resolve errors encountered pertaining to the upgrade, click [here](quickstart\troubleshooting.md).
+
 {% endhint %}
 
 ### Verify Pool Creation and Status
@@ -91,24 +97,17 @@ kubectl get dsp -n mayastor
 {% tab title="Example Output" %}
 ```text
 NAME             NODE          STATE    POOL_STATUS   CAPACITY      USED   AVAILABLE
-pool-on-node-1   node-1-14944  Online   Online        10724835328   0      10724835328
-pool-on-node-2   node-2-14944  Online   Online        10724835328   0      10724835328
-pool-on-node-3   node-3-14944  Online   Online        10724835328   0      10724835328
+pool-on-node-1   node-1-14944  Created   Online        10724835328   0      10724835328
+pool-on-node-2   node-2-14944  Created   Online        10724835328   0      10724835328
+pool-on-node-3   node-3-14944  Created   Online        10724835328   0      10724835328
 ```
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
-
-Mayastor-2.0.1 adds two new fields to the DiskPool operator YAML:
-1. **status.cr_state**: The `cr_state`, which can either be _creating, created or terminating_, will be used by the operator to reconcile with the CR. 
-The `cr_state` is set to `Terminating` when a CR delete event is received.
-2. **status.pool_status**: The `pool_status` represents the status of the respective control plane pool resource. 
-{% endhint %}
-
-Pool configuration and state information can also be obtained by using the [Mayastor kubectl plugin](https://mayastor.gitbook.io/introduction/reference/kubectl-plugin)
-
-
+    
+----------
+    
+    
 ## Create Mayastor StorageClass\(s\)
 
 Mayastor dynamically provisions PersistentVolumes \(PVs\) based on StorageClass definitions created by the user. Parameters of the definition are used to set the characteristics and behaviour of its associated PVs. For a detailed description of these parameters see [storage class parameter description](https://mayastor.gitbook.io/introduction/reference/storage-class-parameters). Most importantly StorageClass definition is used to control the level of data protection afforded to it \(that is, the number of synchronous data replicas which are maintained, for purposes of redundancy\). It is possible to create any number of StorageClass definitions, spanning all permitted parameter permutations.
