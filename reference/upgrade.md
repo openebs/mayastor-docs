@@ -4,7 +4,7 @@ Mayastor supports seamless upgrades starting with target version 2.1.0 and later
 
 ### Supported upgrade paths
 
-- From 2.0.x to 2.3.0
+- From 2.0.x to 2.4.0
 
 {% hint style="info" %}
 - The upgrade operation utilises the [Mayastor Kubectl Plugin](https://mayastor.gitbook.io/introduction/advanced-operations/kubectl-plugin).
@@ -74,7 +74,7 @@ kubectl mayastor get upgrade-status
 {% tab title="Expected Output" %}
 ```text
 Upgrade From: 2.0.0
-Upgrade To: 2.3.0
+Upgrade To: 2.4.0
 Upgrade Status: Successfully upgraded Mayastor
 ```
 {% endtab %}
