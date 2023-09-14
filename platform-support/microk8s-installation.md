@@ -1,12 +1,10 @@
-----
-Title: Mayastor Installation on MicroK8s
-----
+# Mayastor Installation on MicroK8s
 
 ## Install Mayastor on MicroK8s
 
-:::info
+{% hint style="info" %}
 **Prerequisite**: Prepare a cluster by following the steps outlined in this [guide](https://mayastor.gitbook.io/introduction/quickstart/preparing-the-cluster).
-:::
+{% endhint %}
 
 To install Mayastor using Helm on MicroK8s, execute the following command:
 
@@ -37,9 +35,11 @@ For more information or to view the documentation, visit our website at https://
 During the installation of Mayastor in MicroK8s, Pods with hostnetwork might encounter a known issue where they get stuck in the init state due to the Calico Vxlan bug.
 
 **Expected error:**
+
 ![](https://hackmd.io/_uploads/Syigxz7u3.png)
 
 **Resolution:**
+
 To resolve this error, execute the following command:
 
 {% tabs %}
