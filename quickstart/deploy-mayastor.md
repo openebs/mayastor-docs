@@ -11,9 +11,8 @@ The steps and commands which follow are intended only for use in conjunction wit
 ## Installation via helm
 
 {% hint style="info" %}
-Installing Mayastor via the Helm chart sets the StorageClass as 'default' for Loki and etcd StatefulSets. This will work in clusters which have a StorageClass named 'default'. If there is no 'default' StorageClass in the cluster, storage provisioning will fail for Loki and etcd. In such cases, one can change the StorageClass to 'manual' which will provision a PersistentVolume of type hostPath. To do this, make the following changes in the `values.yaml` file:
-- loki-stack.persistence.storageClassName: manual
-- etcd.persistence.storageClass: manual
+The Mayastor Helm chart now includes the Dynamic Local Persistent Volume (LocalPV) provisioner as the default option for provisioning storage to etcd and Loki. This simplifies storage setup by utilizing local volumes within your Kubernetes cluster.
+For etcd, the chart uses the `mayastor-etcd-localpv` storage class, and for Loki, it utilizes the `mayastor-loki-localpv` storage class. These storage classes are bundled with the Mayastor chart, ensuring that your etcd and Loki instances are configured to use openEbs localPV volumes efficiently.
 {% endhint %}
 
 1.  Add the OpenEBS Mayastor Helm repository.
