@@ -12,7 +12,8 @@ The steps and commands which follow are intended only for use in conjunction wit
 
 {% hint style="info" %}
 The Mayastor Helm chart now includes the Dynamic Local Persistent Volume (LocalPV) provisioner as the default option for provisioning storage to etcd and Loki. This simplifies storage setup by utilizing local volumes within your Kubernetes cluster.
-For etcd, the chart uses the `mayastor-etcd-localpv` storage class, and for Loki, it utilizes the `mayastor-loki-localpv` storage class. These storage classes are bundled with the Mayastor chart, ensuring that your etcd and Loki instances are configured to use openEbs localPV volumes efficiently.
+For etcd, the chart uses the `mayastor-etcd-localpv` storage class, and for Loki, it utilizes the `mayastor-loki-localpv` storage class. These storage classes are bundled with the Mayastor chart, ensuring that your etcd and Loki instances are configured to use openEbs localPV volumes efficiently. 
+`/var/local/{{ .Release.Name }}` paths should be persistent accross reboots.
 {% endhint %}
 
 1.  Add the OpenEBS Mayastor Helm repository.
