@@ -37,6 +37,9 @@
 * [Tested Third Party Software](reference/tested-third-party-software.md)
 * [Migrate etcd](quickstart/migrate-etcd.md)
 * [Scale etcd](quickstart/scale-etcd.md)
+* [Migration for Replicated DB](migration-cstor-mayastor\replicateddb-overview.md)
+  * [Backup from cStor](migration-cstor-mayastor\replicateddb-backup.md)
+  * [Restore to Mayastor](migration-cstor-mayastor\replicateddb-restore.md)
 
 ## Platform Support
 
