@@ -40,6 +40,9 @@
 * [Migration for Replicated DB](migration-cstor-mayastor\replicateddb-overview.md)
   * [Backup from cStor](migration-cstor-mayastor\replicateddb-backup.md)
   * [Restore to Mayastor](migration-cstor-mayastor\replicateddb-restore.md)
+* [Migration for Distributed DB](migration-cstor-mayastor\distributeddb-overview.md)
+  * [Backup from cStor](migration-cstor-mayastor\distributeddb-backup.md)
+  * [Restore to Mayastor](migration-cstor-mayastor\distributeddb-restore.md)
 
 ## Platform Support
 
