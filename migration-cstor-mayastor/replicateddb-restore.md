@@ -1,5 +1,11 @@
-# Steps to Restore from Backup to Mayastor
+# Steps to Restore from cStor Backup to Mayastor for Replicated DBs (Mongo)
 
+{% hint style=“info” %}
+Before you begin, make sure you have the following:
+- Access to a Kubernetes cluster with Velero installed.
+- A backup of your Mongo database created using Velero.
+- Mayastor configured in your Kubernetes environment.
+{% endhint %}
 
 ## Step 1: Install Velero with GCP Provider on Destination (Mayastor Cluster)
 
@@ -148,15 +154,15 @@ velero get restore
 
 When Velero performs a restore, it deploys an init container within the application pod, responsible for restoring the volume. Initially, the restore status will be `InProgress`. 
 
-{% hint style="note" %}
-If your storage class was originally set to `cstor-csi-disk` because you imported this PVC from a cStor volume, the status might temporarily stay as `InProgress` until the process is completed.
+{% hint style="note" %}    
+Your storage class was originally set to `cstor-csi-disk` because you imported this PVC from a cStor volume, the status might temporarily stay as **In Progress** and your PVC will be in **Pending** status.
 {% endhint %}
 
 
 
 ## Step 5: Backup PVC and Change Storage Class
 
-- Retrieve the current configuration of the PVC which is not in `Bound` status using the following command:
+- Retrieve the current configuration of the PVC which is in `Pending` status using the following command:
 
 ```
 kubectl get pvc mongodb-persistent-storage-claim-mongod-0 -o yaml > pvc-mongo.yaml
@@ -169,6 +175,11 @@ ls -lrt | grep pvc-mongo.yaml
 ```
 
 - Edit the `pvc-mongo.yaml` file to update its storage class. Below is the modified PVC configuration with `mayastor-single-replica` set as the new storage class:
+
+{% hint style="note" %}    
+The statefulset for Mongo will still have the `cstor-csi-disk` storage class at this point. This will be addressed in the further steps. 
+{% endhint %}
+
 
 ```
 apiVersion: v1
@@ -244,13 +255,9 @@ You can then verify the data restoration by accessing your MongoDB instance. In 
 mongosh mongodb://admin:admin@mongod-0.mongodb-service.default.svc.cluster.local:27017
 ```
 
-
-
-
 ## Step 8: Monitor Pod Progress 
 
-Due to the statefulset's configuration with three replicas, you will notice that the `mongo-1` pod is created but remains in a `Pending` status. This behavior is expected as Kubernetes sequentially provisions statefulset pods, ensuring each one is fully operational before moving to the next.
-
+Due to the statefulset's configuration with three replicas, you will notice that the `mongo-1` pod is created but remains in a `Pending` status. This behavior is expected as we have the storage class set to cStor in statefulset configuration.
 
 ## Step 9: Capture the StatefulSet Configuration and Modify Storage Class
 

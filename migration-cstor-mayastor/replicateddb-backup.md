@@ -1,4 +1,4 @@
-# Steps to take a Backup from cStor
+# Steps to take a Backup from cStor for Replicated DB (Mongo)
 
 {% hint style="note" %}
 If you are deploying databases using operators, you need to find a way to actively modify the entire deployment through the operator. This ensures that you control and manage changes effectively within the operator-driven database deployment.
