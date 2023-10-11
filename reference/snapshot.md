@@ -22,9 +22,6 @@ Currently, Mayastor supports the following operations related to volume snapshot
 2. Listing available snapshots for a PVC
 3. Deleting a snapshot for a PVC
 
-{% hint style="note" %}
-The current version does not support creation of a clone or a new volume from a snapshot.
-{% endhint %}
 
 ------------------
 
