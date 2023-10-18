@@ -309,7 +309,7 @@ kubectl apply -f cassandra_sts_modified.yaml
 
 
 
-### Delete the Cassandra StatefulSet with the --cascade=false flag
+### Delete the Cassandra StatefulSet with the --cascade=orphan flag
 
 Delete the Cassandra StatefulSet while keeping the pods running without controller management:
 
