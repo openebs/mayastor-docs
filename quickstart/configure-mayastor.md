@@ -16,7 +16,7 @@ Mayastor versions before 2.0.1 had an upper limit on the number of retry attempt
 #### Permissible Schemes for `spec.disks` under DiskPool CR
 
 {% hint style="info" %}
-It is highly recommended to specify the disk using a unique device link that remains unaltered across node reboots. One such device link is its `UUID`.
+It is highly recommended to specify the disk using a unique device link that remains unaltered across node reboots. You can create this disk by-path or by-id. One such device link is its `UUID`.
 To get the UUID of a disk, execute:
 `sudo blkid`
 
@@ -79,7 +79,7 @@ When using the examples given as guides to creating your own pools, remember to 
 
 {% hint style="note" %}
 
-Existing schemas in Custom Resource (CR) definitions (in older versions) will be updated from v1alpha1 to v1beta1 after upgrading to Mayastor 2.4 and above. To resolve errors encountered pertaining to the upgrade, click [here](quickstart\troubleshooting.md).
+Existing schemas in Custom Resource (CR) definitions (in older versions) will be updated from v1alpha1 to v1beta1 after upgrading to Mayastor 2.4 and above. To resolve errors encountered pertaining to the upgrade, click [here](quickstart/troubleshooting.md).
 
 {% endhint %}
 
