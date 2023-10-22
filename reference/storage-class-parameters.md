@@ -84,5 +84,5 @@ By default, the `stsAffinityGroup` feature is disabled. To enable it, modify the
 - When set to `false`, the created clone/restore's filesystem `uuid` will be same as the orignal volume `uuid`, but it will be mounted using the `nouuid` flag to bypass duplicate `uuid` validation.
 
 {% hint style="note" %}
-This option needs to be set to true when using a `btrfs` filesystem, if the application using the restored volume is scheduled on the same node where the the original volume is mounted, concurrently.
+This option needs to be set to true when using a `btrfs` filesystem, if the application using the restored volume is scheduled on the same node where the original volume is mounted, concurrently.
 {% endhint %}
