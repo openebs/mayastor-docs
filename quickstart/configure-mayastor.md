@@ -16,16 +16,22 @@ Mayastor versions before 2.0.1 had an upper limit on the number of retry attempt
 #### Permissible Schemes for `spec.disks` under DiskPool CR
 
 {% hint style="info" %}
-It is highly recommended to specify the disk using a unique device link that remains unaltered across node reboots. One such device link is its `UUID`.
-To get the UUID of a disk, execute:
-`sudo blkid`
+It is highly recommended to specify the disk using a unique device link that remains unaltered across node reboots. Examples of such device links are: by-path or by-id.
+
+Easy way to retrieve device link for a given node:
+`kubectl mayastor get block-devices worker`
+
+```
+DEVNAME       DEVTYPE  SIZE      AVAILABLE  MODEL                             DEVPATH                                                           MAJOR  MINOR  DEVLINKS 
+/dev/nvme0n1  disk     894.3GiB  yes        Dell DC NVMe PE8010 RI U.2 960GB  /devices/pci0000:30/0000:30:02.0/0000:31:00.0/nvme/nvme0/nvme0n1  259    0      "/dev/disk/by-id/nvme-eui.ace42e00164f0290", "/dev/disk/by-path/pci-0000:31:00.0-nvme-1", "/dev/disk/by-dname/nvme0n1", "/dev/disk/by-id/nvme-Dell_DC_NVMe_PE8010_RI_U.2_960GB_SDA9N7266I110A814"
+```
 
 Usage of the device name (for example, /dev/sdx) is not advised, as it may change if the node reboots, which might cause data corruption.
 {% endhint %}
 
 | Type | Format | Example |
 | :--- | :--- | :--- |
-| Disk(non PCI) with disk-by-guid reference <i><b>(Best Practice)</b></i> | Device File | aio:////dev/disk/by-uuid/<uuid> OR uring:////dev/disk/by-uuid/<uuid> |
+| Disk(non PCI) with disk-by-guid reference <i><b>(Best Practice)</b></i> | Device File | aio:///dev/disk/by-id/<id> OR uring:///dev/disk/by-id/<id> |
 | Asynchronous Disk\(AIO\) | Device File | /dev/sdx |
 | Asynchronous Disk I/O \(AIO\) | Device File | aio:///dev/sdx |
 | io\_uring | Device File | uring:///dev/sdx |
@@ -79,7 +85,7 @@ When using the examples given as guides to creating your own pools, remember to 
 
 {% hint style="note" %}
 
-Existing schemas in Custom Resource (CR) definitions (in older versions) will be updated from v1alpha1 to v1beta1 after upgrading to Mayastor 2.4 and above. To resolve errors encountered pertaining to the upgrade, click [here](quickstart\troubleshooting.md).
+Existing schemas in Custom Resource (CR) definitions (in older versions) will be updated from v1alpha1 to v1beta1 after upgrading to Mayastor 2.4 and above. To resolve errors encountered pertaining to the upgrade, click [here](quickstart/troubleshooting.md).
 
 {% endhint %}
 
