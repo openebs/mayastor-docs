@@ -6,7 +6,7 @@ Once provisioned, neither Mayastor Disk Pools nor Mayastor Volumes can be re-siz
 
 ## Snapshots and Clones
 
-Mayastor has no snapshot or cloning capabilities.
+Mayastor has no cloning capabilities you can only create snapshots. 
 
 ## Volumes are "Highly Durable" but without multipathing are not "Highly Available"
 
