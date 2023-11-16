@@ -12,7 +12,9 @@ The storage class parameter `local` has been deprecated and is a breaking change
 
 ## "fsType"
 
-File system that will be used when mounting the volume. The default file system when not specified is 'ext4'. We recommend to use 'xfs' that is considered to be more advanced and performant. Though make sure that XFS is installed on all nodes in the cluster before using it.
+File system that will be used when mounting the volume. 
+The supported file systems are **ext4**, **xfs** and **btrfs** and the default file system when not specified is **ext4**. We recommend to use **xfs** that is considered to be more advanced and performant. 
+Please ensure the requested filesystem driver is installed on all worker nodes in the cluster before using it.
 
 ## "ioTimeout"
 
@@ -81,4 +83,6 @@ By default, the `stsAffinityGroup` feature is disabled. To enable it, modify the
 - When set to `true`, the created clone/restore's filesystem `uuid` will be set to the restore volume's `uuid`. This is important because some file systems, like XFS, do not allow duplicate filesystem `uuid` on the same machine by default.
 - When set to `false`, the created clone/restore's filesystem `uuid` will be same as the orignal volume `uuid`, but it will be mounted using the `nouuid` flag to bypass duplicate `uuid` validation.
 
-
+{% hint style="note" %}
+This option needs to be set to true when using a `btrfs` filesystem, if the application using the restored volume is scheduled on the same node where the original volume is mounted, concurrently.
+{% endhint %}
