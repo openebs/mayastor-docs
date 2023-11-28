@@ -11,7 +11,7 @@ To install Mayastor using Helm on MicroK8s, execute the following command:
 {% tabs %}
 {% tab title="Command" %}
 ```text 
-helm install mayastor mayastor/mayastor -n mayastor --create-namespace  --set values.csi.node.kubeletDir="/var/snap/microk8s/common/var/lib/kubelet
+helm install mayastor mayastor/mayastor -n mayastor --create-namespace  --set csi.node.kubeletDir="/var/snap/microk8s/common/var/lib/kubelet"
 ```
 {% endtab %}
 
