@@ -16,14 +16,6 @@ File system that will be used when mounting the volume.
 The supported file systems are **ext4**, **xfs** and **btrfs** and the default file system when not specified is **ext4**. We recommend to use **xfs** that is considered to be more advanced and performant. 
 Please ensure the requested filesystem driver is installed on all worker nodes in the cluster before using it.
 
-## "ioTimeout"
-
-Expressed in seconds and it sets the `io_timeout` parameter in the linux block device driver for Mayastor volume. It also sets `ctrl-loss-tmo` timeout in linux NVMe driver that is used for detecting inaccessible target (nexus in our case). In either case, if IO cannot be served by Mayastor volume, because it is stuck or because the nvmf target is not there, it will take roughly this time to the initiator to return an error to data consumer, which can be either filesystem or an application if using raw block volume. The usual reaction of a filesystem to such error is to switch the filesystem to read-only state and require manual intervention from user - remounting. Be careful when setting this to a low value because any node reboot that does not fit into this time interval may require manual intervention afterwards or can result in application failure - depending on how the error is handled by the application.
- 
-{% hint style="info" %}
-The setting is supported only when using "nvmf" protocol.
-{% endhint %}
-
 ## "protocol"
 
 The parameter 'protocol' takes the value `nvmf`(NVMe over TCP protocol). It is used to mount the volume (target) on the application node.

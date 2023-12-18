@@ -42,7 +42,7 @@ helm search repo mayastor --versions
 {% tab title="Sample Output" %}
 ```text
  NAME             	CHART VERSION	APP VERSION  	DESCRIPTION                       
-mayastor/mayastor	2.4.0        	2.4.0       	Mayastor Helm chart for Kubernetes
+mayastor/mayastor	2.5.0        	2.5.0       	Mayastor Helm chart for Kubernetes
 ```
 {% endtab %}
 {% endtabs %}
@@ -53,11 +53,11 @@ To discover all the versions (including unstable versions), execute:
 {% endhint %}
 
 
-3. Run the following command to install Mayastor _version 2.4.
+3. Run the following command to install Mayastor _version 2.5.
 {% tabs %}
 {% tab title="Command" %}
 ```text
-helm install mayastor mayastor/mayastor -n mayastor --create-namespace --version 2.4.0
+helm install mayastor mayastor/mayastor -n mayastor --create-namespace --version 2.5.0
 ```
 {% endtab %}
 {% tab title="Sample Output" %}
