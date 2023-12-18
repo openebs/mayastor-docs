@@ -299,7 +299,7 @@ Thread 1 (Thread 0x7f782559f040 (LWP 56)):
 
 ##  Diskpool behaviour  
 
-The below behaviour may be encountered while uprading from older releases to Mayastor 2.4 release and above.
+The below behaviour may be encountered while uprading from older releases to Mayastor 2.5 release and above.
 
 ### Get Dsp
 
