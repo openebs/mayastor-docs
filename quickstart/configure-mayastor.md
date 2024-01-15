@@ -60,7 +60,7 @@ metadata:
   namespace: mayastor
 spec:
   node: workernode-1-hostname
-  disks: ["/dev/disk/by-uuid/<uuid>"]
+  disks: ["/dev/disk/by-id/<id>"]
 EOF
 ```
 {% endtab %}
