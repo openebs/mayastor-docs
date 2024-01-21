@@ -29,7 +29,7 @@ Currently, Mayastor supports the following operations related to volume snapshot
 ## Prerequisites
 
 
-1. Deploy and configure Mayastor by following the steps given [here](../quickstart/deploy-mayastor.md) and create disk pools. 
+1. Deploy and configure Mayastor by following the steps given [here](https://mayastor.gitbook.io/introduction/quickstart/deploy-mayastor.md) and create disk pools. 
 2. Create a Mayastor StorageClass with single replica.
 
 {% hint style="note" %}
@@ -68,7 +68,7 @@ provisioner: io.openebs.csi-mayastor
 {% endtab %}
 {% endtabs %}
 
-3. Create a PVC using [these](../quickstart/deploy-a-test-application.md) steps and check if the status of the PVC is **Bound**.
+3. Create a PVC using [these](https://mayastor.gitbook.io/introduction/quickstart/deploy-a-test-application.md) steps and check if the status of the PVC is **Bound**.
 
 {% tabs %}
 {% tab title="Command" %}
@@ -86,7 +86,7 @@ ms-volume-claim     Bound    pvc-fe1a5a16-ef70-4775-9eac-2f9c67b3cd5b   1Gi     
 
 > Copy the PVC name, for example, `ms-volume-claim`.
 
-4. (Optional) Create an application by following [these](../quickstart/deploy-a-test-application.md) steps. 
+4. (Optional) Create an application by following [these](https://mayastor.gitbook.io/introduction/quickstart/deploy-a-test-application.md) steps. 
  
 
 ----------
