@@ -3,7 +3,7 @@
 ## Overview
 
 {% hint style="note" %}
-Before deploying and using Mayastor please consult the [Known Issues](https://mayastor.gitbook.io/introduction/quickstart/known-issues) section of this guide.
+Before deploying and using Mayastor please consult the [Known Issues](../quickstart/known-issues.md) section of this guide.
 {% endhint %}
 
 The steps and commands which follow are intended only for use in conjunction with Mayastor version(s) 2.1.x and above.
