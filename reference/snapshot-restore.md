@@ -52,7 +52,7 @@ provisioner: io.openebs.csi-mayastor
 
 ### Step 2: Create a snapshot 
 
-You need to create a volume snapshot before proceeding with the restore. Follow the steps outlined in [this guide](../quickstart/snapshot.md) to create a volume snapshot.
+You need to create a volume snapshot before proceeding with the restore. Follow the steps outlined in [this guide](../reference/snapshot.md) to create a volume snapshot.
 
 > Note the snapshot's name, for example, **pvc-snap-1**.
 
