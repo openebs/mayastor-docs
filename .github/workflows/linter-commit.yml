@@ -2,7 +2,7 @@ name: commit-linter
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
-
+#this is a test comment
 jobs:
   commitlint:
     runs-on: ubuntu-latest
