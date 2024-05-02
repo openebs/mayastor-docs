@@ -5,11 +5,6 @@ description: 'The native NVMe-oF CAS engine of OpenEBS'
 # Welcome to Mayastor!
 
 {% hint style="danger" %}
-### This documentation is staged on an unstable branch  
-It is provided here as a convenience to the writers, reviewers and editors of Mayastor's user documentation, to provide easy visualisation of content before publishing.  It MUST NOT be used to guide the installation or use of Mayastor, other than for pre-release testing outside of production.  As a staging branch, it is expected at times to contain errors and to be incomplete.
-{% endhint %}
-
-{% hint style="danger" %}
 This is not the latest version of the documentation. Mayastor documentation up to version 2.5 is available on this website.
 Mayastor is now referred to as OpenEBS Replicated Storage. The latest Mayastor documentation (v2.6 and above) is published as part of [OpenEBS Documentation](https://openebs.io/docs).
 {% endhint %}
