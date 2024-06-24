@@ -1,5 +1,11 @@
 # Replica Operations
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## Basics
 
 When a Mayastor volume is provisioned based on a StorageClass which has a replication factor greater than one \(set by its `repl` parameter)\, the control plane will attempt to maintain through a 'Kubernetes-like' reconciliation loop that number of identical copies of the volume's data  "replicas" (a replica is a nexus target "child"\) at any point in time.  When a volume is first provisioned the control plane will attempt to create the required number of replicas, whilst adhering to its internal heuristics for their location within the cluster \(which will be discussed shortly\).  If it succeeds, the volume will become available and will bind with the PVC.  If the control plane cannot identify a sufficient number of eligble Mayastor Pools in which to create required replicas at the time of provisioning, the operation will fail; the Mayastor Volume will not be created and the associated PVC will not be bound.  Kubernetes will periodically re-try the volume creation and if at any time the appropriate number of pools can be selected, the volume provisioning should succeed.

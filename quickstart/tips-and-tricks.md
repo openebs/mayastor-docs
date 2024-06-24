@@ -1,5 +1,11 @@
 # Tips and Tricks
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## What if I have no Disk Devices available that I can use for testing?
 
 For basic test and evaluation purposes it may not always be practical or possible to allocate physical disk devices on a cluster to Mayastor for use within its pools.  As a convenience, Mayastor supports two disk device type emulations for this purpose:
