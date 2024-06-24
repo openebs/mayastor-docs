@@ -1,5 +1,11 @@
 # Deploy a Test Application
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## Objective
 
 If all verification steps in the preceding stages were satisfied, then Mayastor has been successfully deployed within the cluster. In order to verify basic functionality, we will now dynamically provision a Persistent Volume based on a Mayastor StorageClass, mount that volume within a small test pod which we'll create, and use the [**Flexible I/O Tester**](https://github.com/axboe/fio) utility within that pod to check that I/O to the volume is processed correctly.

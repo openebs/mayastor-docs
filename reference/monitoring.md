@@ -1,5 +1,11 @@
 # Monitoring
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## Pool metrics exporter
 
 The Mayastor pool metrics exporter runs as a sidecar container within every io-engine pod and exposes pool usage metrics in Prometheus format. These metrics are exposed on port 9502 using an HTTP endpoint /metrics and are refreshed every five minutes.

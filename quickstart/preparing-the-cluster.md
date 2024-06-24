@@ -1,5 +1,11 @@
 # Preparing the Cluster
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ### Verify / Enable Huge Page Support
 
 _2MiB-sized_  Huge Pages must be supported and enabled on the mayastor storage nodes. A minimum number of 1024 such pages \(i.e. 2GiB total\) must be available _exclusively_ to the Mayastor pod on each node, which should be verified thus:
