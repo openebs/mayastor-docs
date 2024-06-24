@@ -1,9 +1,14 @@
 ## Legacy Upgrade Support
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 A legacy installation of Mayastor (1.0.x and below) cannot be seamlessly upgraded and needs manual intervention.
 Follow the below steps if you wish to upgrade from Mayastor 1.0.x to Mayastor 2.1.0 and above.
 Mayastor uses etcd as a persistent datastore for its configuration. As a first step, take a snapshot of the etcd. The detailed steps for taking a snapshot can be found in the etcd [documentation](https://etcd.io/docs/v3.3/op-guide/recovery/).
-
 
 {% hint style="warning" %}
 As compared to Mayastor 1.0, the Mayastor 2.0 feature-set introduces breaking changes in some of the components, due to which the upgrade process from 1.0 to 2.0 is not seamless. The list of such changes are given below:

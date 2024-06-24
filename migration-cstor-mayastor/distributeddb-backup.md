@@ -1,5 +1,11 @@
 # Steps to take a Backup from cStor for Distributed DBs (Cassandra)
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## Step 1: Backup from CStor Cluster
 
 In the current setup, we have a CStor cluster serving as the source, with Cassandra running as a StatefulSet, utilizing CStor volumes.

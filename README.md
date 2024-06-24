@@ -5,8 +5,9 @@ description: 'The native NVMe-oF CAS engine of OpenEBS'
 # Welcome to Mayastor!
 
 {% hint style="danger" %}
-This is not the latest version of the documentation. Mayastor documentation up to version 2.5 is available on this website.
-Mayastor is now referred to as OpenEBS Replicated Storage. The latest Mayastor documentation (v2.6 and above) is published as part of [OpenEBS Documentation](https://openebs.io/docs).
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
 {% endhint %}
 
 ## What is Mayastor?
@@ -35,7 +36,3 @@ Mayastor's source code and documentation are distributed amongst a number of Git
 - [openebs/mayastor-dependencies](https://github.com/openebs/mayastor-dependencies) : contains dependencies common to the control and data plane repositories
 - [openebs/mayastor-extensions](https://github.com/openebs/mayastor-extensions) : contains components and utilities that provide extended functionalities like ease of installation, monitoring and observability aspects
 - [openebs/mayastor-docs](https://github.com/openebs/mayastor-docs) : contains Mayastor's user documenation 
-
-
-
-

@@ -1,5 +1,11 @@
 # Steps to Restore from cStor Backup to Mayastor for Replicated DBs (Cassandra)
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 Cassandra is a popular NoSQL database used for handling large amounts of data with high availability and scalability. In Kubernetes environments, managing and restoring Cassandra backups efficiently is crucial. In this article, we'll walk you through the process of restoring a Cassandra database in a Kubernetes cluster using Velero, and we'll change the storage class to Mayastor for improved performance.
 
 

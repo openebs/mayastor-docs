@@ -1,5 +1,10 @@
 # Migrating from CStor to Mayastor for Replicated Databases (MongoDB)
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
 
 This documentation provides a comprehensive guide on migrating CStor application volumes to Mayastor. We utilize Velero for the backup and restoration process, enabling a seamless transition from a CStor cluster to Mayastor. This example specifically focuses on a GKE cluster.
 

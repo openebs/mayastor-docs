@@ -1,5 +1,10 @@
 # Migration from CStor to Mayastor for Distributed Databases (Cassandra)
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
 
 This documentation outlines the process of migrating application volumes from CStor to Mayastor. We will leverage Velero for backup and restoration, facilitating the transition from a CStor cluster to a Mayastor cluster. This example specifically focuses on a Google Kubernetes Engine (GKE) cluster.
 
