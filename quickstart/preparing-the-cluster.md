@@ -1,5 +1,11 @@
 # Preparing the Cluster
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## Configure Mayastor Nodes
 
 In the context of the Mayastor application, a "Mayastor Node" \(MSN\) is a Kubernetes worker node on which is scheduled an instance of a Mayastor data plane pod and which is thus capable of hosting storage "pools" and exporting Persistent Volumes \(PV\) to application pods within the cluster.  A MSN makes use of block storage device\(s\) attached to it to contribute storage capacity to its pool\(s\), which supply backing storage for the Persistent Volumes dynamically-provisioned on the cluster by Mayastor.

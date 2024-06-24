@@ -1,5 +1,11 @@
 # Basic Troubleshooting
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## Logs
 
 The correct set of log file to collect depends on the nature of the problem. If unsure, then it is best to collect log files for all Mayastor containers.  In nearly every  case, the logs of all of the control plane component pods will be needed;
