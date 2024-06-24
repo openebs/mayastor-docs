@@ -1,5 +1,11 @@
 ## Upgrading Mayastor
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 Mayastor supports seamless upgrades starting with target version 2.1.0 and later, and source versions 2.0.0 and later. To upgrade from a previous version(1.0.5 or prior) to 2.1.0 or later, visit [Legacy Upgrade Support](https://mayastor.gitbook.io/introduction/additional-information/upgrade/legacy-upgrade). 
 
 ### Supported upgrade paths

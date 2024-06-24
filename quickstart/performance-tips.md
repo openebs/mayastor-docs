@@ -1,5 +1,11 @@
 # Performance Tips
 
+{% hint style="danger" %}
+This website/page will be End-of-life (EOL) after 31 August 2024. We recommend you to visit [OpenEBS Documentation](https://openebs.io/docs/user-guides/replicated-storage-user-guide/replicated-pv-mayastor/rs-installation) for the latest Mayastor documentation (v2.6 and above).
+ 
+Mayastor is now also referred to as OpenEBS Replicated PV Mayastor.
+{% endhint %}
+
 ## CPU isolation
 
 Mayastor will fully utilize each CPU core that it was configured to run on. It will spawn a thread on each and the thread will run in an endless loop serving tasks dispatched to it without sleeping or blocking. There are also other Mayastor threads that are not bound to the CPU and those are allowed to block and sleep. However, the bound threads \(also called reactors\) rely on being interrupted by the kernel and other userspace processes as little as possible. Otherwise, the latency of IO may suffer.
@@ -107,3 +113,7 @@ Edit the `mayastor-daemonset.yaml` file and set the `-l` parameter of mayastor t
         - "-l3,4"
 ```
 
+<<<<<<< HEAD
+=======
+In the above command, `io_engine.coreList={3,4}` specifies that Mayastor's reactors should operate on the third and fourth CPU cores.
+>>>>>>> ef5f92a (docs: added EOL info panel (#216))
